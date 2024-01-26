@@ -30,11 +30,3 @@ TA Game Creator Website
 - The Player is an actual mobile app.
 - Different publishing options: public or private. Private games must use a link or QR code for distribution. Anyone can find a list of public games on one of the TA Game Player pages.
   A rating system for public published games.
-
-## How to start server Django Server:
-
-1. `python3 manage.py runserver`
-
-## How to start the React front:
-
-1. `<fill in>`
