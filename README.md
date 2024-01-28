@@ -30,3 +30,26 @@ TA Game Creator Website
 - The Player is an actual mobile app.
 - Different publishing options: public or private. Private games must use a link or QR code for distribution. Anyone can find a list of public games on one of the TA Game Player pages.
   A rating system for public published games.
+
+## Dependencies
+
+- Register an account with [MongoDB account](https://www.mongodb.com/)
+- Within your cluster insert the database: `taventures`
+  - Within `taventures` insert the collections: `game_data`, `users`, & `reviews`.
+  - (Schema structure to be determined)
+- After, from your command line run:
+  - `touch server/config.env`
+  - `vim server/config.env`
+  - Then paste: `ATLAS_URI=mongodb+srv://<username>:<password>@sandbox.jadwj.mongodb.net/employees?retryWrites=true&w=majority
+PORT=5000`
+  - Fill in the `<username>` and `<password>` with your MongoDB accoount username and password.
+
+## How to Run localy:
+
+1. Open two command line terminals from the project directory.
+1. From the first run the commands:
+   1. `cd server`
+   1. `node server.js`
+1. From the second run the commands:
+   1. `cd client`
+   1. `npm start`

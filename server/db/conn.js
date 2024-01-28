@@ -4,23 +4,27 @@ const client = new MongoClient(Db, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
- 
-var _db;
- 
+
+let _dbConnection;
+
 module.exports = {
-  connectToServer: function (callback) {
-    client.connect(function (err, db) {
-      // Verify we got a good "db" object
-      if (db)
-      {
-        _db = db.db("employees");
-        console.log("Successfully connected to MongoDB."); 
-      }
-      return callback(err);
-         });
+  connectToServer: async (callback) => {
+    await client
+      .connect()
+      .then(() => {
+        console.log("Successfully connected to MongoDB");
+      })
+      .catch((err) => {
+        console.error("Database err: " + err);
+        callback(err);
+      });
+    // List all databases in the connected cluster.
+    // const databases = await client.db().admin().listDatabases();
+    // databases.databases.forEach((db) => console.log({ db }));
+
+    _dbConnection = client.db("taventures");
+    return _dbConnection;
   },
- 
-  getDb: function () {
-    return _db;
-  },
+
+  getDb: () => _dbConnection,
 };
