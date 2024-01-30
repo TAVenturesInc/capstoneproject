@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router";
 
 export default function Edit() {
-  const [form, setForm] = useState({
+  const [form, setForm] = React.useState({
     author: "",
     field: "",
     name: "",
@@ -11,7 +11,7 @@ export default function Edit() {
   const params = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
+  React.useEffect(() => {
     async function fetchData() {
       const id = params.id.toString();
       const response = await fetch(
