@@ -1,0 +1,22 @@
+{
+  "name": "mernscripts",
+  "version": "1.0.0",
+  "description": "Full Stack MERN app with user authentication and private routes",
+  "main": "server.js",
+  "scripts": {
+    "install-server": "cd server && npm install",
+    "start-server": "cd server && node server.js",
+    "install-client": "cd client && npm install",
+    "start-client": "cd client && npm run start",
+    "build-client": "cd client && npm run build"
+  },
+  "keywords": [
+    "MERN",
+    "MongoDB",
+    "Express",
+    "React",
+    "Node"
+  ],
+  "author": "",
+  "license": "ISC"
+}
