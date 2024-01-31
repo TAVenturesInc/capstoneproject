@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import serverURL from "../serverURL";
 
 const Record = (props) => (
   <tr>
@@ -28,7 +29,8 @@ export default function RecordList() {
   // This method fetches the records from the database.
   React.useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`http://localhost:5000/games/`);
+      const response = await fetch(`${serverURL()}/games/`);
+      // const response = await fetch(`http://localhost:5000/games/`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -47,7 +49,8 @@ export default function RecordList() {
 
   // This method will delete a record
   async function deleteRecord(id) {
-    await fetch(`http://localhost:5000/${id}`, {
+    // await fetch(`http://localhost:5000/${id}`, {
+    await fetch(`${serverURL}/${id}`, {
       method: "DELETE",
     });
 

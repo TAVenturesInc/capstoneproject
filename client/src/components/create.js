@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import serverURL from "../serverURL";
 
 export default function Create() {
   const [form, setForm] = React.useState({
@@ -24,7 +25,8 @@ export default function Create() {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newPerson = { ...form };
 
-    await fetch("http://localhost:5000/games/add", {
+    // await fetch("http://localhost:5000/games/add", {
+    await fetch(`${serverURL()}/games/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +41,6 @@ export default function Create() {
     navigate("/");
   }
 
-  // This following section will display the form that takes the input from the user.
   return (
     <div>
       <h3>Create New Record</h3>

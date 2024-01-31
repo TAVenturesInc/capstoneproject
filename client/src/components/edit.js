@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router";
+import serverURL from "../serverURL";
 
 export default function Edit() {
   const [form, setForm] = React.useState({
@@ -14,8 +15,9 @@ export default function Edit() {
   React.useEffect(() => {
     async function fetchData() {
       const id = params.id.toString();
+      // const response = await fetch(`http://localhost:5000/games/${params.id.toString()}`);
       const response = await fetch(
-        `http://localhost:5000/games/${params.id.toString()}`
+        `${serverURL()}/games/${params.id.toString()}`
       );
 
       if (!response.ok) {
@@ -56,7 +58,8 @@ export default function Edit() {
     };
 
     // This will send a post request to update the data in the database.
-    await fetch(`http://localhost:5000/games/${params.id}`, {
+    // await fetch(`http://localhost:5000/games/${params.id}`, {
+    await fetch(`${serverURL}/games/${params.id}`, {
       method: "POST",
       body: JSON.stringify(editedPerson),
       headers: {
