@@ -53,3 +53,28 @@ PORT=5000`
 1. From the second run the commands:
    1. `cd client`
    1. `npm start`
+
+## How to deploy:
+
+1. Open account with `https://render.com/`
+1. Deploy Frontend project
+   1. Create New `Static Site`
+   1. Connect the repository if it is not yet connected
+   1. `Connect`
+      1. Choose a site name.
+      1. Build Command: `npm run install-client && npm run build-client`
+      1. Publish Directory: `./client/build`
+1. Deploy Backend project
+   1. Create new `Web Service`
+   1. Connect the repository if it is not yet connected
+      1. Choose a service name.
+      1. Runtime: `Node`
+      1. Build Command: `npm run install-server`
+      1. Start Command: `npm run start-server`
+1. Add All Render IP addresses to MongoDB Atlas
+   1. From the Backend Project select `Environment`
+      1. Click `Connect`
+      1. Copy all Outbound Static IP Addresses
+   1. Open the MongoDB Atlas site.
+      1. Select Network Access
+      1. Add each IP address to the IP Access List
