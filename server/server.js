@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(require("./routes/records"));
+app.use(require("./routes/auth"));
 
 // Get MongoDB driver connection
 const dbo = require("./db/conn");
