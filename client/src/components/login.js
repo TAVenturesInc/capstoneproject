@@ -10,11 +10,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   // These methods will update the state properties.
-  function updateForm(value) {
-    return setForm((prev) => {
-        return { ...prev, ...value };
-    });
-  }
+  const updateForm = (value) => setForm((prev) => ({ ...prev, ...value }));
 
   // This function will handle the submission.
   async function onSubmit(e) {
@@ -25,9 +21,9 @@ export default function Login() {
 
     // await fetch
     await fetch(`${serverURL()}/auth/login`, {
-      method: "POST", 
+      method: "POST",
       headers: {
-          "Content-Type": "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(userLogin),
     }).catch((error) => {
@@ -40,37 +36,38 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <h3>User Login</h3>
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            value={form.username}
-            onChange={(e) => updateForm({ username: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            value={form.password}
-            onChange={(e) => updateForm({ password: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="submit"
-            value="Register"
-            className="btn btn-primary"
-          />
-        </div>
-      </form>
+    <div className="card">
+      <div className="card-body">
+        <form onSubmit={onSubmit} className="container form-group">
+          <div className="row">
+            <div className="col col-lg-4">
+              <h3>User Login</h3>
+              <label htmlFor="username">Username</label>
+              <input
+                className="form-control"
+                id="username"
+                onChange={(e) => updateForm({ username: e.target.value })}
+                type="text"
+                value={form.username}
+              />
+              <label htmlFor="password">Password</label>
+              <input
+                className="form-control"
+                id="password"
+                onChange={(e) => updateForm({ password: e.target.value })}
+                type="password"
+                value={form.password}
+              />
+              <br />
+              <input
+                className="btn btn-primary"
+                type="submit"
+                value="Register"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
