@@ -35,7 +35,7 @@ export default function Register() {
     .then((response) => {
       // Check status code
       if (response.status === 409) {
-        // Username exists
+        // Username or email exists
         return response.json().then((data) => {
           window.alert(data.message);
           // Redirect back to register page

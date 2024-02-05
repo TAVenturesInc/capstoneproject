@@ -28,8 +28,19 @@ authRoutes.route("/auth/register").post(async (req, res) => {
   if (existingUser) {
     // Username is taken
     res.status(409).send({ success: false, message: "Username already exists" });
+
   } else {
-    // Username is available
+    // Check if email exists
+    const emailCount = await dbConnection
+      .collection("users")
+      .count({ email: myobj.email });
+
+    if (emailCount > 0) {
+      // Email is taken
+      res.status(409).send({ success: false, message: "Email already exists" });
+
+    } else {
+    // Username and email are available
     const ans = await dbConnection
       .collection("users")
       .insertOne(myobj, function (err, res) {
@@ -38,6 +49,7 @@ authRoutes.route("/auth/register").post(async (req, res) => {
       });
     res.send(true);
     }
+  }
 });
 
 // Need to add login functionality below
