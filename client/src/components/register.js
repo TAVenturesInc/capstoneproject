@@ -43,7 +43,7 @@ export default function Register() {
         });
       } else {
         setForm({ username: "", password: "", email: "" });
-        navigate("/");
+        navigate("/login");
       }
     }).catch((error) => {
       window.alert(error);
@@ -52,47 +52,46 @@ export default function Register() {
   }
 
   return (
-    <div>
-      <h3>Create New Record</h3>
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            value={form.username}
-            onChange={(e) => updateForm({ username: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            value={form.password}
-            onChange={(e) => updateForm({ password: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            value={form.email}
-            onChange={(e) => updateForm({ email: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="submit"
-            value="Register"
-            className="btn btn-primary"
-          />
-        </div>
-      </form>
+    <div className="card">
+      <div className="card-body">
+        <form onSubmit={onSubmit} className="container form-group">
+          <div className="row">
+            <div className="col col-lg-4">
+              <h3>Register</h3>
+              <label htmlFor="username">Username</label>
+              <input
+                className="form-control"
+                id="username"
+                onChange={(e) => updateForm({ username: e.target.value })}
+                type="text"
+                value={form.username}
+              />
+              <label htmlFor="password">Password</label>
+              <input
+                className="form-control"
+                id="password"
+                onChange={(e) => updateForm({ password: e.target.value })}
+                type="password"
+                value={form.password}
+              />
+              <label htmlFor="email">Email</label>
+              <input
+                className="form-control"
+                id="email"
+                onChange={(e) => updateForm({ email: e.target.value })}
+                type="email"
+                value={form.email}
+              />
+              <br />
+              <input
+                className="btn btn-primary"
+                type="submit"
+                value="Register"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
