@@ -19,13 +19,25 @@ authRoutes.route("/auth/register").post(async (req, res) => {
       password: hashedPassword,
       email: req.body.email,
   };
-  const ans = await dbConnection
+
+  // Check if username exists
+  const existingUser = await dbConnection
     .collection("users")
-    .insertOne(myobj, function (err, res) {
-      if (err) throw err;
-      response.json(res);
-    });
-  res.send(true);
+    .findOne({ username: myobj.username });
+
+  if (existingUser) {
+    // Username is taken
+    res.status(409).send({ success: false, message: "Username already exists" });
+  } else {
+    // Username is available
+    const ans = await dbConnection
+      .collection("users")
+      .insertOne(myobj, function (err, res) {
+        if (err) throw err;
+        response.json(res);
+      });
+    res.send(true);
+    }
 });
 
 // Need to add login functionality below

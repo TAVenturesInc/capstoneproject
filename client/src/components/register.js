@@ -31,13 +31,24 @@ export default function Register() {
           "Content-Type": "application/json",
       },
       body: JSON.stringify(newUser),
+    })
+    .then((response) => {
+      // Check status code
+      if (response.status === 409) {
+        // Username exists
+        return response.json().then((data) => {
+          window.alert(data.message);
+          // Redirect back to register page
+          navigate("/register");
+        });
+      } else {
+        setForm({ username: "", password: "", email: "" });
+        navigate("/");
+      }
     }).catch((error) => {
       window.alert(error);
       return;
     });
-
-    setForm({ username: "", password: "", email: "" });
-    navigate("/");
   }
 
   return (
