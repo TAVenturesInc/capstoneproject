@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 const authRoutes = express.Router();
 
@@ -15,9 +15,9 @@ authRoutes.route("/auth/register").post(async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 12);
 
   const myobj = {
-      username: req.body.username,
-      password: hashedPassword,
-      email: req.body.email,
+    username: req.body.username,
+    password: hashedPassword,
+    email: req.body.email,
   };
 
   // Check if username exists
@@ -27,8 +27,9 @@ authRoutes.route("/auth/register").post(async (req, res) => {
 
   if (existingUser) {
     // Username is taken
-    res.status(409).send({ success: false, message: "Username already exists" });
-
+    res
+      .status(409)
+      .send({ success: false, message: "Username already exists" });
   } else {
     // Check if email exists
     const emailCount = await dbConnection
@@ -38,20 +39,19 @@ authRoutes.route("/auth/register").post(async (req, res) => {
     if (emailCount > 0) {
       // Email is taken
       res.status(409).send({ success: false, message: "Email already exists" });
-
     } else {
-    // Username and email are available
-    const ans = await dbConnection
-      .collection("users")
-      .insertOne(myobj, function (err, res) {
-        if (err) throw err;
-        response.json(res);
-      });
-    res.send(true);
+      // Username and email are available
+      const ans = await dbConnection
+        .collection("users")
+        .insertOne(myobj, function (err, res) {
+          if (err) throw err;
+          response.json(res);
+        });
+      res.send(true);
     }
   }
 });
 
 // Need to add login functionality below
 
-module.exports = authRoutes
+module.exports = authRoutes;

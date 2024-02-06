@@ -1,8 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import serverURL from "../serverURL";
+import serverURL from "../../serverURL";
+
+import { Button } from "react-bootstrap";
 
 export default function Login() {
+  const [loading, setLoading] = React.useState(false);
   const [form, setForm] = React.useState({
     username: "",
     password: "",
@@ -18,6 +21,7 @@ export default function Login() {
 
     // When a post request is sent to the create url, we'll add a new record to the database
     const userLogin = { ...form };
+    setLoading(true);
 
     // await fetch
     await fetch(`${serverURL()}/auth/login`, {
@@ -26,10 +30,12 @@ export default function Login() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userLogin),
-    }).catch((error) => {
-      window.alert(error);
-      return;
-    });
+    })
+      .catch((error) => {
+        window.alert(error);
+        return;
+      })
+      .finally(() => setLoading(false));
 
     setForm({ username: "", password: "" });
     navigate("/");
@@ -59,11 +65,14 @@ export default function Login() {
                 value={form.password}
               />
               <br />
-              <input
-                className="btn btn-primary"
-                type="submit"
+              <Button
                 value="Login"
-              />
+                variant="primary"
+                type="submit"
+                disabled={loading}
+              >
+                Login
+              </Button>
             </div>
           </div>
         </form>

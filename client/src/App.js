@@ -7,10 +7,9 @@ import { Route, Routes } from "react-router-dom";
 import Create from "./components/create";
 import Creator from "./components/creator";
 import Edit from "./components/edit";
-import Login from "./components/login";
+import { Login, Register } from "./components/authentication";
 import Navbar from "./components/navbar";
 import RecordList from "./components/recordList";
-import Register from "./components/register";
 
 const App = () => {
   return (
