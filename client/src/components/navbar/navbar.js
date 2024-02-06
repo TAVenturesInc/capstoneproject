@@ -6,7 +6,7 @@ import { Navbar, Nav } from "react-bootstrap";
 export default function NavbarComponent() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Navbar.Brand href="#home" style={{ paddingLeft: "20px" }}>
+      <Navbar.Brand href="/" style={{ paddingLeft: "20px" }}>
         TA Ventures Inc
       </Navbar.Brand>
       <Nav className="me-auto">
