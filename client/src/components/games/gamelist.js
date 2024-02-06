@@ -6,10 +6,9 @@ import { Button } from "react-bootstrap";
 import { Game } from "./game";
 
 export default function GameList() {
-  const { games, loading, loaded, errorList, actions } = useGameContext();
-
+  const { games, loading, gamesLoaded /*, errorList*/, actions } =
+    useGameContext();
   const deleteGame = (id) => actions?.deleteGame(id);
-
   React.useEffect(() => {
     actions?.refreshGameList();
   }, []);
@@ -40,9 +39,10 @@ export default function GameList() {
             </tr>
           </thead>
           <tbody>
-            {games.map((game) => (
-              <Game {...game} key={game._id} deleteGame={deleteGame} />
-            ))}
+            {gamesLoaded &&
+              games.map((game) => (
+                <Game {...game} key={game._id} deleteGame={deleteGame} />
+              ))}
           </tbody>
         </table>
       </div>

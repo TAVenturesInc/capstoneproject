@@ -26,7 +26,7 @@ export default function Create() {
     const newPerson = { ...form };
 
     // await fetch("http://localhost:5000/games/add", {
-    await fetch(`${serverURL()}/games/add`, {
+    await fetch(`${serverURL()}/api/games/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

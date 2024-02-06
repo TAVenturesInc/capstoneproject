@@ -64,7 +64,7 @@ function GameContext({ children }) {
   const refreshGameList = async () => {
     dispatch({ type: "START_LOADING" });
 
-    const response = await fetch(`${serverURL()}/games/`);
+    const response = await fetch(`${serverURL()}/api/games/`);
 
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;

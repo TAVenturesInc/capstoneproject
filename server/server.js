@@ -11,11 +11,16 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use(require("./routes/records"));
 app.use(require("./routes/auth"));
+app.use(require("./routes/games"));
+app.use(require("./routes/records"));
 
 // Get MongoDB driver connection
 const dbo = require("./db/conn");
+
+app.get("*", function (req, res) {
+  res.redirect("/");
+});
 
 app.listen(port, () => {
   // Perform a database connection when server starts

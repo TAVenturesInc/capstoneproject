@@ -2,16 +2,23 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
 import { Navbar, Nav } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 export default function NavbarComponent() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Navbar.Brand href="/" style={{ paddingLeft: "20px" }}>
-        TA Ventures Inc
+      <Navbar.Brand style={{ paddingLeft: "20px" }}>
+        <NavLink className="nav-link" to="/">
+          TA Ventures Inc
+        </NavLink>
       </Navbar.Brand>
       <Nav className="me-auto">
-        <Nav.Link href="/register">Register</Nav.Link>
-        <Nav.Link href="/login">Login</Nav.Link>
+        <NavLink className="nav-link" to="/register">
+          Register
+        </NavLink>
+        <NavLink className="nav-link" to="/login">
+          Login
+        </NavLink>
       </Nav>
     </nav>
   );
