@@ -3,6 +3,7 @@ import React from "react";
 import serverURL from "../serverURL";
 
 const GameContextProvider = React.createContext({
+  currentGame: {},
   errorList: [],
   games: [],
   loaded: false,
@@ -10,6 +11,7 @@ const GameContextProvider = React.createContext({
 });
 
 const initialState = {
+  currentGame: null,
   errorList: [],
   games: [],
   loaded: false,
@@ -18,6 +20,14 @@ const initialState = {
 
 function boardReducer(state, action) {
   switch (action.type) {
+    case "SET_GAME_DATA": {
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        currentGame: action.game,
+      };
+    }
     case "START_LOADING": {
       return { ...state, loading: true, loaded: false };
     }
@@ -48,6 +58,22 @@ function GameContext({ children }) {
     boardReducer,
     initialState
   );
+
+  const getGameData = async (id) => {
+    dispatch({ type: "START_LOADING" });
+
+    const response = await fetch(`${serverURL}/api/games/${id}`);
+
+    if (!response.ok) {
+      const message = `An error occurred: ${response.statusText}`;
+      window.alert(message);
+      dispatch({ type: "LOADING_ERROR", errors: [message] });
+      return;
+    } else {
+      const game = await response.json();
+      dispatch({ type: "SET_GAME_DATA", game });
+    }
+  };
 
   const deleteGame = async (id) => {
     dispatch({ type: "START_LOADING" });
@@ -81,7 +107,7 @@ function GameContext({ children }) {
     games,
     gamesLoading: loading,
     gamesLoaded: loaded,
-    actions: { deleteGame, refreshGameList },
+    actions: { deleteGame, getGameData, refreshGameList },
   };
 
   return (

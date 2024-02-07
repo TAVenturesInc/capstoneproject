@@ -7,17 +7,6 @@ const gamesRoutes = express.Router();
 // This will help us connect to the database
 const dbo = require("../db/conn");
 
-// This section will help you create a new user
-// Still need to add username/email check against the db to ensure no duplicates are found
-// gamesRoutes.route("/games").get((req, res) => {
-//   res.sendFile(__dirname + '/public/index.html');
-// });
-// gamesRoutes.route("/games/edit/:id").get((req, res) => {
-//   res.sendFile(__dirname + '/public/index.html');
-// });
-// gamesRoutes.route("/games/new").get((req, res) => {
-//   res.sendFile(__dirname + '/public/index.html');
-// });
 gamesRoutes.route("/api/games").get(async (req, res) => {
   const dbConnection = dbo.getDb();
   const ans = await dbConnection
@@ -27,6 +16,7 @@ gamesRoutes.route("/api/games").get(async (req, res) => {
     .toArray();
   res.send(ans);
 });
+
 // This section will help you get a single record by id
 gamesRoutes.route("/api/games/:id").get(async (req, res) => {
   const dbConnection = dbo.getDb();

@@ -6,9 +6,10 @@ import { Button } from "react-bootstrap";
 import { Game } from "./game";
 
 export default function GameList() {
-  const { games, loading, gamesLoaded /*, errorList*/, actions } =
+  const { games, gamesLoading, gamesLoaded /*, errorList*/, actions } =
     useGameContext();
   const deleteGame = (id) => actions?.deleteGame(id);
+
   React.useEffect(() => {
     actions?.refreshGameList();
   }, []);
@@ -23,17 +24,17 @@ export default function GameList() {
           }}
         >
           <h3>Game List</h3>
-          <Button type="primary" disabled={loading} href="/games/new">
+          <Button type="primary" disabled={gamesLoading} href="/games/new">
             Create New Game
           </Button>
         </div>
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Level</th>
+              <th>Title</th>
               <th>Author</th>
+              <th>Genre</th>
+              <th>description</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>

@@ -1,19 +1,23 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import { useParams /*, useNavigate*/ } from "react-router";
 
 import { Button, Dropdown } from "react-bootstrap";
 
+import { genreList } from "../../genres";
+import { useGameContext } from "../../context";
+
 const Creator = () => {
+  const { actions } = useGameContext();
+  const { id } = useParams();
+
   const [gameData, setGameData] = React.useState({
     title: "",
     description: "",
     genre: "",
   });
   const [gameContent, setGameContent] = React.useState([
-    {
-      title: "Page 1",
-      value: "#### Example Page Content \n- Thing 1\n- Thing 2\n- Thing 3",
-    },
+    { title: "", value: "" },
   ]);
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
@@ -54,57 +58,70 @@ const Creator = () => {
 
   const currentPage = gameContent[currentIndex];
 
+  React.useEffect(() => {
+    if (id) {
+      actions.getGameData(id);
+    } else {
+      setGameData({
+        title: "",
+        description: "",
+        genre: "",
+      });
+      setGameContent([
+        {
+          title: "Page 1",
+          value: "#### Example Page Content \n- Thing 1\n- Thing 2\n- Thing 3",
+        },
+      ]);
+    }
+  }, [id]);
+
   return (
     <div className="card">
       <div className="card-body">
         <div className="container form-group">
           <div className="row">
-            <h2 className="col">Design Your Game</h2>
-          </div>
-          <br />
-          <div className="row">
             <div className="col col-lg-6">
+              <h2>Design Your Game</h2>
               <label htmlFor="title">Title</label>
               <input
                 className="form-control"
                 id="title"
-                onChange={(e) => setGameData({ title: e.target.value })}
+                onChange={(e) =>
+                  setGameData({ ...gameData, title: e.target.value })
+                }
                 type="text"
                 value={gameData.title}
               />
-            </div>
-          </div>
-          <br />
-          <div className="row">
-            <div className="col col-lg-6">
+              <br />
               <label htmlFor="description">Description</label>
               <textarea
                 className="form-control"
                 id="description"
-                onChange={(e) => setGameData({ description: e.target.value })}
+                onChange={(e) =>
+                  setGameData({ ...gameData, description: e.target.value })
+                }
                 type="text"
                 value={gameData.description}
               />
-            </div>
-          </div>
-          <br />
-          <div className="row">
-            <div className="col col-lg-6">
+              <br />
               <label htmlFor="genre">Genre</label>
-              <input
-                className="form-control"
+              <br />
+              <select
                 id="genre"
-                onChange={(e) => setGameData({ genre: e.target.value })}
-                type="text"
+                onChange={(e) =>
+                  setGameData({ ...gameData, genre: e.target.value })
+                }
                 value={gameData.genre}
-              />
-            </div>
-          </div>
-          <br />
-          <hr />
-          <br />
-          <div className="row">
-            <div className="col col-lg-6">
+              >
+                {genreList.map((genre, index) => (
+                  <option key={genre} value={index}>
+                    {genre}
+                  </option>
+                ))}
+              </select>
+              <br />
+
               <label htmlFor="contentTitle">Page Title</label>
               <input
                 className="form-control"
@@ -115,7 +132,7 @@ const Creator = () => {
               />
             </div>
           </div>
-          <br />
+
           <div className="row">
             <div className="col col-lg-6">
               <label htmlFor="genre">
@@ -133,11 +150,7 @@ const Creator = () => {
                 type="text"
                 value={currentPage.value}
               />
-            </div>
-          </div>
-          <br />
-          <div className="row">
-            <div className="col col-lg-3">
+              <br />
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                   Current Page: {currentPage.title}
@@ -154,13 +167,10 @@ const Creator = () => {
                   ))}
                 </Dropdown.Menu>
               </Dropdown>
-            </div>
-            <div className="col col-lg-3">
+              <br />
               <Button variant="primary" onClick={addPage}>
-                Add New Page
-              </Button>
-            </div>
-            <div className="col col-lg-3">
+                Add / Update Game Data
+              </Button>{" "}
               <Button
                 variant="danger"
                 disabled={gameContent.length === 1}
@@ -169,11 +179,10 @@ const Creator = () => {
                 Remove Current Page
               </Button>
             </div>
-          </div>
-          <br />
-          <div className="row">
-            <h3>{currentPage.title}</h3>
-            <ReactMarkdown>{currentPage.value}</ReactMarkdown>
+            <div className="col col-lg-6">
+              <h3>{currentPage.title}</h3>
+              <ReactMarkdown>{currentPage.value}</ReactMarkdown>
+            </div>
           </div>
         </div>
       </div>

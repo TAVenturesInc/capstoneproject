@@ -6,7 +6,6 @@ import { Route, Routes } from "react-router-dom";
 import { GameContext } from "./context";
 // We import all the components we need in our app
 import Creator from "./components/creator";
-import Edit from "./components/edit";
 import Navbar from "./components/navbar";
 import Games from "./components/games";
 import LandingPage from "./components/landingpage";
@@ -19,7 +18,7 @@ const App = () => (
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path="/games" element={<Games />} />
-        <Route path="/games/edit/:id" element={<Edit />} />
+        <Route path="/games/edit/:id" element={<Creator />} />
         <Route path="/games/new/" element={<Creator />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
