@@ -61,25 +61,22 @@ function GameContext({ children }) {
 
   const getGameData = async (id) => {
     dispatch({ type: "START_LOADING" });
-
-    const response = await fetch(`${serverURL}/api/games/${id}`);
-
-    if (!response.ok) {
-      const message = `An error occurred: ${response.statusText}`;
-      window.alert(message);
-      dispatch({ type: "LOADING_ERROR", errors: [message] });
-      return;
-    } else {
-      const game = await response.json();
-      dispatch({ type: "SET_GAME_DATA", game });
-    }
+    fetch(`${serverURL()}/api/games/${id}`)
+      .then((response) => response.json())
+      .then((game) => dispatch({ type: "SET_GAME_DATA", game }))
+      .catch((error) => {
+        console.log({ error });
+        const message = `An error occurred: ${error.statusText}`;
+        window.alert(message);
+        dispatch({ type: "LOADING_ERROR", errors: [message] });
+      });
   };
 
   const deleteGame = async (id) => {
     dispatch({ type: "START_LOADING" });
 
     // await fetch(`http://localhost:5000/${id}`, {
-    await fetch(`${serverURL}/${id}`, {
+    await fetch(`${serverURL()}/${id}`, {
       method: "DELETE",
     });
 
@@ -89,18 +86,14 @@ function GameContext({ children }) {
 
   const refreshGameList = async () => {
     dispatch({ type: "START_LOADING" });
-
-    const response = await fetch(`${serverURL()}/api/games/`);
-
-    if (!response.ok) {
-      const message = `An error occurred: ${response.statusText}`;
-      window.alert(message);
-      dispatch({ type: "LOADING_ERROR", errors: [message] });
-      return;
-    } else {
-      const games = await response.json();
-      dispatch({ type: "LOADING_COMPLETE", games });
-    }
+    fetch(`${serverURL()}/api/games/`)
+      .then((response) => response.json())
+      .then((games) => dispatch({ type: "LOADING_COMPLETE", games }))
+      .catch((error) => {
+        console.log({ error });
+        const message = `An error occurred: ${error.statusText}`;
+        dispatch({ type: "LOADING_ERROR", errors: [message] });
+      });
   };
 
   const exposedState = {
