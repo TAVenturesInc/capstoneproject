@@ -13,6 +13,7 @@ app.use(express.json());
 
 app.use(require("./routes/auth"));
 app.use(require("./routes/games"));
+app.use(require("./routes/state"));
 
 // Get MongoDB driver connection
 const dbo = require("./db/conn");
