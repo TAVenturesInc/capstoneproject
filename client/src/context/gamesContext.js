@@ -20,6 +20,9 @@ const initialState = {
 
 function boardReducer(state, action) {
   switch (action.type) {
+    case "UPDATE_COMPLETE": {
+      return { ...state, loading: false, loaded: true };
+    }
     case "SET_GAME_DATA": {
       return {
         ...state,
@@ -54,10 +57,48 @@ function boardReducer(state, action) {
 }
 
 function GameContext({ children }) {
-  const [{ loading, loaded, games }, dispatch] = React.useReducer(
+  const [{ currentGame, games, loaded, loading }, dispatch] = React.useReducer(
     boardReducer,
     initialState
   );
+
+  const createGameData = async (data) => {
+    dispatch({ type: "START_LOADING" });
+    fetch(`${serverURL()}/api/games/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then(() => dispatch({ type: "UPDATE_COMPLETE" }))
+      .catch((error) => {
+        const message = `An error occurred: ${error.statusText}`;
+        window.alert(message);
+        dispatch({ type: "LOADING_ERROR", errors: [message] });
+      });
+  };
+
+  const updateGameData = async (id, data) => {
+    dispatch({ type: "START_LOADING" });
+    fetch(`${serverURL()}/api/games/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((game) => {
+        dispatch({ type: "UPDATE_COMPLETE" });
+      })
+      .catch((error) => {
+        const message = `An error occurred: ${error.statusText}`;
+        window.alert(message);
+        dispatch({ type: "LOADING_ERROR", errors: [message] });
+      });
+  };
 
   const getGameData = async (id) => {
     dispatch({ type: "START_LOADING" });
@@ -65,7 +106,6 @@ function GameContext({ children }) {
       .then((response) => response.json())
       .then((game) => dispatch({ type: "SET_GAME_DATA", game }))
       .catch((error) => {
-        console.log({ error });
         const message = `An error occurred: ${error.statusText}`;
         window.alert(message);
         dispatch({ type: "LOADING_ERROR", errors: [message] });
@@ -75,13 +115,19 @@ function GameContext({ children }) {
   const deleteGame = async (id) => {
     dispatch({ type: "START_LOADING" });
 
-    // await fetch(`http://localhost:5000/${id}`, {
-    await fetch(`${serverURL()}/${id}`, {
+    fetch(`${serverURL()}/api/games/${id}`, {
       method: "DELETE",
-    });
-
-    const newGames = [...games].filter((el) => el._id !== id);
-    dispatch({ type: "LOADING_COMPLETE", games: newGames });
+    })
+      .then((response) => response.json())
+      .then(() => {
+        const newGames = [...games].filter((el) => el._id !== id);
+        dispatch({ type: "LOADING_COMPLETE", games: newGames });
+      })
+      .catch((error) => {
+        const message = `An error occurred: ${error.statusText}`;
+        window.alert(message);
+        dispatch({ type: "LOADING_ERROR", errors: [message] });
+      });
   };
 
   const refreshGameList = async () => {
@@ -97,10 +143,17 @@ function GameContext({ children }) {
   };
 
   const exposedState = {
+    currentGame,
     games,
     gamesLoading: loading,
     gamesLoaded: loaded,
-    actions: { deleteGame, getGameData, refreshGameList },
+    actions: {
+      createGameData,
+      deleteGame,
+      getGameData,
+      refreshGameList,
+      updateGameData,
+    },
   };
 
   return (

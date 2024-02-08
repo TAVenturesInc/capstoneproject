@@ -21,7 +21,6 @@ gamesRoutes.route("/api/games").get(async (req, res) => {
 // This section will help you get a single record by id
 gamesRoutes.route("/api/games/:id").get(async (req, res) => {
   const dbConnection = dbo.getDb();
-
   const ans = await dbConnection
     .collection("game_data")
     .findOne({ _id: new ObjectId(req.params.id) })
@@ -39,10 +38,11 @@ gamesRoutes.route("/api/games/:id").get(async (req, res) => {
 gamesRoutes.route("/api/games/add").post(async (req, res) => {
   const dbConnection = dbo.getDb();
   const myobj = {
-    name: req.body.name,
-    rating: req.body.rating,
-    field: req.body.field,
-    author: req.body.author,
+    author: "_authorId",
+    content: req.body.content,
+    description: req.body.description,
+    genre: req.body.genre,
+    title: req.body.title,
   };
   const ans = await dbConnection
     .collection("game_data")
@@ -59,10 +59,11 @@ gamesRoutes.route("/api/games/:id").post(async (req, res) => {
   const myquery = { _id: new ObjectId(req.params.id) };
   const newvalues = {
     $set: {
-      name: req.body.name,
-      rating: req.body.rating,
-      field: req.body.field,
-      author: req.body.author,
+      author: "_authorId",
+      content: req.body.content,
+      description: req.body.description,
+      genre: req.body.genre,
+      title: req.body.title,
     },
   };
   const ans = await dbConnection

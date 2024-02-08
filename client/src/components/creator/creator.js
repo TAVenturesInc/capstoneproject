@@ -2,24 +2,23 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { useParams /*, useNavigate*/ } from "react-router";
 
-import { Button, Dropdown } from "react-bootstrap";
+import { Button, ButtonGroup, Dropdown } from "react-bootstrap";
 
 import { genreList } from "../../genres";
 import { useGameContext } from "../../context";
 
 const Creator = () => {
-  const { actions } = useGameContext();
-  const { id } = useParams();
-
   const [gameData, setGameData] = React.useState({
-    title: "",
     description: "",
     genre: "",
+    title: "",
   });
   const [gameContent, setGameContent] = React.useState([
     { title: "", value: "" },
   ]);
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const { actions, currentGame } = useGameContext();
+  const { id } = useParams();
 
   const addPage = () => {
       setGameContent((prev) => [
@@ -43,7 +42,12 @@ const Creator = () => {
       const value = e.target.value;
       setGameContent((prev) => {
         const newContent = [...prev];
-        newContent[currentIndex].title = value;
+        const currentPage = newContent[currentIndex] || {
+          title: "",
+          value: "",
+        };
+        currentPage.title = value;
+        newContent[currentIndex] = currentPage;
         return newContent;
       });
     },
@@ -51,12 +55,42 @@ const Creator = () => {
       const value = e.target.value;
       setGameContent((prev) => {
         const newContent = [...prev];
-        newContent[currentIndex].value = value;
+        const currentPage = newContent[currentIndex] || {
+          title: "",
+          value: "",
+        };
+        currentPage.value = value;
+        newContent[currentIndex] = currentPage;
         return newContent;
       });
     };
 
   const currentPage = gameContent[currentIndex];
+
+  const updateGameData = () => {
+    if (currentGame?._id) {
+      actions.updateGameData(currentGame._id, {
+        ...gameData,
+        content: JSON.stringify(gameContent),
+      });
+    } else {
+      actions.createGameData({
+        ...gameData,
+        content: JSON.stringify(gameContent),
+      });
+    }
+  };
+
+  React.useEffect(() => {
+    if (currentGame) {
+      setGameData({
+        title: currentGame.title,
+        description: currentGame.description,
+        genre: currentGame.genre,
+      });
+      setGameContent(JSON.parse(currentGame.content));
+    }
+  }, [Boolean(currentGame)]);
 
   React.useEffect(() => {
     if (id) {
@@ -121,6 +155,7 @@ const Creator = () => {
                 ))}
               </select>
               <br />
+              <br />
 
               <label htmlFor="contentTitle">Page Title</label>
               <input
@@ -128,7 +163,7 @@ const Creator = () => {
                 id="contentTitle"
                 onChange={updatePageTitle}
                 type="text"
-                value={currentPage.title}
+                value={currentPage?.title || ""}
               />
             </div>
           </div>
@@ -148,40 +183,51 @@ const Creator = () => {
                 onChange={updatePageContent}
                 style={{ minHeight: "112px" }}
                 type="text"
-                value={currentPage.value}
+                value={currentPage?.value || ""}
               />
               <br />
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  Current Page: {currentPage.title}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {gameContent.map(({ title }, index) => (
-                    <Dropdown.Item
-                      key={`${title.replace(" ", "")}-${index}`}
-                      value={index}
-                      onClick={() => setCurrentIndex(index)}
-                    >
-                      {title}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
+              <ButtonGroup>
+                <Button variant="info" onClick={addPage} size="sm">
+                  &#43; Add Page
+                </Button>{" "}
+                <Button
+                  size="sm"
+                  variant="danger"
+                  disabled={gameContent.length === 1}
+                  onClick={removePage}
+                >
+                  &#45; Remove Curernt Page
+                </Button>
+                <Dropdown size="sm">
+                  <Dropdown.Toggle variant="light" id="dropdown-basic">
+                    Current Page: {currentPage?.title || ""}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {gameContent.map((current, index) => {
+                      const title = current?.title || "";
+                      const header = title.replace(" ", "");
+                      return (
+                        <Dropdown.Item
+                          key={`${header}-${index}`}
+                          value={index}
+                          onClick={() => setCurrentIndex(index)}
+                        >
+                          {title}
+                        </Dropdown.Item>
+                      );
+                    })}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </ButtonGroup>
               <br />
-              <Button variant="primary" onClick={addPage}>
-                Add / Update Game Data
-              </Button>{" "}
-              <Button
-                variant="danger"
-                disabled={gameContent.length === 1}
-                onClick={removePage}
-              >
-                Remove Current Page
+              <br />
+              <Button kind="primary" onClick={updateGameData}>
+                Update Game Data
               </Button>
             </div>
             <div className="col col-lg-6">
-              <h3>{currentPage.title}</h3>
-              <ReactMarkdown>{currentPage.value}</ReactMarkdown>
+              <h3>{currentPage?.title || ""}</h3>
+              <ReactMarkdown>{currentPage?.value || ""}</ReactMarkdown>
             </div>
           </div>
         </div>
