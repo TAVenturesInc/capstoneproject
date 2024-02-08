@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const ObjectId = require('mongodb').ObjectId;
 const gamesRoutes = express.Router();
-const ObjectId = require("mongodb").ObjectId;
+
 
 // This will help us connect to the database
 const dbo = require("../db/conn");
