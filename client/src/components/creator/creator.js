@@ -4,9 +4,9 @@ import generateUniqueId from "generate-unique-id";
 import { Button } from "react-bootstrap";
 import { useParams /*, useNavigate*/ } from "react-router";
 
-import { Actions } from "./actions";
-import { GameDetails } from "./gameDetails";
-import { Page } from "./page";
+import { Actions } from "./components/actions";
+import { GameDetails } from "./components/gameDetails";
+import { Page } from "./components/page";
 import { useGameContext } from "../../context";
 
 const Creator = () => {
