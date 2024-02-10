@@ -1,22 +1,20 @@
 import React from "react";
-import generateUniqueId from "generate-unique-id";
 
 import { Action } from "./action";
+import { NewAction } from "./newAction";
 
-export const Actions = ({ onChange, actions = [], pages = [] }) => {
-  const [newId, setNewId] = React.useState(generateUniqueId());
-
+export const Actions = ({
+  actions = [],
+  currentIndex,
+  onChange,
+  pages = [],
+}) => {
   const changeAction = ({ name, destination, id }) => {
+    let index = actions.findIndex((action) => action.id === id);
+    if (index === -1) index = actions.length;
     const newActions = [...actions];
-    if (id === newId) {
-      newActions.push({ name, destination, id });
-      onChange(newActions);
-      setNewId(generateUniqueId());
-    } else {
-      const index = actions.findIndex((action) => action.id === id);
-      newActions[index] = { id, name, destination };
-      onChange(newActions);
-    }
+    newActions[index] = { id, name, destination };
+    onChange(newActions);
   };
   const removeAction = (id) => {
     const newActions = [...actions].filter((action) => action.id !== id);
@@ -43,17 +41,17 @@ export const Actions = ({ onChange, actions = [], pages = [] }) => {
       {actions.map((action) => (
         <Action
           action={action}
+          currentIndex={currentIndex}
           key={action.id}
           onChange={changeAction}
-          removeAction={removeAction}
           pages={pages}
+          removeAction={removeAction}
         />
       ))}
-      <Action
-        action={{ name: "", destination: "", id: newId }}
-        key={newId}
+      <NewAction
         onChange={changeAction}
         pages={pages}
+        currentIndex={currentIndex}
       />
     </>
   );

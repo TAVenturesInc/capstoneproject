@@ -95,14 +95,16 @@ const Creator = () => {
           />
           <Actions
             actions={currentPage.actions}
+            currentIndex={currentIndex}
             onChange={updatePageActions}
             pages={gameContent}
           />
           <div className="row">
             <div className="col col-lg-6">
               <Button variant="primary" onClick={updateGameData}>
-                Update Game Data
-              </Button>{" "}
+                {id ? "Update" : "Save"} Game
+              </Button>
+              &nbsp;
               <Button variant="outline-primary">Preview Game</Button>
             </div>
           </div>
