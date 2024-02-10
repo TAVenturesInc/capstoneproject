@@ -2,6 +2,8 @@ import React from "react";
 import generateUniqueId from "generate-unique-id";
 import { Button, Form } from "react-bootstrap";
 
+import { rowStyle } from "../styles";
+
 export const NewAction = ({ currentIndex, onChange, pages }) => {
   const [name, setName] = React.useState("");
   const [destination, setDestination] = React.useState("");
@@ -17,7 +19,7 @@ export const NewAction = ({ currentIndex, onChange, pages }) => {
   };
 
   return (
-    <div className="row" style={{ paddingBottom: "6px" }}>
+    <div className="row" style={{ ...rowStyle, paddingBottom: "6px" }}>
       <div className="col col-lg-1">
         {Boolean(name) && Boolean(destination) && (
           <Button variant="outline-success" onClick={addAction}>
