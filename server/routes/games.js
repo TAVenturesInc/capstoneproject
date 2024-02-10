@@ -1,9 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const ObjectId = require('mongodb').ObjectId;
+const ObjectId = require("mongodb").ObjectId;
 const gamesRoutes = express.Router();
-
 
 // This will help us connect to the database
 const dbo = require("../db/conn");
@@ -50,7 +49,12 @@ gamesRoutes.route("/api/games/add").post(async (req, res) => {
       if (err) throw err;
       response.json(res);
     });
-  res.send(true);
+
+  res.send({
+    success: true,
+    message: "Game added successfully!",
+    id: ans.insertedId.toString(),
+  });
 });
 
 // This section will help you update a record by id.
