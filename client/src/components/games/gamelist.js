@@ -36,8 +36,6 @@ export default function GameList() {
               <th>Author</th>
               <th>Genre</th>
               <th>Game Description</th>
-              <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
