@@ -1,18 +1,17 @@
 import React from "react";
+import generateUniqueId from "generate-unique-id";
 
 import { Action } from "./action";
 
 export const Actions = ({ onChange, actions = [], pages = [] }) => {
-  const [newId, setNewId] = React.useState(
-    Math.floor(Math.random() * 10000000).toString()
-  );
+  const [newId, setNewId] = React.useState(generateUniqueId());
 
   const changeAction = ({ name, destination, id }) => {
     const newActions = [...actions];
     if (id === newId) {
       newActions.push({ name, destination, id });
       onChange(newActions);
-      setNewId(Math.floor(Math.random() * 10000000).toString());
+      setNewId(generateUniqueId());
     } else {
       const index = actions.findIndex((action) => action.id === id);
       newActions[index] = { id, name, destination };

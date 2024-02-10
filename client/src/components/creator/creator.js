@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useParams /*, useNavigate*/ } from "react-router";
+import generateUniqueId from "generate-unique-id";
 
 import { Button } from "react-bootstrap";
 
@@ -17,7 +19,7 @@ const Creator = () => {
   const [gameContent, setGameContent] = React.useState([
     {
       actions: [],
-      id: Math.floor(Math.random() * 10000000).toString(),
+      id: generateUniqueId(),
       title: "",
       value: "",
     },
@@ -71,7 +73,7 @@ const Creator = () => {
       setGameContent([
         {
           actions: [],
-          id: Math.floor(Math.random() * 10000000).toString(),
+          id: generateUniqueId(),
           title: "Page 1",
           value: "#### Example Page Content \n- Thing 1\n- Thing 2\n- Thing 3",
         },
@@ -98,10 +100,10 @@ const Creator = () => {
           />
           <div className="row">
             <div className="col col-lg-6">
-              <Button kind="primary" onClick={updateGameData}>
+              <Button variant="primary" onClick={updateGameData}>
                 Update Game Data
-              </Button>
-              <Button>Preview Game</Button>
+              </Button>{" "}
+              <Button variant="outline-primary">Preview Game</Button>
             </div>
           </div>
         </div>
