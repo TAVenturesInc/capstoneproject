@@ -20,6 +20,11 @@ export const Game = ({
       </Link>
     </td>
     <td>
+      <Link className="btn btn-link" to={`/game/${_id}`}>
+        Preview Game
+      </Link>
+    </td>
+    <td>
       <button className="btn btn-link" onClick={() => deleteGame(_id)}>
         Delete Game
       </button>

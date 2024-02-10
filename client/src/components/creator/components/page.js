@@ -2,7 +2,7 @@ import ReactMarkdown from "react-markdown";
 import generateUniqueId from "generate-unique-id";
 import { Button, ButtonGroup, Dropdown, Form } from "react-bootstrap";
 
-import { rowStyle } from "./styles";
+import { rowStyle } from "../styles";
 
 export const Page = ({
   currentIndex,

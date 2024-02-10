@@ -1,18 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import generateUniqueId from "generate-unique-id";
-import { Button } from "react-bootstrap";
-import { useParams /*, useNavigate*/ } from "react-router";
+import { Button, Form } from "react-bootstrap";
+import { useParams } from "react-router";
 
-import { Actions } from "./actions";
-import { GameDetails } from "./gameDetails";
-import { Page } from "./page";
+import { Actions } from "./components/actions";
+import { GameDetails } from "./components/gameDetails";
+import { Page } from "./components/page";
 import { useGameContext } from "../../context";
+
+import { rowStyle } from "./styles";
 
 const Creator = () => {
   const [gameData, setGameData] = React.useState({
     description: "",
     genre: "",
+    startingPage: "",
     title: "",
   });
   const [gameContent, setGameContent] = React.useState([
@@ -39,12 +42,12 @@ const Creator = () => {
     if (currentGame?._id) {
       actions.updateGameData(currentGame._id, {
         ...gameData,
-        content: gameContent.map((content) => JSON.stringify(content)),
+        content: gameContent,
       });
     } else {
       actions.createGameData({
         ...gameData,
-        content: gameContent.map((content) => JSON.stringify(content)),
+        content: gameContent,
       });
     }
   };
@@ -56,7 +59,7 @@ const Creator = () => {
         description: currentGame.description,
         genre: currentGame.genre,
       });
-      setGameContent(currentGame.content.map((content) => JSON.parse(content)));
+      setGameContent(currentGame.content);
     }
   }, [Boolean(currentGame)]);
 
@@ -98,6 +101,30 @@ const Creator = () => {
             onChange={updatePageActions}
             pages={gameContent}
           />
+          <div className="row" style={rowStyle}>
+            <div className="col col-lg-6">
+              <Form.Label htmlFor="startingPage">Starting Point</Form.Label>
+              <br />
+              <select
+                id="startingPage"
+                value={gameData.startingPage}
+                onChange={(e) =>
+                  setGameData({ ...gameData, startingPage: e.target.value })
+                }
+              >
+                <option value="">First Page</option>
+                {gameContent.map((page) => (
+                  <option key={`${page.id}`} value={page.id}>
+                    {page.title}
+                  </option>
+                ))}
+              </select>
+              <br />
+              <Form.Text id="startingPageHelpBlock" muted>
+                Select the page the game will start on.
+              </Form.Text>
+            </div>
+          </div>
           <div className="row">
             <div className="col col-lg-6">
               <Button variant="primary" onClick={updateGameData}>
