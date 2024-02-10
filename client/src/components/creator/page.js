@@ -1,22 +1,23 @@
 import ReactMarkdown from "react-markdown";
+import generateUniqueId from "generate-unique-id";
 
 import { Button, ButtonGroup, Dropdown, Form } from "react-bootstrap";
 
 import { rowStyle } from "./styles";
 
 export const Page = ({
-  currentPage,
-  setGameContent,
-  setCurrentIndex,
   currentIndex,
+  currentPage,
   gameContent,
+  setCurrentIndex,
+  setGameContent,
 }) => {
   const addPage = () => {
     setGameContent((prev) => [
       ...prev,
       {
         actions: [],
-        id: Math.floor(Math.random() * 10000000).toString(),
+        id: generateUniqueId(),
         title: `Page ${prev.length + 1}`,
         value: "",
       },
@@ -85,9 +86,9 @@ export const Page = ({
             aria-describedby="pageContentValue"
             as="textarea"
             id="pageContentValue"
+            onChange={updatePageContent}
             rows={9}
             value={currentPage?.value || ""}
-            onChange={updatePageContent}
           />
           <Form.Text id="pageContentValueHelpBlock" muted>
             This mark-down will appear as the content of your current page.
@@ -109,34 +110,39 @@ export const Page = ({
               &#43; Add Page
             </Button>{" "}
             <Button
-              size="sm"
-              variant="danger"
               disabled={gameContent.length === 1}
               onClick={removePage}
+              size="sm"
+              variant="danger"
             >
               &#45; Remove Curernt Page
             </Button>
-            <Dropdown size="sm">
-              <Dropdown.Toggle variant="light" id="dropdown-basic">
-                Current Page: {currentPage?.title || ""}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {gameContent.map((current, index) => {
-                  const title = current?.title || "";
-                  const header = title.replace(" ", "");
-                  return (
-                    <Dropdown.Item
-                      key={`${header}-${index}`}
-                      value={index}
-                      onClick={() => setCurrentIndex(index)}
-                    >
-                      {title}
-                    </Dropdown.Item>
-                  );
-                })}
-              </Dropdown.Menu>
-            </Dropdown>
           </ButtonGroup>
+          &nbsp;
+          <Dropdown style={{ display: "contents" }}>
+            <Dropdown.Toggle
+              id="dropdown-basic"
+              size="sm"
+              variant="outline-primary"
+            >
+              Current Page: {currentPage?.title || ""}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {gameContent.map((current, index) => {
+                const title = current?.title || "";
+                const header = title.replace(" ", "");
+                return (
+                  <Dropdown.Item
+                    key={`${header}-${index}`}
+                    onClick={() => setCurrentIndex(index)}
+                    value={index}
+                  >
+                    {title}
+                  </Dropdown.Item>
+                );
+              })}
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </div>
     </>
