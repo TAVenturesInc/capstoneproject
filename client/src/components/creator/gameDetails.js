@@ -1,6 +1,7 @@
 import { Form } from "react-bootstrap";
 
 import { genreList } from "../../genres";
+
 import { rowStyle } from "./styles";
 
 export const GameDetails = ({ gameData, onChange: setGameData }) => (

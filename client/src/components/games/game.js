@@ -16,12 +16,12 @@ export const Game = ({
     <td>{description}</td>
     <td>
       <Link className="btn btn-link" to={`/games/edit/${_id}`}>
-        Edit
+        Edit Game
       </Link>
     </td>
     <td>
       <button className="btn btn-link" onClick={() => deleteGame(_id)}>
-        Delete
+        Delete Game
       </button>
     </td>
   </tr>

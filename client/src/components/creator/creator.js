@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { useParams /*, useNavigate*/ } from "react-router";
 import generateUniqueId from "generate-unique-id";
-
 import { Button } from "react-bootstrap";
+import { useParams /*, useNavigate*/ } from "react-router";
 
 import { Actions } from "./actions";
 import { GameDetails } from "./gameDetails";
@@ -40,12 +39,12 @@ const Creator = () => {
     if (currentGame?._id) {
       actions.updateGameData(currentGame._id, {
         ...gameData,
-        content: JSON.stringify(gameContent),
+        content: gameContent.map((content) => JSON.stringify(content)),
       });
     } else {
       actions.createGameData({
         ...gameData,
-        content: JSON.stringify(gameContent),
+        content: gameContent.map((content) => JSON.stringify(content)),
       });
     }
   };
@@ -57,7 +56,7 @@ const Creator = () => {
         description: currentGame.description,
         genre: currentGame.genre,
       });
-      setGameContent(JSON.parse(currentGame.content));
+      setGameContent(currentGame.content.map((content) => JSON.parse(content)));
     }
   }, [Boolean(currentGame)]);
 

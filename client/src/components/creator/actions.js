@@ -30,11 +30,12 @@ export const Actions = ({
         </div>
       </div>
       <div className="row">
+        <div className="col col-lg-1"></div>
         <div className="col col-lg-3">
-          <label>Action Name</label>
+          <label>Action Text</label>
         </div>
-        <div className="col col-lg-3">
-          <label>Action Destination</label>
+        <div className="col col-lg-2">
+          <label>Destination</label>
         </div>
       </div>
 
