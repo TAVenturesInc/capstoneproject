@@ -62,17 +62,22 @@ function GameContext({ children }) {
     initialState
   );
 
-  const createGameData = async (data) => {
+  const createGameData = async (game) => {
     dispatch({ type: "START_LOADING" });
     fetch(`${serverURL()}/api/games/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(game),
     })
       .then((response) => response.json())
-      .then(() => dispatch({ type: "UPDATE_COMPLETE" }))
+      .then((res) => {
+        dispatch({ type: "UPDATE_COMPLETE" });
+        if (res.success) {
+          return getGameData(res.id);
+        }
+      })
       .catch((error) => {
         const message = `An error occurred: ${error.statusText}`;
         window.alert(message);

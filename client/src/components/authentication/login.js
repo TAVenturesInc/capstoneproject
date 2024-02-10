@@ -31,14 +31,25 @@ export default function Login() {
       },
       body: JSON.stringify(userLogin),
     })
+      .then ((response) => {
+        // Check status code
+        if (response.status === 404 || response.status === 401) {
+          // Incorrect username or password
+          return response.json().then((data) => {
+            window.alert(data.message);
+            // Recirect back to login page
+            navigate("/login");
+          });
+        } else {
+          setForm({ username: "", password: "" });
+          navigate("/games")
+        }
+      })
       .catch((error) => {
         window.alert(error);
         return;
       })
       .finally(() => setLoading(false));
-
-    setForm({ username: "", password: "" });
-    navigate("/");
   }
 
   return (

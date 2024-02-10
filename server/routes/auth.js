@@ -1,6 +1,9 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const authRoutes = express.Router();
 
@@ -52,6 +55,39 @@ authRoutes.route("/auth/register").post(async (req, res) => {
   }
 });
 
-// Need to add login functionality below
+// Login authentication
+authRoutes.route("/auth/login").post(async (req, res) => {
+  const dbConnection = dbo.getDb();
+
+  const myobj = {
+    username: req.body.username,
+    password: req.body.password,
+  };
+
+  // Find user
+  const user = await dbConnection
+    .collection("users")
+    .findOne({ username: myobj.username });
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+  
+  // Compare passwords
+  const isValidPassword = await bcrypt.compare(myobj.password, user.password);
+
+  if (!isValidPassword) {
+    return res.status(401).json({ success: false, message: "Invalid credentials" });
+  }
+
+  // Valid user and password, generate JWT token
+  const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET, { 
+    expiresIn: "1h",
+  });
+
+  // Send token as response
+  res.status(200).json({ success: true, token: token });
+})
+
 
 module.exports = authRoutes;
