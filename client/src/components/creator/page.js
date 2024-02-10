@@ -1,6 +1,5 @@
 import ReactMarkdown from "react-markdown";
 import generateUniqueId from "generate-unique-id";
-
 import { Button, ButtonGroup, Dropdown, Form } from "react-bootstrap";
 
 import { rowStyle } from "./styles";
@@ -92,9 +91,7 @@ export const Page = ({
           />
           <Form.Text id="pageContentValueHelpBlock" muted>
             This mark-down will appear as the content of your current page.
-            <a href="https://www.markdownguide.org/cheat-sheet/">
-              MarkDown Cheat Sheet
-            </a>
+            <a href="https://commonmark.org/help/">MarkDown Cheat Sheet</a>
           </Form.Text>
 
           <br />

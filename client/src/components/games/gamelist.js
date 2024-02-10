@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useGameContext } from "../../context";
 
@@ -34,9 +35,9 @@ export default function GameList() {
               <th>Title</th>
               <th>Author</th>
               <th>Genre</th>
-              <th>description</th>
-              <th>Edit</th>
-              <th>Delete</th>
+              <th>Game Description</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

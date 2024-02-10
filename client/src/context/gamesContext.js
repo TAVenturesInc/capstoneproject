@@ -85,14 +85,14 @@ function GameContext({ children }) {
       });
   };
 
-  const updateGameData = async (id, data) => {
+  const updateGameData = async (id, game) => {
     dispatch({ type: "START_LOADING" });
     fetch(`${serverURL()}/api/games/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(game),
     })
       .then((response) => response.json())
       .then((game) => {

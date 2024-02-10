@@ -1,30 +1,27 @@
 import React from "react";
+import generateUniqueId from "generate-unique-id";
 import { Button, Form } from "react-bootstrap";
 
-export const Action = ({
-  action,
-  currentIndex,
-  onChange,
-  pages,
-  removeAction,
-}) => {
-  const changeField = (field) => (e) => {
-    const value = e.target.value;
+export const NewAction = ({ currentIndex, onChange, pages }) => {
+  const [name, setName] = React.useState("");
+  const [destination, setDestination] = React.useState("");
+
+  const addAction = () => {
     onChange({
-      name: action.name,
-      destination: action.destination,
-      id: action.id,
-      [field]: value,
+      name: name,
+      destination: destination,
+      id: generateUniqueId(),
     });
+    setName("");
+    setDestination("");
   };
-  const removeCurrentAction = () => removeAction(action.id);
 
   return (
     <div className="row" style={{ paddingBottom: "6px" }}>
       <div className="col col-lg-1">
-        {removeAction && (
-          <Button variant="outline-danger" onClick={removeCurrentAction}>
-            &#8722;
+        {Boolean(name) && Boolean(destination) && (
+          <Button variant="outline-success" onClick={addAction}>
+            Add
           </Button>
         )}
       </div>
@@ -33,20 +30,20 @@ export const Action = ({
           aria-describedby="title"
           id="title"
           type="text"
-          value={action.name}
-          onChange={changeField("name")}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className="col col-lg-2">
         <select
-          value={action.destination}
-          onChange={changeField("destination")}
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
         >
           <option value="">Select Page</option>
           {pages.map((page, index) => (
             <option
               disabled={index === currentIndex}
-              key={`${page.id}-${action.id}`}
+              key={`${page.id}`}
               value={page.id}
             >
               {page.title}
