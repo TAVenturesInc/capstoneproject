@@ -1,21 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import generateUniqueId from "generate-unique-id";
-import { Button, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useParams } from "react-router";
 
-import { Actions } from "./components/actions";
-import { GameDetails } from "./components/gameDetails";
-import { Page } from "./components/page";
+import {
+  Actions,
+  GameDetails,
+  Page,
+  PointsOfInterest,
+  StartingPage,
+} from "./components";
+
 import { useGameContext } from "../../context";
 
-import { rowStyle } from "./styles";
-
 const Creator = () => {
+  const [pointsOfInterest, setPointsOfInterest] = React.useState([]);
+  const [startingPage, setStartingPage] = React.useState("");
   const [gameData, setGameData] = React.useState({
     description: "",
     genre: "",
-    startingPage: "",
     title: "",
   });
   const [gameContent, setGameContent] = React.useState([
@@ -43,11 +47,15 @@ const Creator = () => {
       actions.updateGameData(currentGame._id, {
         ...gameData,
         content: gameContent,
+        pointsOfInterest,
+        startingPage,
       });
     } else {
       actions.createGameData({
         ...gameData,
         content: gameContent,
+        pointsOfInterest,
+        startingPage,
       });
     }
   };
@@ -101,30 +109,15 @@ const Creator = () => {
             onChange={updatePageActions}
             pages={gameContent}
           />
-          <div className="row" style={rowStyle}>
-            <div className="col col-lg-6">
-              <Form.Label htmlFor="startingPage">Starting Point</Form.Label>
-              <br />
-              <select
-                id="startingPage"
-                value={gameData.startingPage}
-                onChange={(e) =>
-                  setGameData({ ...gameData, startingPage: e.target.value })
-                }
-              >
-                <option value="">First Page</option>
-                {gameContent.map((page) => (
-                  <option key={`${page.id}`} value={page.id}>
-                    {page.title}
-                  </option>
-                ))}
-              </select>
-              <br />
-              <Form.Text id="startingPageHelpBlock" muted>
-                Select the page the game will start on.
-              </Form.Text>
-            </div>
-          </div>
+          <StartingPage
+            gameContent={gameContent}
+            setStartingPage={setStartingPage}
+            startingPage={startingPage}
+          />
+          {/* <PointsOfInterest
+            pointsOfInterest={pointsOfInterest}
+            setPointsOfInterest={setPointsOfInterest}
+          /> */}
           <div className="row">
             <div className="col col-lg-6">
               <Button variant="primary" onClick={updateGameData}>

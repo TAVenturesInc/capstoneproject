@@ -80,7 +80,7 @@ export const Page = ({
 
       <div className="row" style={rowStyle}>
         <div className="col col-lg-6">
-          <Form.Label htmlFor="pageContentValue">Description</Form.Label>
+          <Form.Label htmlFor="pageContentValue">Page Content</Form.Label>
           <Form.Control
             aria-describedby="pageContentValue"
             as="textarea"
