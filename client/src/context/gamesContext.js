@@ -64,7 +64,7 @@ function GameContext({ children }) {
 
   const createGameData = async (game) => {
     dispatch({ type: "START_LOADING" });
-    fetch(`${serverURL()}/api/games/add`, {
+    return fetch(`${serverURL()}/api/games/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -87,7 +87,7 @@ function GameContext({ children }) {
 
   const updateGameData = async (id, game) => {
     dispatch({ type: "START_LOADING" });
-    fetch(`${serverURL()}/api/games/${id}`, {
+    return fetch(`${serverURL()}/api/games/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -107,9 +107,12 @@ function GameContext({ children }) {
 
   const getGameData = async (id) => {
     dispatch({ type: "START_LOADING" });
-    fetch(`${serverURL()}/api/games/${id}`)
+    return fetch(`${serverURL()}/api/games/${id}`)
       .then((response) => response.json())
-      .then((game) => dispatch({ type: "SET_GAME_DATA", game }))
+      .then((game) => {
+        dispatch({ type: "SET_GAME_DATA", game });
+        return game;
+      })
       .catch((error) => {
         const message = `An error occurred: ${error.statusText}`;
         window.alert(message);
@@ -120,7 +123,7 @@ function GameContext({ children }) {
   const deleteGame = async (id) => {
     dispatch({ type: "START_LOADING" });
 
-    fetch(`${serverURL()}/api/games/${id}`, {
+    return fetch(`${serverURL()}/api/games/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -137,7 +140,7 @@ function GameContext({ children }) {
 
   const refreshGameList = async () => {
     dispatch({ type: "START_LOADING" });
-    fetch(`${serverURL()}/api/games/`)
+    return fetch(`${serverURL()}/api/games/`)
       .then((response) => response.json())
       .then((games) => dispatch({ type: "LOADING_COMPLETE", games }))
       .catch((error) => {

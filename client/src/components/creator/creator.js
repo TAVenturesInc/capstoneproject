@@ -8,7 +8,7 @@ import {
   Actions,
   GameDetails,
   Page,
-  PointsOfInterest,
+  // PointsOfInterest,
   StartingPage,
 } from "./components";
 
