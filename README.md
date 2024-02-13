@@ -42,7 +42,10 @@ TA Game Creator Website
   - `vim server/config.env`
   - Then paste: `ATLAS_URI=mongodb+srv://<username>:<password>@sandbox.jadwj.mongodb.net/employees?retryWrites=true&w=majority
 PORT=5000`
-  - Fill in the `<username>` and `<password>` with your MongoDB accoount username and password.
+  - Fill in the `<username>` and `<password>` with your MongoDB account username and password.
+  - Then paste on a new line below ATLAS_URI: JWT_SECRET=<yourSecretKey>
+  - Fill in the `<yourSecretKey>` with a longm random string that serves as your JWT secret.
+
 
 ## How to Run localy:
 
