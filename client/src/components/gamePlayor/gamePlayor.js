@@ -67,6 +67,7 @@ const GamePlayor = () => {
                     </Button>
                   ))}
                 </ButtonGroup>
+                <Button variant="outline-primary" href="/games" > Quit </Button>
               </div>
             </div>
           </div>
