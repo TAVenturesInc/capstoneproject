@@ -10,35 +10,45 @@ export const Game = ({
   genre,
   loading,
   title,
-}) => (
-  <tr>
-    <td>{title}</td>
-    <td>{author}</td>
-    <td>{genre}</td>
-    <td>{description}</td>
-    <td>
-      <Link className="btn btn-link" to={`/games/edit/${_id}`}>
-        Edit
-      </Link>
-    </td>
-    <td>
-      <Link className="btn btn-link" to={`/game/${_id}`}>
-        Preview
-      </Link>
-    </td>
-    <td>
-      <Link
-        className="btn btn-link"
-        disabled={loading}
-        onClick={() => downloadGame(_id)}
-      >
-        Download
-      </Link>
-    </td>
-    <td>
-      <button className="btn btn-link" onClick={() => deleteGame(_id)}>
-        Delete
-      </button>
-    </td>
-  </tr>
-);
+}) => {
+  const confirmDeletion = async () => {
+    const confirmation = await window.confirm(
+      "Are you sure you want to delete this game?"
+    );
+    if (confirmation) {
+      deleteGame(_id);
+    }
+  };
+  return (
+    <tr>
+      <td>{title}</td>
+      <td>{author}</td>
+      <td>{genre}</td>
+      <td>{description}</td>
+      <td>
+        <Link className="btn btn-link" to={`/games/edit/${_id}`}>
+          Edit
+        </Link>
+      </td>
+      <td>
+        <Link className="btn btn-link" target={"_blank"} to={`/game/${_id}`}>
+          Preview
+        </Link>
+      </td>
+      <td>
+        <Link
+          className="btn btn-link"
+          disabled={loading}
+          onClick={() => downloadGame(_id)}
+        >
+          Download
+        </Link>
+      </td>
+      <td>
+        <button className="btn btn-link" onClick={confirmDeletion}>
+          Delete
+        </button>
+      </td>
+    </tr>
+  );
+};

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 import { Game } from "./game";
 import { useGameContext } from "../../context";
@@ -51,12 +51,14 @@ export default function GameList() {
             </Button>
           </div>
           <div className="col-4">
-            <input
-              accept="application/JSON"
-              id="file"
-              onChange={handleFileUpload}
-              type="file"
-            />
+            <Form.Group controlId="file" className="mb-3">
+              <Form.Control
+                accept="application/JSON"
+                id="file"
+                onChange={handleFileUpload}
+                type="file"
+              />
+            </Form.Group>
           </div>
         </div>
         <table className="table table-striped" style={{ marginTop: 20 }}>
