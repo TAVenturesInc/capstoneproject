@@ -124,7 +124,8 @@ const Creator = () => {
                 {id ? "Update" : "Save"} Game
               </Button>
               &nbsp;
-              <Button variant="outline-primary">Preview Game</Button>
+              <Button variant="outline-primary" >Preview Game</Button>
+              <Button variant="outline-primary" href="/games" > Cancel </Button>
             </div>
           </div>
         </div>

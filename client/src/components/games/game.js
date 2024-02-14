@@ -32,7 +32,7 @@ export const Game = ({
       </td>
       <td>
         <Link className="btn btn-link" target={"_blank"} to={`/game/${_id}`}>
-          Preview
+          Play
         </Link>
       </td>
       <td>
