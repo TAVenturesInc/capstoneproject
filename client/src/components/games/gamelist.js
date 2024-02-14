@@ -6,6 +6,9 @@ import { Game } from "./game";
 import { useGameContext } from "../../context";
 
 export default function GameList() {
+  const [search, setSearch] = React.useState("");
+  const regex = new RegExp(search, "i");
+
   const { games, gamesLoading, gamesLoaded /*, errorList*/, actions } =
     useGameContext();
   const deleteGame = (id) => actions?.deleteGame(id);
@@ -45,6 +48,20 @@ export default function GameList() {
           <div className="col-6">
             <h3>Game List</h3>
           </div>
+        </div>
+        <div className="row">
+          <div className="col-6">
+            <Form.Control
+              aria-describedby="searchHelpBlock"
+              id="search"
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <Form.Text id="searchHelpBlock" muted>
+              Find a game by title, author, or genre.
+            </Form.Text>
+          </div>
           <div className="col-2">
             <Button variant="primary" disabled={gamesLoading} href="/games/new">
               Create New Game
@@ -72,15 +89,23 @@ export default function GameList() {
           </thead>
           <tbody>
             {gamesLoaded &&
-              games.map((game) => (
-                <Game
-                  {...game}
-                  deleteGame={deleteGame}
-                  downloadGame={downloadGame}
-                  key={game._id}
-                  loading={gamesLoading}
-                />
-              ))}
+              games
+                .filter(
+                  ({ author, description, genre, title }) =>
+                    author.match(regex) ||
+                    description.match(regex) ||
+                    genre.match(regex) ||
+                    title.match(regex)
+                )
+                .map((game) => (
+                  <Game
+                    {...game}
+                    deleteGame={deleteGame}
+                    downloadGame={downloadGame}
+                    key={game._id}
+                    loading={gamesLoading}
+                  />
+                ))}
           </tbody>
         </table>
       </div>
