@@ -12,7 +12,7 @@ gamesRoutes.route("/api/games").get(async (req, res) => {
   const ans = await dbConnection
     .collection("game_data")
     .find({})
-    .limit(10)
+    .project({ title: 1, author: 1, genre: 1, description: 1 })
     .toArray();
   res.send(ans);
 });
