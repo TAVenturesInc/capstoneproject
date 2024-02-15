@@ -1,3 +1,2 @@
-import { GameContext, useGameContext } from "./gamesContext";
-
-export { GameContext, useGameContext };
+export * from "./gamesContext";
+export * from "./userContext";

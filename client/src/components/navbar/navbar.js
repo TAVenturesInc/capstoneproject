@@ -1,10 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-
 import { Navbar, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
+import { useUserContext } from "../../context";
+
 export default function NavbarComponent() {
+  const { actions, loggedIn } = useUserContext();
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Navbar.Brand style={{ paddingLeft: "20px" }}>
@@ -13,12 +16,28 @@ export default function NavbarComponent() {
         </NavLink>
       </Navbar.Brand>
       <Nav className="me-auto">
-        <NavLink className="nav-link" to="/register">
-          Register
-        </NavLink>
-        <NavLink className="nav-link" to="/login">
-          Login
-        </NavLink>
+        {loggedIn ? (
+          <>
+            <NavLink className="nav-link" to="/games">
+              Games
+            </NavLink>
+            <NavLink className="nav-link" to="/profile">
+              My Profile
+            </NavLink>
+            <NavLink className="nav-link" onClick={actions.logOutUserAction}>
+              Logout
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink className="nav-link" to="/register">
+              Register
+            </NavLink>
+            <NavLink className="nav-link" to="/login">
+              Login
+            </NavLink>
+          </>
+        )}
       </Nav>
     </nav>
   );
