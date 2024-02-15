@@ -25,23 +25,23 @@ export const Game = ({
       <td>{author}</td>
       <td>{genre}</td>
       <td>{description}</td>
-      <td>
+      <td style={{ whiteSpace: "nowrap" }}>
         <Link className="btn btn-link" to={`/games/edit/${_id}`}>
           Share
-        </Link>{" "}
+        </Link>
         <Link className="btn btn-link" to={`/games/edit/${_id}`}>
           Edit
-        </Link>{" "}
+        </Link>
         <Link className="btn btn-link" target={"_blank"} to={`/game/${_id}`}>
           Play
-        </Link>{" "}
+        </Link>
         <Link
           className="btn btn-link"
           disabled={loading}
           onClick={() => downloadGame(_id)}
         >
           Download
-        </Link>{" "}
+        </Link>
         <button className="btn btn-link" onClick={confirmDeletion}>
           Delete
         </button>
