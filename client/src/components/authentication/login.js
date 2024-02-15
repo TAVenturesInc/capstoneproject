@@ -24,32 +24,35 @@ export default function Login() {
     setLoading(true);
 
     // await fetch
-    await fetch(`${serverURL()}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userLogin),
-    })
-      .then ((response) => {
-        // Check status code
-        if (response.status === 404 || response.status === 401) {
-          // Incorrect username or password
-          return response.json().then((data) => {
-            window.alert(data.message);
-            // Recirect back to login page
-            navigate("/login");
-          });
-        } else {
-          setForm({ username: "", password: "" });
-          navigate("/games")
-        }
-      })
-      .catch((error) => {
-        window.alert(error);
-        return;
-      })
-      .finally(() => setLoading(false));
+    try {
+      const response = await fetch(`${serverURL()}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userLogin),
+      });
+      
+      // Check status code
+      if (response.status === 404 || response.status === 401) {
+        // Incorrect username or password
+        const data = await response.json();
+        window.alert(data.message);
+        navigate("/login");
+      } else {
+        const data = await response.json();
+        setForm({ username: "", password: "" });
+
+        // Set the received token as a cookie
+        document.cookie = `token=${data.token}; path=/;`;
+
+        navigate("/games");
+      }
+    } catch (error) {
+      window.alert(error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (

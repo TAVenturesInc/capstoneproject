@@ -1,17 +1,25 @@
 const express = require("express");
-
 const app = express();
-
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 
 require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT || 5000;
 
+
 app.use(cors());
-
 app.use(express.json());
+app.use(cookieParser());
 
-app.use(require("./routes/auth"));
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+}));
+
+app.use(require("./routes/auth/login"));
+app.use(require("./routes/auth/register"));
 app.use(require("./routes/games"));
 
 // Get MongoDB driver connection
