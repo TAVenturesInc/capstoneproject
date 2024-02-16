@@ -68,7 +68,7 @@ export default function GameList() {
             </Button>
           </div>
           <div className="col-4">
-            <Form.Group controlId="file" className="mb-3">
+            <Form.Group className="mb-3">
               <Form.Control
                 accept="application/JSON"
                 id="file"
@@ -91,11 +91,16 @@ export default function GameList() {
             {gamesLoaded &&
               games
                 .filter(
-                  ({ author, description, genre, title }) =>
-                    author.match(regex) ||
+                  ({
+                    description = "",
+                    genre = "",
+                    title = "",
+                    userName = "",
+                  }) =>
                     description.match(regex) ||
                     genre.match(regex) ||
-                    title.match(regex)
+                    title.match(regex) ||
+                    userName.match(regex)
                 )
                 .map((game) => (
                   <Game

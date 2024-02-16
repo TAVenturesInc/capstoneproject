@@ -18,15 +18,22 @@ const rootReducer = (state, action) => {
     case "BEGIN_LOGIN":
       return { ...state, loading: true };
     case "LOGIN_USER":
-      return { ...state, loading: false, token: action.token, loggedIn: true };
+      return {
+        ...state,
+        loading: false,
+        loggedIn: true,
+        token: action.token,
+        userId: action.userId,
+        userName: action.userName,
+      };
     case "LOGOUT_USER":
       return {
         ...state,
         loading: false,
         loggedIn: false,
         token: null,
-        userName: null,
         userId: null,
+        userName: null,
       };
     case "END_LOGIN":
       return { ...state, loading: false };
@@ -50,8 +57,9 @@ export const LoginContext = ({ children }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log({ data });
-        document.cookie = `token=${data.token}; path=/;`;
+        document.cookie = `token=${data.token};`;
+        document.cookie = `userName=${data.userName};`;
+        document.cookie = `userId=${data.userId};`;
         dispatch({ type: "LOGIN_USER", token: data.token });
         navigate("/games");
       })
@@ -67,18 +75,28 @@ export const LoginContext = ({ children }) => {
 
   const logOutUserAction = () => {
     document.cookie = "token=;expires=" + new Date(0).toUTCString();
+    document.cookie = "userName=;expires=" + new Date(0).toUTCString();
+    document.cookie = "userId=;expires=" + new Date(0).toUTCString();
     dispatch({ type: "LOGOUT_USER" });
-    navigate("/");
   };
 
   const actions = { loginUserAction, logOutUserAction };
 
   React.useEffect(() => {
-    if (document?.cookie?.match(/^token=/)) {
-      const token = document.cookie.replace("token=", "");
+    if (document?.cookie?.match(/token=/)) {
+      const cookieData = {};
+      document.cookie
+        .toString()
+        .replaceAll(" ", "")
+        .split(";")
+        .map((token) => token.split("="))
+        .map((arr) => (cookieData[arr[0]] = arr[1]));
+
       dispatch({
         type: "LOGIN_USER",
-        token,
+        token: cookieData.token,
+        userName: cookieData.userName,
+        userId: cookieData.userId,
       });
     } else {
       navigate("/");
@@ -86,9 +104,11 @@ export const LoginContext = ({ children }) => {
   }, []);
 
   const userState = {
+    actions,
     loading: state.loading,
     loggedIn: state.loggedIn,
-    actions,
+    userId: state.userId,
+    userName: state.userName,
   };
 
   return (

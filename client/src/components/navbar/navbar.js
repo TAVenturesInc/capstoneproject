@@ -24,7 +24,11 @@ export default function NavbarComponent() {
             <NavLink className="nav-link" to="/profile">
               My Profile
             </NavLink>
-            <NavLink className="nav-link" onClick={actions.logOutUserAction}>
+            <NavLink
+              className="nav-link"
+              to="/"
+              onClick={actions.logOutUserAction}
+            >
               Logout
             </NavLink>
           </>

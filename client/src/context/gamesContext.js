@@ -64,6 +64,7 @@ function GameContext({ children }) {
 
   const createGameData = async (game) => {
     dispatch({ type: "START_LOADING" });
+
     return fetch(`${serverURL()}/api/games/add`, {
       method: "POST",
       headers: {

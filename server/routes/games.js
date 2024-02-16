@@ -12,9 +12,9 @@ gamesRoutes.route("/api/games").get(async (req, res) => {
   const ans = await dbConnection
     .collection("game_data")
     .find({})
-    .project({ title: 1, author: 1, genre: 1, description: 1 })
+    .project({ title: 1, userId: 1, userName: 1, genre: 1, description: 1 })
     .toArray();
-  res.send(ans);
+  return res.send(ans);
 });
 
 // This section will help you get a single record by id
@@ -23,21 +23,19 @@ gamesRoutes.route("/api/games/:id").get(async (req, res) => {
   const ans = await dbConnection
     .collection("game_data")
     .findOne({ _id: new ObjectId(req.params.id) })
-    .then((result) => {
-      res.json(result);
-    })
     .catch((err) => {
       console.error(err);
     });
 
-  res.send(ans);
+  return res.send(ans);
 });
 
 // This section will help you create a new record.
 gamesRoutes.route("/api/games/add").post(async (req, res) => {
   const dbConnection = dbo.getDb();
   const myobj = {
-    author: "_authorId",
+    userName: req.body.userName,
+    userId: new ObjectId(req.body.userId),
     content: req.body.content,
     description: req.body.description,
     genre: req.body.genre,
@@ -50,7 +48,7 @@ gamesRoutes.route("/api/games/add").post(async (req, res) => {
       response.json(res);
     });
 
-  res.send({
+  return res.send({
     success: true,
     message: "Game added successfully!",
     id: ans.insertedId.toString(),
@@ -63,7 +61,8 @@ gamesRoutes.route("/api/games/:id").post(async (req, res) => {
   const myquery = { _id: new ObjectId(req.params.id) };
   const newvalues = {
     $set: {
-      author: "_authorId",
+      userName: req.body.userName,
+      userId: new ObjectId(req.body.userId),
       content: req.body.content,
       description: req.body.description,
       genre: req.body.genre,
@@ -78,7 +77,7 @@ gamesRoutes.route("/api/games/:id").post(async (req, res) => {
       response.json(res);
     });
 
-  res.send(ans);
+  return res.send(ans);
 });
 
 // This section will help you delete a record
@@ -93,7 +92,7 @@ gamesRoutes.route("/api/games/:id").delete(async (req, res) => {
       response.json(obj);
     });
 
-  res.send(true);
+  return res.send(true);
 });
 
 module.exports = gamesRoutes;

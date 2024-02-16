@@ -12,7 +12,7 @@ import {
   StartingPage,
 } from "./components";
 
-import { useGameContext } from "../../context";
+import { useGameContext, useLoginContext } from "../../context";
 
 const Creator = () => {
   const [pointsOfInterest, setPointsOfInterest] = React.useState([]);
@@ -31,6 +31,8 @@ const Creator = () => {
     },
   ]);
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const { userName, userId } = useLoginContext();
+
   const { actions, currentGame } = useGameContext();
   const { id } = useParams();
 
@@ -49,6 +51,8 @@ const Creator = () => {
         content: gameContent,
         pointsOfInterest,
         startingPage,
+        userId,
+        userName,
       });
     } else {
       actions.createGameData({
@@ -56,6 +60,8 @@ const Creator = () => {
         content: gameContent,
         pointsOfInterest,
         startingPage,
+        userId,
+        userName,
       });
     }
   };
@@ -124,8 +130,11 @@ const Creator = () => {
                 {id ? "Update" : "Save"} Game
               </Button>
               &nbsp;
-              <Button variant="outline-primary" >Preview Game</Button>
-              <Button variant="outline-primary" href="/games" > Cancel </Button>
+              <Button variant="outline-primary">Preview Game</Button>
+              &nbsp;
+              <Button variant="outline-primary" href="/games">
+                Cancel
+              </Button>
             </div>
           </div>
         </div>
