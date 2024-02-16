@@ -1,10 +1,10 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-import { useUserContext } from "../../context";
+import { useLoginContext } from "../../context";
 
 export default function Login() {
-  const { actions, loading } = useUserContext();
+  const { actions, loading } = useLoginContext();
 
   const [form, setForm] = React.useState({
     username: "",

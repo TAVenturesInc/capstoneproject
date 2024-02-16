@@ -3,10 +3,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Navbar, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
-import { useUserContext } from "../../context";
+import { useLoginContext } from "../../context";
 
 export default function NavbarComponent() {
-  const { actions, loggedIn } = useUserContext();
+  const { actions, loggedIn } = useLoginContext();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">

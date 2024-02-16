@@ -7,10 +7,11 @@ const initialState = {
   loading: false,
   loggedIn: false,
   token: null,
-  user: null,
+  userName: null,
+  userId: null,
 };
 
-const userContext = React.createContext();
+const loginContext = React.createContext();
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -24,7 +25,8 @@ const rootReducer = (state, action) => {
         loading: false,
         loggedIn: false,
         token: null,
-        user: null,
+        userName: null,
+        userId: null,
       };
     case "END_LOGIN":
       return { ...state, loading: false };
@@ -33,7 +35,7 @@ const rootReducer = (state, action) => {
   }
 };
 
-export const UserContext = ({ children }) => {
+export const LoginContext = ({ children }) => {
   const [state, dispatch] = React.useReducer(rootReducer, initialState);
   const navigate = useNavigate();
 
@@ -48,6 +50,7 @@ export const UserContext = ({ children }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log({ data });
         document.cookie = `token=${data.token}; path=/;`;
         dispatch({ type: "LOGIN_USER", token: data.token });
         navigate("/games");
@@ -89,11 +92,11 @@ export const UserContext = ({ children }) => {
   };
 
   return (
-    <userContext.Provider value={userState}>{children}</userContext.Provider>
+    <loginContext.Provider value={userState}>{children}</loginContext.Provider>
   );
 };
 
-export const useUserContext = () => {
-  const exposedState = React.useContext(userContext);
+export const useLoginContext = () => {
+  const exposedState = React.useContext(loginContext);
   return exposedState;
 };

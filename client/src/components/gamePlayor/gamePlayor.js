@@ -33,8 +33,6 @@ const GamePlayor = () => {
     (page) => page.id === currentPageId
   );
 
-  console.log({ currentGame, rest });
-
   if (!currentGame || !currentPage) {
     return <div>Loading...</div>;
   }

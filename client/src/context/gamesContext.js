@@ -143,11 +143,12 @@ function GameContext({ children }) {
     return fetch(`${serverURL()}/api/games/`)
       .then((response) => response.json())
       .then((games) => dispatch({ type: "LOADING_COMPLETE", games }))
-      .catch((error) => {
-        console.log({ error });
-        const message = `An error occurred: ${error.statusText}`;
-        dispatch({ type: "LOADING_ERROR", errors: [message] });
-      });
+      .catch((error) =>
+        dispatch({
+          type: "LOADING_ERROR",
+          errors: [`An error occurred: ${error.statusText}`],
+        })
+      );
   };
 
   const exposedState = {
