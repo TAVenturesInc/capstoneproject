@@ -11,9 +11,10 @@ export const Game = ({
   genre,
   loading,
   title,
+  userId,
   userName,
 }) => {
-  const { userName: currentUser } = useLoginContext();
+  const { userId: currentUserId } = useLoginContext();
   const confirmDeletion = async () => {
     const confirmation = await window.confirm(
       "Are you sure you want to delete this game?"
@@ -32,7 +33,7 @@ export const Game = ({
         <Link className="btn btn-link" target={"_blank"} to={`/game/${_id}`}>
           Play
         </Link>
-        {userName === currentUser && (
+        {userId === currentUserId && (
           <>
             <Link className="btn btn-link" to={`/games/edit/${_id}`}>
               Share
