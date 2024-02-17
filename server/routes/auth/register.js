@@ -22,6 +22,7 @@ authRegister.route("/auth/register").post(async (req, res) => {
       username: req.body.username,
       password: hashedPassword,
       email: req.body.email,
+      game_state: [],
     };
 
     // Check if username exists
@@ -31,7 +32,9 @@ authRegister.route("/auth/register").post(async (req, res) => {
 
     if (existingUser) {
       // Username is taken
-      return res.status(409).json({ success: false, message: "Username already exists" });
+      return res
+        .status(409)
+        .json({ success: false, message: "Username already exists" });
     }
 
     // Check if email exists
@@ -41,7 +44,9 @@ authRegister.route("/auth/register").post(async (req, res) => {
 
     if (emailCount > 0) {
       // Email is taken
-      return res.status(409).json({ success: false, message: "Email already exists" });
+      return res
+        .status(409)
+        .json({ success: false, message: "Email already exists" });
     }
     // Username and email are available
     await dbConnection.collection("users").insertOne(newUser);
@@ -53,4 +58,3 @@ authRegister.route("/auth/register").post(async (req, res) => {
 });
 
 module.exports = authRegister;
-
