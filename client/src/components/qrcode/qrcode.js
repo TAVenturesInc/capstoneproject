@@ -1,12 +1,14 @@
 import ReactDOM from 'react-dom';
-import {QRCodeSVG} from 'qrcode.react';
+import QRCode from 'qrcode.react';
 
 
 
-export const QRGenerator = (game_id) =>{
-    
-    ReactDOM.render(
-        <QRCodeSVG value="https://reactjs.org/" />, // change to game player with game id
-        document.getElementById('mountNode')
+const QRGenerator = ({ value }) =>{
+    return(
+        <div>
+            <QRCode value={ value } />
+        </div>
     );
 };
+
+export default QRGenerator;

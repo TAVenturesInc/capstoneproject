@@ -2,7 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useLoginContext } from "../../context";
-//import QRGenerator from "../qrcode";
+
+// for qr generator
+import QRGenerator from "../qrcode";
+import { useState } from "react";
+
 
 export const Game = ({
   _id,
@@ -15,6 +19,13 @@ export const Game = ({
   userId,
   userName,
 }) => {
+
+  // for qr generator
+  const [showQR, setShowQR] = useState(false);
+  const qrHandler = () => {
+    setShowQR(true);
+  };
+
   const { userId: currentUserId } = useLoginContext();
   const confirmDeletion = async () => {
     const confirmation = await window.confirm(
@@ -34,9 +45,13 @@ export const Game = ({
         <Link className="btn btn-link" target={"_blank"} to={`/game/${_id}`}>
           Play
         </Link>
-        <Link className="btn btn-link" onClick={alert("you pushed the qr code button")}>
+        <Link className="btn btn-link" onClick={qrHandler}>
               QR
         </Link>
+        {/* <div>
+          <QRGenerator value='https://www.example.com'>QR</QRGenerator>
+        </div> */}
+
         {userId === currentUserId && (
           <>
             <Link className="btn btn-link" to={`/games/e{_dit/${_id}`}>
@@ -57,6 +72,7 @@ export const Game = ({
             </button>
           </>
         )}
+        {showQR && <QRGenerator value="example.com" />}
       </td>
     </tr>
   );
