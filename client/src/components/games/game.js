@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useLoginContext } from "../../context";
+//import QRGenerator from "../qrcode";
 
 export const Game = ({
   _id,
@@ -29,16 +30,16 @@ export const Game = ({
       <td>{userName}</td>
       <td>{genre}</td>
       <td>{description}</td>
-      <td style={{ whiteSpace: "nowrap" }}>
+      <td style={{ whiteSpace: "nowrap" }}>_
         <Link className="btn btn-link" target={"_blank"} to={`/game/${_id}`}>
           Play
         </Link>
-        <Link className="btn btn-link" to={`/games/edit/${_id}`}>
+        <Link className="btn btn-link" onClick={alert("you pushed the qr code button")}>
               QR
         </Link>
         {userId === currentUserId && (
           <>
-            <Link className="btn btn-link" to={`/games/edit/${_id}`}>
+            <Link className="btn btn-link" to={`/games/e{_dit/${_id}`}>
               Share
             </Link>
             <Link className="btn btn-link" to={`/games/edit/${_id}`}>
