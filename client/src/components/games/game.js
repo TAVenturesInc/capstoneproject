@@ -23,7 +23,9 @@ export const Game = ({
   // for qr generator
   const [showQR, setShowQR] = useState(false);
   const qrHandler = () => {
-    setShowQR(true);
+    if (showQR) setShowQR(false);
+    else setShowQR(true);
+
   };
 
   const { userId: currentUserId } = useLoginContext();
@@ -54,7 +56,7 @@ export const Game = ({
 
         {userId === currentUserId && (
           <>
-            <Link className="btn btn-link" to={`/games/e{_dit/${_id}`}>
+            <Link className="btn btn-link" to={`/games/edit/${_id}`}>
               Share
             </Link>
             <Link className="btn btn-link" to={`/games/edit/${_id}`}>
