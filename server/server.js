@@ -30,5 +30,6 @@ app.listen(port, async () => {
   await dbo.connectToServer(function (err) {
     if (err) console.error(err);
   });
+  console.log(`${process.env.SESSION_SECRET}`)
   console.log(`Server is running on port: ${port}`);
 });

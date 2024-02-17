@@ -33,6 +33,9 @@ export const Game = ({
         <Link className="btn btn-link" target={"_blank"} to={`/game/${_id}`}>
           Play
         </Link>
+        <Link className="btn btn-link" to={`/games/edit/${_id}`}>
+              QR
+        </Link>
         {userId === currentUserId && (
           <>
             <Link className="btn btn-link" to={`/games/edit/${_id}`}>
