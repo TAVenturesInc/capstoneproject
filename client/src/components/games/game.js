@@ -50,9 +50,7 @@ export const Game = ({
         <Link className="btn btn-link" onClick={qrHandler}>
               QR
         </Link>
-        {/* <div>
-          <QRGenerator value='https://www.example.com'>QR</QRGenerator>
-        </div> */}
+
 
         {userId === currentUserId && (
           <>
@@ -74,7 +72,8 @@ export const Game = ({
             </button>
           </>
         )}
-        {showQR && <QRGenerator value="example.com" />}
+        
+        {showQR && <QRGenerator value={`https://taventures.onrender.com/game/${_id}`} />}
       </td>
     </tr>
   );
