@@ -75,7 +75,7 @@ export const Game = ({
           </>
         )}
         
-        {showQR && <QRGenerator value={`https://${appURL()}/game/${_id}`} />}
+        {showQR && <QRGenerator value={`${appURL()}/game/${_id}`} />}
       </td>
     </tr>
   );
