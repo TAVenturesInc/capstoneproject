@@ -6,6 +6,8 @@ import { useLoginContext } from "../../context";
 // for qr generator
 import QRGenerator from "../qrcode";
 import { useState } from "react";
+import appURL from "../../appURL";
+
 
 
 export const Game = ({
@@ -73,7 +75,7 @@ export const Game = ({
           </>
         )}
         
-        {showQR && <QRGenerator value={`https://taventures.onrender.com/game/${_id}`} />}
+        {showQR && <QRGenerator value={`https://${appURL()}/game/${_id}`} />}
       </td>
     </tr>
   );
