@@ -9,8 +9,12 @@ export default function Register() {
   const [form, setForm] = React.useState({
     username: "",
     password: "",
+    confirmPassword: "",
     email: "",
   });
+  const [passwordsMatch, setPasswordsMatch] = React.useState(true);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const navigate = useNavigate();
 
   // These methods will update the state properties.
@@ -24,6 +28,12 @@ export default function Register() {
   async function onSubmit(e) {
     setLoading(true);
     e.preventDefault();
+
+    if (!passwordsMatch) {
+      window.alert("Passwords do not match");
+      setLoading(false);
+      return;
+    }
 
     // When a post request is sent to the create url, we'll add a new record to the database
     const newUser = { ...form };
@@ -45,7 +55,7 @@ export default function Register() {
             navigate("/register");
           });
         } else {
-          setForm({ username: "", password: "", email: "" });
+          setForm({ username: "", password: "", confirmPassword: "", email: "" });
           navigate("/login");
         }
       })
@@ -55,6 +65,11 @@ export default function Register() {
       })
       .finally(() => setLoading(false));
   }
+
+  // Check for password match
+  React.useEffect(() => {
+    setPasswordsMatch(form.password === form.confirmPassword);
+  }, [form.password, form.confirmPassword]);
 
   return (
     <div className="card">
@@ -72,13 +87,48 @@ export default function Register() {
                 value={form.username}
               />
               <label htmlFor="password">Password</label>
-              <input
-                className="form-control"
-                id="password"
-                onChange={(e) => updateForm({ password: e.target.value })}
-                type="password"
-                value={form.password}
-              />
+              <div className="input-group">
+                <input
+                  className="form-control"
+                  id="password"
+                  onChange={(e) => updateForm({ password: e.target.value })}
+                  type={showPassword ? "text" : "password"}
+                  value={form.password}
+                />
+                <div className="input-group-append">
+                  <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
+                </div>
+              </div>
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <div className="input-group">
+                <input
+                  className={`form-control ${ !passwordsMatch ? "is-invalid" : "" }`}
+                  id="confirmPassword"
+                  onChange={(e) => updateForm({ confirmPassword: e.target.value })}
+                  type={showConfirmPassword ? "text" : "password"}
+                  value={form.confirmPassword}
+                />
+                <div className="input-group-append">
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? "Hide" : "Show"}
+                  </button>
+                </div>
+              </div>
+              { !passwordsMatch && (
+                <div className="invalid-feedback">
+                  Passwords do not match
+                </div>
+              )}
               <label htmlFor="email">Email</label>
               <input
                 className="form-control"

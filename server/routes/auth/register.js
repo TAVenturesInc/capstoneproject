@@ -11,7 +11,6 @@ const authRegister = express.Router();
 const dbo = require("../../db/conn");
 
 // This section will help you create a new user
-// Still need to add username/email check against the db to ensure no duplicates are found
 authRegister.route("/auth/register").post(async (req, res) => {
   try {
     const dbConnection = dbo.getDb();
