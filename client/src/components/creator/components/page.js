@@ -1,6 +1,12 @@
 import ReactMarkdown from "react-markdown";
 import generateUniqueId from "generate-unique-id";
-import { Button, ButtonGroup, Dropdown, Form } from "react-bootstrap";
+import {
+  Button,
+  ButtonGroup,
+  Dropdown,
+  Form,
+  ToggleButton,
+} from "react-bootstrap";
 
 import { rowStyle } from "../styles";
 
@@ -32,22 +38,31 @@ export const Page = ({
       return newContent;
     });
   };
-  const updatePageContent = (e) => {
-    const value = e.target.value;
+
+  const updateGameContent = (e) => {
+    const { name, value } = e.target;
     setGameContent((prev) => {
       const newContent = [...prev];
-      newContent[currentIndex].value = value;
+      newContent[currentIndex][name] = value;
       return newContent;
     });
   };
-  const updatePageTitle = (e) => {
-    const value = e.target.value;
+  const updatePageEndNode = (e) => {
+    const value = e.target.value === "true";
     setGameContent((prev) => {
       const newContent = [...prev];
-      newContent[currentIndex].title = value;
+      newContent[currentIndex].endNode = !value;
+      newContent[currentIndex].endState = "";
       return newContent;
     });
   };
+
+  const {
+    endNode = false,
+    endState = "",
+    title = "",
+    value = "",
+  } = currentPage || {};
 
   return (
     <>
@@ -65,16 +80,17 @@ export const Page = ({
           <Form.Control
             aria-describedby="contentTitle"
             id="contentTitle"
-            onChange={updatePageTitle}
+            name="title"
+            onChange={updateGameContent}
             type="text"
-            value={currentPage?.title || ""}
+            value={title}
           />
           <Form.Text id="contentTitleHelpBlock" muted>
             Title text for the current page.
           </Form.Text>
         </div>
         <div className="col col-lg-6">
-          <h2>{currentPage?.title || ""}</h2>
+          <h2>{title}</h2>
         </div>
       </div>
 
@@ -85,9 +101,10 @@ export const Page = ({
             aria-describedby="pageContentValue"
             as="textarea"
             id="pageContentValue"
-            onChange={updatePageContent}
+            onChange={updateGameContent}
+            name="value"
             rows={9}
-            value={currentPage?.value || ""}
+            value={value}
           />
           <Form.Text id="pageContentValueHelpBlock" muted>
             This mark-down will appear as the content of your current page.
@@ -97,10 +114,10 @@ export const Page = ({
           <br />
         </div>
         <div className="col col-lg-6">
-          <ReactMarkdown>{currentPage?.value || ""}</ReactMarkdown>
+          <ReactMarkdown>{value}</ReactMarkdown>
         </div>
       </div>
-      <div className="row">
+      <div className="row" style={rowStyle}>
         <div className="col col-lg-6">
           <ButtonGroup>
             <Button variant="info" onClick={addPage} size="sm">
@@ -122,7 +139,7 @@ export const Page = ({
               size="sm"
               variant="outline-primary"
             >
-              Current Page: {currentPage?.title || ""}
+              Current Page: {title}
             </Dropdown.Toggle>
             <Dropdown.Menu>
               {gameContent.map((current, index) => {
@@ -142,6 +159,39 @@ export const Page = ({
           </Dropdown>
         </div>
       </div>
+      <div className="row">
+        <div className="col col-lg-6">
+          <ToggleButton
+            checked={endNode}
+            id="toggle-check"
+            name="endNode"
+            onChange={updatePageEndNode}
+            size="sm"
+            type="checkbox"
+            value={endNode}
+            variant="outline-primary"
+          >
+            Is this an end node?
+          </ToggleButton>
+        </div>
+      </div>
+      {endNode && (
+        <div className="row" style={{ paddingTop: "8px" }}>
+          <div className="col col-lg-6">
+            <Form.Control
+              aria-describedby="endState"
+              id="endState"
+              onChange={updateGameContent}
+              type="text"
+              name="endState"
+              value={endState}
+            />
+            <Form.Text id="endStateHelpBlock" muted>
+              What should be recorded for completing the game?
+            </Form.Text>
+          </div>
+        </div>
+      )}
     </>
   );
 };

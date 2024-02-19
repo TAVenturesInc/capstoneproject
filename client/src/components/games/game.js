@@ -8,8 +8,6 @@ import QRGenerator from "../qrcode";
 import { useState } from "react";
 import appURL from "../../appURL";
 
-
-
 export const Game = ({
   _id,
   deleteGame,
@@ -21,14 +19,8 @@ export const Game = ({
   userId,
   userName,
 }) => {
-
-  // for qr generator
   const [showQR, setShowQR] = useState(false);
-  const qrHandler = () => {
-    if (showQR) setShowQR(false);
-    else setShowQR(true);
-
-  };
+  const toggleQRCode = () => setShowQR(!showQR);
 
   const { userId: currentUserId } = useLoginContext();
   const confirmDeletion = async () => {
@@ -45,15 +37,13 @@ export const Game = ({
       <td>{userName}</td>
       <td>{genre}</td>
       <td>{description}</td>
-      <td style={{ whiteSpace: "nowrap" }}>_
+      <td style={{ whiteSpace: "nowrap" }}>
         <Link className="btn btn-link" target={"_blank"} to={`/game/${_id}`}>
           Play
         </Link>
-        <Link className="btn btn-link" onClick={qrHandler}>
-              QR
+        <Link className="btn btn-link" onClick={toggleQRCode}>
+          QR
         </Link>
-
-
         {userId === currentUserId && (
           <>
             <Link className="btn btn-link" to={`/games/edit/${_id}`}>
@@ -74,7 +64,6 @@ export const Game = ({
             </button>
           </>
         )}
-        
         {showQR && <QRGenerator value={`${appURL()}/game/${_id}`} />}
       </td>
     </tr>

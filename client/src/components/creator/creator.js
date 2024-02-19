@@ -28,6 +28,8 @@ const Creator = () => {
       id: generateUniqueId(),
       title: "",
       value: "",
+      endNode: false,
+      endState: "",
     },
   ]);
   const [currentIndex, setCurrentIndex] = React.useState(0);

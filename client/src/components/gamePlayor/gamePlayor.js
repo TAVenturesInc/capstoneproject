@@ -9,11 +9,20 @@ import { useGameContext } from "../../context";
 const GamePlayor = () => {
   const [currentPageId, setCurrentPageId] = React.useState(null);
   const { id, pageId } = useParams();
-  const { actions, currentGame, ...rest } = useGameContext();
+  const { actions: gameActions, currentGame } = useGameContext();
+
+  const currentPage = currentGame?.content.find(
+    (page) => page.id === currentPageId
+  );
+  const goToStart = () =>
+    setCurrentPageId(currentGame?.startingPage || currentGame?.content[0]?.id);
+
+  const { title = "", description = "" } = currentGame || {};
+  const { actions = [], value = "", endNode = false } = currentPage || {};
 
   React.useEffect(() => {
     if (id) {
-      actions.getGameData(id);
+      gameActions.getGameData(id);
     }
   }, []);
 
@@ -22,16 +31,10 @@ const GamePlayor = () => {
       if (pageId) {
         setCurrentPageId(pageId);
       } else {
-        setCurrentPageId(
-          currentGame?.startingPage || currentGame?.content[0]?.id
-        );
+        goToStart();
       }
     }
   }, [currentGame?.content?.length]);
-
-  const currentPage = currentGame?.content.find(
-    (page) => page.id === currentPageId
-  );
 
   if (!currentGame || !currentPage) {
     return <div>Loading...</div>;
@@ -43,20 +46,20 @@ const GamePlayor = () => {
         <div className="container form-group">
           <div className="row">
             <div className="col-md-12">
-              <h1>{currentGame.title}</h1>
+              <h1>{title}</h1>
             </div>
           </div>
           <div className="row">
             <div className="col-md-12">
-              <p>{currentGame.description}</p>
-              <ReactMarkdown>{currentPage.value}</ReactMarkdown>
+              <p>{description}</p>
+              <ReactMarkdown>{value}</ReactMarkdown>
             </div>
           </div>
           <div className="row">
             <div className="col-md-12">
               <div>
                 <ButtonGroup>
-                  {currentPage.actions.map(({ name, id, destination }) => (
+                  {actions.map(({ name, id, destination }) => (
                     <Button
                       key={id}
                       onClick={() => setCurrentPageId(destination)}
@@ -65,10 +68,19 @@ const GamePlayor = () => {
                     </Button>
                   ))}
                 </ButtonGroup>
-                
               </div>
               &nbsp;
-              <div><Button variant="outline-primary" href="/games" > Quit </Button></div>
+              <div>
+                <Button variant="outline-primary" href="/games">
+                  Quit
+                </Button>
+                &nbsp;
+                {endNode && (
+                  <Button variant="outline-warning" onClick={goToStart}>
+                    Start Over
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
         </div>
