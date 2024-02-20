@@ -1,14 +1,16 @@
-import ReactDOM from 'react-dom';
-import QRCode from 'qrcode.react';
+import QRCode from "qrcode.react";
+import { useParams } from "react-router";
 
+import appURL from "../../appURL";
 
+const QRGenerator = () => {
+  const { id } = useParams();
 
-const QRGenerator = ({ value }) =>{
-    return(
-        <div>
-            <QRCode value={ value } />
-        </div>
-    );
+  return (
+    <div>
+      <QRCode value={`${appURL()}/game/${id}`} />
+    </div>
+  );
 };
 
 export default QRGenerator;

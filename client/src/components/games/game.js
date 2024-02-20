@@ -1,12 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
 
 import { useLoginContext } from "../../context";
-
-// for qr generator
-import QRGenerator from "../qrcode";
-import { useState } from "react";
-import appURL from "../../appURL";
 
 export const Game = ({
   _id,
@@ -19,52 +15,45 @@ export const Game = ({
   userId,
   userName,
 }) => {
-  const [showQR, setShowQR] = useState(false);
-  const toggleQRCode = () => setShowQR(!showQR);
-
   const { userId: currentUserId } = useLoginContext();
   const confirmDeletion = async () => {
     const confirmation = await window.confirm(
       "Are you sure you want to delete this game?"
     );
-    if (confirmation) {
-      deleteGame(_id);
-    }
+    if (confirmation) deleteGame(_id);
   };
+
   return (
     <tr>
       <td>{title}</td>
       <td>{userName}</td>
       <td>{genre}</td>
       <td>{description}</td>
-      <td style={{ whiteSpace: "nowrap" }}>
-        <Link className="btn btn-link" target={"_blank"} to={`/game/${_id}`}>
-          Play
-        </Link>
-        <Link className="btn btn-link" onClick={toggleQRCode}>
-          QR
-        </Link>
-        {userId === currentUserId && (
-          <>
-            <Link className="btn btn-link" to={`/games/edit/${_id}`}>
-              Share
-            </Link>
-            <Link className="btn btn-link" to={`/games/edit/${_id}`}>
-              Edit
-            </Link>
-            <Link
-              className="btn btn-link"
-              disabled={loading}
-              onClick={() => downloadGame(_id)}
-            >
-              Download
-            </Link>
-            <button className="btn btn-link" onClick={confirmDeletion}>
-              Delete
-            </button>
-          </>
+      <td style={{ textAlign: "right" }}>
+        {userId === currentUserId ? (
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Actions
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item href={`/game/${_id}`} target="_blank">
+                Play
+              </Dropdown.Item>
+              <Dropdown.Item href={`/qr/${_id}`} target="_blank">
+                Shareable QR Code`
+              </Dropdown.Item>
+              <Dropdown.Item href={`/games/edit/${_id}`}>Edit</Dropdown.Item>
+              <Dropdown.Item onClick={() => downloadGame(_id)}>
+                Download JSON
+              </Dropdown.Item>
+              <Dropdown.Item onClick={confirmDeletion}>
+                Delete Game
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        ) : (
+          <Link to={`/games/play/${_id}`}>Play</Link>
         )}
-        {showQR && <QRGenerator value={`${appURL()}/game/${_id}`} />}
       </td>
     </tr>
   );
