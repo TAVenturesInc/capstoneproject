@@ -50,6 +50,15 @@ function boardReducer(state, action) {
         games: action.games,
       };
     }
+    case "RESET_GAME_DATA": {
+      return {
+        currentGame: null,
+        errorList: [],
+        games: [],
+        loaded: false,
+        loading: false,
+      };
+    }
     default: {
       return state;
     }
@@ -61,6 +70,10 @@ function GameContext({ children }) {
     boardReducer,
     initialState
   );
+
+  const resetGameData = () => {
+    dispatch({ type: "RESET_GAME_DATA" });
+  };
 
   const createGameData = async (game) => {
     dispatch({ type: "START_LOADING" });
@@ -152,6 +165,24 @@ function GameContext({ children }) {
       );
   };
 
+  const updateUserGameStatus = (gameId, userId, status) => {
+    dispatch({ type: "START_LOADING" });
+
+    return fetch(`${serverURL()}/api/game/${gameId}/user/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status }),
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        const message = `An error occurred: ${error.statusText}`;
+        window.alert(message);
+        dispatch({ type: "LOADING_ERROR", errors: [message] });
+      });
+  };
+
   const exposedState = {
     currentGame,
     games,
@@ -162,7 +193,9 @@ function GameContext({ children }) {
       deleteGame,
       getGameData,
       refreshGameList,
+      resetGameData,
       updateGameData,
+      updateUserGameStatus,
     },
   };
 

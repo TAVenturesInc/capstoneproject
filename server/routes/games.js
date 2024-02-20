@@ -95,4 +95,46 @@ gamesRoutes.route("/api/games/:id").delete(async (req, res) => {
   return res.send(true);
 });
 
+gamesRoutes.route("/api/game/:game/user/:user").post(async (req, res) => {
+  const dbConnection = dbo.getDb();
+  const { game, user } = req.params;
+  const myquery = { _id: new ObjectId(user) };
+
+  const userData = await dbConnection.collection("users").findOne(myquery);
+  const gameState = userData.game_state || [];
+  const gameIndex = gameState.findIndex((el) => el._game === game);
+  const currentDate = new Date().toString();
+  const status = req.body.status;
+
+  if (gameIndex === -1) {
+    gameState.push({
+      _game: game,
+      originalStart: currentDate,
+      recentStart: currentDate,
+      recentEnd: null,
+      status: [],
+    });
+  } else {
+    const game = { ...gameState[gameIndex] };
+    if (status.start) {
+      game.recentStart = currentDate;
+    } else if (status.end) {
+      game.recentEnd = currentDate;
+      game.status.push({ state: status.status, currentDate });
+    }
+    gameState[gameIndex] = game;
+  }
+  const updates = { $set: { game_state: gameState } };
+
+  const ans = await dbConnection
+    .collection("users")
+    .updateOne(myquery, updates, function (err, res) {
+      if (err) throw err;
+      console.log("1 document updated");
+      response.json(res);
+    });
+
+  return res.send(ans);
+});
+
 module.exports = gamesRoutes;

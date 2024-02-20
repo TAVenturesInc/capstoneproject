@@ -3,10 +3,15 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Navbar, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
-import { useLoginContext } from "../../context";
+import { useGameContext, useLoginContext } from "../../context";
 
 export default function NavbarComponent() {
-  const { actions, loggedIn } = useLoginContext();
+  const { actions: loginActions, loggedIn } = useLoginContext();
+  const { actions: gamesActions } = useGameContext();
+  const logout = () => {
+    loginActions.logOutUserAction();
+    gamesActions.resetGameData();
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,11 +29,7 @@ export default function NavbarComponent() {
             <NavLink className="nav-link" to="/profile">
               My Profile
             </NavLink>
-            <NavLink
-              className="nav-link"
-              to="/"
-              onClick={actions.logOutUserAction}
-            >
+            <NavLink className="nav-link" to="/" onClick={logout}>
               Logout
             </NavLink>
           </>
