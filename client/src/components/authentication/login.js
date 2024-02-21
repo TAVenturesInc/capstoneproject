@@ -4,8 +4,7 @@ import { Button } from "react-bootstrap";
 import { useLoginContext } from "../../context";
 
 export default function Login() {
-  const { actions, loading } = useLoginContext();
-
+  const { actions, error, loading } = useLoginContext();
   const [form, setForm] = React.useState({
     username: "",
     password: "",
@@ -55,6 +54,8 @@ export default function Login() {
               >
                 Login
               </Button>
+              <br />
+              {error && <p style={{ color: "red" }}>{error}</p>}
             </div>
           </div>
         </form>

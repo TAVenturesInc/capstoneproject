@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import serverURL from "../serverURL";
 
 const initialState = {
+  error: null,
   loading: false,
   loggedIn: false,
   token: null,
@@ -16,7 +17,7 @@ const loginContext = React.createContext();
 const rootReducer = (state, action) => {
   switch (action.type) {
     case "BEGIN_LOGIN":
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: null };
     case "LOGIN_USER":
       return {
         ...state,
@@ -29,6 +30,7 @@ const rootReducer = (state, action) => {
     case "LOGOUT_USER":
       return {
         ...state,
+        error: null,
         loading: false,
         loggedIn: false,
         token: null,
@@ -37,6 +39,8 @@ const rootReducer = (state, action) => {
       };
     case "END_LOGIN":
       return { ...state, loading: false };
+    case "LOGIN_ERROR":
+      return { ...state, loading: false, error: action.error };
     default:
       return state;
   }
@@ -57,11 +61,15 @@ export const LoginContext = ({ children }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        document.cookie = `token=${data.token};`;
-        document.cookie = `userName=${data.userName};`;
-        document.cookie = `userId=${data.userId};`;
-        dispatch({ type: "LOGIN_USER", token: data.token });
-        navigate("/games");
+        if (data.success) {
+          document.cookie = `token=${data.token};`;
+          document.cookie = `userName=${data.userName};`;
+          document.cookie = `userId=${data.userId};`;
+          dispatch({ type: "LOGIN_USER", token: data.token });
+          navigate("/games");
+        } else {
+          dispatch({ type: "LOGIN_ERROR", error: "Login was unsuccessful" });
+        }
       })
       .catch((err) => {
         window.alert(err);
@@ -105,6 +113,7 @@ export const LoginContext = ({ children }) => {
 
   const userState = {
     actions,
+    error: state.error,
     loading: state.loading,
     loggedIn: state.loggedIn,
     userId: state.userId,
