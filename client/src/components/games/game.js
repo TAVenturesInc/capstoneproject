@@ -52,7 +52,7 @@ export const Game = ({
             </Dropdown.Menu>
           </Dropdown>
         ) : (
-          <Link to={`/games/play/${_id}`}>Play</Link>
+          <Link to={`/game/${_id}`}>Play</Link>
         )}
       </td>
     </tr>
