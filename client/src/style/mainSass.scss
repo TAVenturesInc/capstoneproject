@@ -1,0 +1,29 @@
+//navbar
+$light: rgb(25,25,25);
+
+//body
+$body-bg: rgb(70, 70, 70);
+$card-bg: rgb(50, 50, 50);
+
+//table
+$table-striped-bg:           rgb(60, 60, 60);
+$table-color: #FFC200;
+
+$table-striped-bg-factor:     .1 !default;
+$table-active-bg-factor: .5;
+$table-cell-padding-y:        .8rem;
+$table-cell-padding-x:        .8rem;
+$table-cell-padding-y-sm:     .50rem;
+$table-cell-padding-x-sm:     .50rem;
+
+
+
+//buttons & links
+$primary: #FFC200;
+$body-color: #FFC200;
+
+
+
+
+@import '../../node_modules/bootstrap/scss/bootstrap';
+$primary: #FFC200 ;

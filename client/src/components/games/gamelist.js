@@ -5,6 +5,8 @@ import { Button, Form } from "react-bootstrap";
 import { Game } from "./game";
 import { useGameContext } from "../../context";
 
+import "../../style/mainSass.css"
+
 export default function GameList() {
   const [search, setSearch] = React.useState("");
   const regex = new RegExp(search, "i");

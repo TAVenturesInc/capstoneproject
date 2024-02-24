@@ -13,6 +13,8 @@ import Navbar from "./components/navbar";
 import QRcode from "./components/qrcode";
 import { Login, Register } from "./components/authentication";
 
+import "./style/mainSass.css"
+
 const App = () => (
   <div>
     <LoginContext>
