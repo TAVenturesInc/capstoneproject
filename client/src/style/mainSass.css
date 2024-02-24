@@ -12,10 +12,6 @@
   font-variation-settings: "BLED" 0, "SCAN" 0;
 }
 
-#file.form-control {
-  border-color: #FFC200;
-}
-
 input::file-selector-button {
   background-color: rgb(70, 70, 70) !important;
   padding: 5 rem;
