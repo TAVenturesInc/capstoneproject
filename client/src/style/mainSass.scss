@@ -1,9 +1,20 @@
 //navbar
 $light: rgb(25,25,25);
+$navbar-light-active-color: #FFC200;
 
 //body
 $body-bg: rgb(70, 70, 70);
 $card-bg: rgb(50, 50, 50);
+
+//buttons & links
+$body-color: #FFC200 ;
+$primary: #FFC200;
+#dropdown-basic.dropdown-toggle{
+    background-color: #FFC200;
+    color: rgb(50, 50, 50);
+};
+
+
 
 //table
 $table-striped-bg:           rgb(60, 60, 60);
@@ -16,14 +27,31 @@ $table-cell-padding-x:        .8rem;
 $table-cell-padding-y-sm:     .50rem;
 $table-cell-padding-x-sm:     .50rem;
 
+.font_64{
+    font-family: "Sixtyfour", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+      "BLED" 0,
+      "SCAN" 0;
+}
 
 
-//buttons & links
-$primary: #FFC200;
-$body-color: #FFC200;
+// forms
 
+#file.form-control{
+    border-color: #FFC200;
+};
+
+input::file-selector-button {
+    //font-weight: bold;
+    background-color: rgb(70,70,70) !important;
+    padding: 5 rem;
+    border: thin solid grey;
+    border-radius: 10px;
+  }
 
 
 
 @import '../../node_modules/bootstrap/scss/bootstrap';
-$primary: #FFC200 ;

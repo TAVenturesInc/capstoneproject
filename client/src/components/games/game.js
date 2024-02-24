@@ -40,7 +40,7 @@ export const Game = ({
                 Play
               </Dropdown.Item>
               <Dropdown.Item href={`/qr/${_id}`} target="_blank">
-                Shareable QR Code`
+                Shareable QR Code
               </Dropdown.Item>
               <Dropdown.Item href={`/games/edit/${_id}`}>Edit</Dropdown.Item>
               <Dropdown.Item onClick={() => downloadGame(_id)}>

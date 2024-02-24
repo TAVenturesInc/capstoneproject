@@ -48,7 +48,7 @@ export default function GameList() {
       <div className="card-body">
         <div className="row">
           <div className="col-6">
-            <h3>Game List</h3>
+            <h3 className="font_64">Game List</h3>
           </div>
         </div>
         <div className="row">
@@ -87,6 +87,7 @@ export default function GameList() {
               <th>Author</th>
               <th>Genre</th>
               <th>Game Description</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
