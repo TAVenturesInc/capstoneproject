@@ -20,6 +20,7 @@ authLogin.route("/auth/login").post(async (req, res) => {
     const myobj = {
       username: req.body.username,
       password: req.body.password,
+      email: req.body.email,
     };
 
     // Find user
@@ -52,6 +53,7 @@ authLogin.route("/auth/login").post(async (req, res) => {
     res.status(200).json({
       userId: user._id,
       userName: user.username,
+      email: user.email,
       success: true,
       token: token,
     });

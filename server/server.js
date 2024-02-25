@@ -20,6 +20,7 @@ app.use(session({
 
 app.use(require("./routes/auth/login"));
 app.use(require("./routes/auth/register"));
+app.use(require("./routes/auth/profile"));
 app.use(require("./routes/games"));
 
 // Get MongoDB driver connection
