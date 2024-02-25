@@ -22,8 +22,8 @@ $table-color: #FFC200;
 
 $table-striped-bg-factor:     .1 !default;
 $table-active-bg-factor: .5;
-$table-cell-padding-y:        .8rem;
-$table-cell-padding-x:        .8rem;
+$table-cell-padding-y:        1rem;
+$table-cell-padding-x:        1rem;
 $table-cell-padding-y-sm:     .50rem;
 $table-cell-padding-x-sm:     .50rem;
 
@@ -40,9 +40,7 @@ $table-cell-padding-x-sm:     .50rem;
 
 // forms
 
-// #file.form-control{
-//     border-color: #FFC200;
-// };
+
 
 input::file-selector-button {
     //font-weight: bold;
@@ -50,7 +48,7 @@ input::file-selector-button {
     padding: 5 rem;
     border: thin solid grey;
     border-radius: 10px;
-  }
+}
 
 
 
