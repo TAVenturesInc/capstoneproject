@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 
 import { useGameContext, useLoginContext } from "../../context";
 
-
 export default function NavbarComponent() {
   const { actions: loginActions, loggedIn } = useLoginContext();
   const { actions: gamesActions } = useGameContext();

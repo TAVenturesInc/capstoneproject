@@ -66,6 +66,7 @@ const Creator = () => {
         userName,
       });
     }
+    alert("Game Saved");
   };
 
   React.useEffect(() => {
