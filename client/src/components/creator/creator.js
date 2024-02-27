@@ -35,7 +35,7 @@ const Creator = () => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const { userName, userId } = useLoginContext();
 
-  const { actions, currentGame } = useGameContext();
+  const { actions, currentGame, gamesLoading } = useGameContext();
   const { id } = useParams();
 
   const updatePageActions = (actions = []) => {
@@ -128,8 +128,12 @@ const Creator = () => {
           /> */}
           <div className="row">
             <div className="col col-lg-6">
-              <Button variant="primary" onClick={updateGameData}>
-                {id ? "Update" : "Save"} Game
+              <Button
+                variant="primary"
+                onClick={updateGameData}
+                disabled={gamesLoading}
+              >
+                {gamesLoading ? "Loading..." : id ? "Update Game" : "Save Game"}
               </Button>
               &nbsp;
               <Button variant="outline-primary">Preview Game</Button>
