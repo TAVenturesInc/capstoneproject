@@ -11,7 +11,8 @@ import GamePlayer from "./components/gamePlayor";
 import LandingPage from "./components/landingpage";
 import Navbar from "./components/navbar";
 import QRcode from "./components/qrcode";
-import { Login, Register } from "./components/authentication";
+import { Login, Register, Profile } from "./components/authentication";
+
 
 import "./style/mainSass.css"
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/game/:id/:pageId" element={<GamePlayer />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/qr/:id" element={<QRcode />} />
         </Routes>
       </GameContext>

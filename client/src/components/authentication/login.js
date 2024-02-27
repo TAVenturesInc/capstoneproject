@@ -52,7 +52,7 @@ export default function Login() {
                 type="submit"
                 disabled={loading}
               >
-                Login
+                {loading ? "Loading..." : "Login"}
               </Button>
               <br />
               {error && <p style={{ color: "red" }}>{error}</p>}

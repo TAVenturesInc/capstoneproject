@@ -5,6 +5,7 @@ import serverURL from "../serverURL";
 const GameContextProvider = React.createContext({
   currentGame: {},
   errorList: [],
+  gameData: null,
   games: [],
   loaded: false,
   loading: false,
@@ -13,6 +14,7 @@ const GameContextProvider = React.createContext({
 const initialState = {
   currentGame: null,
   errorList: [],
+  gameData: null,
   games: [],
   loaded: false,
   loading: false,
@@ -20,6 +22,12 @@ const initialState = {
 
 function boardReducer(state, action) {
   switch (action.type) {
+    case "SET_USER_GAME_RECORDS": {
+      return {
+        ...state,
+        gameData: action.gameData,
+      };
+    }
     case "UPDATE_COMPLETE": {
       return { ...state, loading: false, loaded: true };
     }
@@ -32,7 +40,7 @@ function boardReducer(state, action) {
       };
     }
     case "START_LOADING": {
-      return { ...state, loading: true, loaded: false };
+      return { ...state, loading: true, loaded: false, gameData: null };
     }
     case "LOADING_ERROR": {
       return {
@@ -66,10 +74,28 @@ function boardReducer(state, action) {
 }
 
 function GameContext({ children }) {
-  const [{ currentGame, games, loaded, loading }, dispatch] = React.useReducer(
-    boardReducer,
-    initialState
-  );
+  const [{ currentGame, gameData, games, loaded, loading }, dispatch] =
+    React.useReducer(boardReducer, initialState);
+
+  const getUserGameData = async (userId) => {
+    await fetch(`${serverURL()}/api/gameData`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log({ data });
+        if (data.success) {
+          dispatch({
+            type: "SET_USER_GAME_RECORDS",
+            gameData: data.gameState,
+          });
+        }
+      });
+  };
 
   const resetGameData = () => {
     dispatch({ type: "RESET_GAME_DATA" });
@@ -185,13 +211,15 @@ function GameContext({ children }) {
 
   const exposedState = {
     currentGame,
+    gameData,
     games,
-    gamesLoading: loading,
     gamesLoaded: loaded,
+    gamesLoading: loading,
     actions: {
       createGameData,
       deleteGame,
       getGameData,
+      getUserGameData,
       refreshGameList,
       resetGameData,
       updateGameData,

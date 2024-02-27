@@ -55,7 +55,12 @@ export default function Register() {
             navigate("/register");
           });
         } else {
-          setForm({ username: "", password: "", confirmPassword: "", email: "" });
+          setForm({
+            username: "",
+            password: "",
+            confirmPassword: "",
+            email: "",
+          });
           navigate("/login");
         }
       })
@@ -97,9 +102,9 @@ export default function Register() {
                 />
                 <div className="input-group-append">
                   <button
-                  className="btn btn-outline-secondary"
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? "Hide" : "Show"}
                   </button>
@@ -108,9 +113,13 @@ export default function Register() {
               <label htmlFor="confirmPassword">Confirm Password</label>
               <div className="input-group">
                 <input
-                  className={`form-control ${ !passwordsMatch ? "is-invalid" : "" }`}
+                  className={`form-control ${
+                    !passwordsMatch ? "is-invalid" : ""
+                  }`}
                   id="confirmPassword"
-                  onChange={(e) => updateForm({ confirmPassword: e.target.value })}
+                  onChange={(e) =>
+                    updateForm({ confirmPassword: e.target.value })
+                  }
                   type={showConfirmPassword ? "text" : "password"}
                   value={form.confirmPassword}
                 />
@@ -124,10 +133,8 @@ export default function Register() {
                   </button>
                 </div>
               </div>
-              { !passwordsMatch && (
-                <div className="invalid-feedback">
-                  Passwords do not match
-                </div>
+              {!passwordsMatch && (
+                <div className="invalid-feedback">Passwords do not match</div>
               )}
               <label htmlFor="email">Email</label>
               <input
@@ -144,7 +151,7 @@ export default function Register() {
                 type="submit"
                 disabled={loading}
               >
-                Register
+                {loading ? "Loading..." : "Register"}
               </Button>
             </div>
           </div>
