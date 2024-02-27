@@ -1,11 +1,21 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const ObjectId = require("mongodb").ObjectId;
 const gamesRoutes = express.Router();
 
 // This will help us connect to the database
 const dbo = require("../db/conn");
+
+gamesRoutes.route("/api/gameData").post(async (req, res) => {
+  const dbConnection = dbo.getDb();
+  const ans = await dbConnection
+    .collection("users")
+    .findOne({ _id: new ObjectId(req.body.userId) })
+    .catch((err) => {
+      console.error(err);
+    });
+
+  return res.send({ success: true, gameState: ans.game_state });
+});
 
 gamesRoutes.route("/api/games").get(async (req, res) => {
   const dbConnection = dbo.getDb();

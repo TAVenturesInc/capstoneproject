@@ -4,18 +4,41 @@ import { Dropdown } from "react-bootstrap";
 
 import { useLoginContext } from "../../context";
 
+const completeStyle = {
+  background: "rgb(255 255 255 / 15%)",
+  border: "solid 1px rgb(89 137 209)",
+  borderRadius: "8px",
+  color: "rgb(89 137 209)",
+  fontSize: "14px",
+  marginLeft: "6px",
+  padding: "2px 10px",
+};
+const startedStyle = {
+  background: "rgb(255 255 255 / 15%)",
+  border: "solid 1px rgb(137 227 185)",
+  borderRadius: "8px",
+  color: "rgb(137 227 185)",
+  fontSize: "14px",
+  marginLeft: "6px",
+  padding: "2px 10px",
+};
+
 export const Game = ({
   _id,
   deleteGame,
   description,
   downloadGame,
   genre,
-  loading,
   title,
+  userData,
   userId,
   userName,
 }) => {
   const { userId: currentUserId } = useLoginContext();
+  const { recentStart, recentEnd } = userData || {
+    recentStart: "",
+    recentEnd: "",
+  };
   const confirmDeletion = async () => {
     const confirmation = await window.confirm(
       "Are you sure you want to delete this game?"
@@ -25,7 +48,11 @@ export const Game = ({
 
   return (
     <tr>
-      <td>{title}</td>
+      <td>
+        {title}
+        {recentEnd && <span style={completeStyle}>Completed</span>}
+        {recentStart && !recentEnd && <span style={startedStyle}>Started</span>}
+      </td>
       <td>{userName}</td>
       <td>{genre}</td>
       <td>{description}</td>

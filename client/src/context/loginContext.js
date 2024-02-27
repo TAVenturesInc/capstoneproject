@@ -10,7 +10,7 @@ const initialState = {
   token: null,
   userName: null,
   userId: null,
-  email: null, 
+  email: null,
 };
 
 const loginContext = React.createContext();
@@ -27,7 +27,7 @@ const rootReducer = (state, action) => {
         token: action.token,
         userId: action.userId,
         userName: action.userName,
-        email: action.email, 
+        email: action.email,
       };
     case "LOGOUT_USER":
       return {
@@ -38,7 +38,7 @@ const rootReducer = (state, action) => {
         token: null,
         userId: null,
         userName: null,
-        email: null, 
+        email: null,
       };
     case "END_LOGIN":
       return { ...state, loading: false };
@@ -48,7 +48,7 @@ const rootReducer = (state, action) => {
       return {
         ...state,
         userName: action.userName,
-        email: action.email, 
+        email: action.email,
       };
     default:
       return state;
@@ -74,13 +74,13 @@ export const LoginContext = ({ children }) => {
           document.cookie = `token=${data.token};`;
           document.cookie = `userName=${data.userName};`;
           document.cookie = `userId=${data.userId};`;
-          document.cookie = `email=${data.email};`; 
+          document.cookie = `email=${data.email};`;
           dispatch({
             type: "LOGIN_USER",
             token: data.token,
             userId: data.userId,
             userName: data.userName,
-            email: data.email, 
+            email: data.email,
           });
           navigate("/games");
         } else {
@@ -101,7 +101,7 @@ export const LoginContext = ({ children }) => {
     document.cookie = "token=;expires=" + new Date(0).toUTCString();
     document.cookie = "userName=;expires=" + new Date(0).toUTCString();
     document.cookie = "userId=;expires=" + new Date(0).toUTCString();
-    document.cookie = "email=;expires=" + new Date(0).toUTCString(); 
+    document.cookie = "email=;expires=" + new Date(0).toUTCString();
     dispatch({ type: "LOGOUT_USER" });
   };
 
@@ -120,7 +120,7 @@ export const LoginContext = ({ children }) => {
         token: cookieData.token,
         userName: cookieData.userName,
         userId: cookieData.userId,
-        email: cookieData.email, 
+        email: cookieData.email,
       });
     } else {
       navigate("/");
@@ -136,7 +136,7 @@ export const LoginContext = ({ children }) => {
     loggedIn: state.loggedIn,
     userId: state.userId,
     userName: state.userName,
-    email: state.email, 
+    email: state.email,
   };
 
   return (
@@ -148,4 +148,3 @@ export const useLoginContext = () => {
   const exposedState = React.useContext(loginContext);
   return exposedState;
 };
-

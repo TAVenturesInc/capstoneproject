@@ -3,18 +3,24 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 
 import { Game } from "./game";
-import { useGameContext } from "../../context";
+import { useGameContext, useLoginContext } from "../../context";
 
-import "../../style/mainSass.css"
+import "../../style/mainSass.css";
 
 export default function GameList() {
   const [search, setSearch] = React.useState("");
   const regex = new RegExp(search, "i");
 
-  const { games, gamesLoading, gamesLoaded /*, errorList*/, actions } =
-    useGameContext();
-  const deleteGame = (id) => actions?.deleteGame(id);
+  const {
+    gameData,
+    games = [],
+    gamesLoading,
+    gamesLoaded,
+    actions,
+  } = useGameContext();
+  const { userId } = useLoginContext();
 
+  const deleteGame = (id) => actions?.deleteGame(id);
   const downloadGame = async (id) => {
     const game = await actions?.getGameData(id);
     const element = document.createElement("a");
@@ -39,9 +45,26 @@ export default function GameList() {
     };
   };
 
+  const gameList = games
+    ?.filter(
+      ({ description = "", genre = "", title = "", userName = "" }) =>
+        description.match(regex) ||
+        genre.match(regex) ||
+        title.match(regex) ||
+        userName.match(regex)
+    )
+    .map((game) => ({
+      ...game,
+      userData: gameData?.find((data) => data._game === game._id),
+    }));
+
   React.useEffect(() => {
     actions?.refreshGameList();
   }, []);
+
+  React.useEffect(() => {
+    userId && actions?.getUserGameData(userId);
+  }, [userId]);
 
   return (
     <div className="card" style={{ margin: "2rem 4rem" }}>
@@ -92,28 +115,15 @@ export default function GameList() {
           </thead>
           <tbody>
             {gamesLoaded &&
-              games
-                .filter(
-                  ({
-                    description = "",
-                    genre = "",
-                    title = "",
-                    userName = "",
-                  }) =>
-                    description.match(regex) ||
-                    genre.match(regex) ||
-                    title.match(regex) ||
-                    userName.match(regex)
-                )
-                .map((game) => (
-                  <Game
-                    {...game}
-                    deleteGame={deleteGame}
-                    downloadGame={downloadGame}
-                    key={game._id}
-                    loading={gamesLoading}
-                  />
-                ))}
+              gameList.map((game) => (
+                <Game
+                  {...game}
+                  deleteGame={deleteGame}
+                  downloadGame={downloadGame}
+                  key={game._id}
+                  loading={gamesLoading}
+                />
+              ))}
           </tbody>
         </table>
       </div>
