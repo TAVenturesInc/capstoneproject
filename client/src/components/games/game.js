@@ -34,6 +34,9 @@ export const Game = ({
   userId,
   userName,
 }) => {
+
+  let theme = "amber"
+
   const { userId: currentUserId } = useLoginContext();
   const { recentStart, recentEnd } = userData || {
     recentStart: "",
@@ -47,19 +50,19 @@ export const Game = ({
   };
 
   return (
-    <tr>
-      <td>
+    <tr >
+      <td id={theme} className="tableRow">
         {title}
         {recentEnd && <span style={completeStyle}>Completed</span>}
         {recentStart && !recentEnd && <span style={startedStyle}>Started</span>}
       </td>
-      <td>{userName}</td>
-      <td>{genre}</td>
-      <td>{description}</td>
-      <td style={{ textAlign: "right" }}>
+      <td id={theme} className="tableRow">{userName}</td>
+      <td id={theme} className="tableRow">{genre}</td>
+      <td id={theme} className="tableRow">{description}</td>
+      <td id={theme} className="tableRow" style={{ textAlign: "right" }}>
         {userId === currentUserId ? (
           <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <Dropdown.Toggle variant="success" id={theme}>
               Actions
             </Dropdown.Toggle>
             <Dropdown.Menu>

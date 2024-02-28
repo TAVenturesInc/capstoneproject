@@ -28,41 +28,76 @@ $light: rgb(70,70,70);
     font-style: normal;
     font-variation-settings: "BLED" 0, "SCAN" 0;
 }
-
-
 //buttons & links
-$body-color: #1eff00 ;
-$primary: #1eff00;
+//$body-color: #1eff00 ;
+// $primary: #1eff00;
+// $primary-text-emphasis: rgb(30, 30, 30);
 
-//table
-$table-striped-bg:           rgb(60, 60, 60);
-$table-color: #FFC200;
+#green.searchHelpBlock{
+    color: #1eff00!important;
+}
+#amber.searchHelpBlock{
+    color: #FFC200 !important;
+}
 
-$table-striped-bg-factor:     .1 !default;
-$table-active-bg-factor: .5;
-$table-cell-padding-y:        1rem;
-$table-cell-padding-x:        1rem;
-$table-cell-padding-y-sm:     .50rem;
-$table-cell-padding-x-sm:     .50rem;
+#amber.create { 
+    background-color: #FFC200;
+    color: black !important;   
+}
+#green.create {  
+    background-color: #1eff00;
+    color: black !important;   
+}
 
-#dropdown-basic.dropdown-toggle {
+#file.form-control{
+    color: red;
+}
+
+#amber.tableHeader{
+    color: #FFC200;
+}
+#green.tableHeader{
+    color: #1eff00;
+}
+#amber.tableRow{
+    color: #FFC200;
+}
+#green.tableRow{
+    color: #1eff00;
+}
+
+// //table
+// $table-striped-bg:           rgb(60, 60, 60);
+// $table-color: #FFC200;
+
+// $table-striped-bg-factor:     .1 !default;
+// $table-active-bg-factor: .5;
+// $table-cell-padding-y:        1rem;
+// $table-cell-padding-x:        1rem;
+// $table-cell-padding-y-sm:     .50rem;
+// $table-cell-padding-x-sm:     .50rem;
+
+
+ 
+#green.dropdown-toggle {
   background-color: #1eff00;
   color: rgb(30, 30, 30);
 }
+#amber.dropdown-toggle {
+    background-color: #FFC200;
+    color: rgb(50, 50, 50);
+}
+
 
 .actionGroup {
   padding: 25px;
 }
 
 
-#dropdown-basic.dropdown-toggle {
-    background-color: #FFC200;
-    color: rgb(50, 50, 50);
-  }
- 
 
   
 input::file-selector-button {
+    color: red !important;
     background-color: rgb(70, 70, 70) !important;
     padding: 5 rem;
     border: thin solid grey;
