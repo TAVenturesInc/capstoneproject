@@ -50,6 +50,28 @@ const rootReducer = (state, action) => {
         userName: action.userName,
         email: action.email,
       };
+    case "BEGIN_UPDATE_PROFILE":
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      }
+    case "UPDATE_USER_PROFILE":
+      return {
+        ...state,
+        userName: action.userName,
+        email: action.email,
+      };
+    case "CANCEL_UPDATE_PROFILE":
+      return {
+        ...state, 
+        loading: false,
+      };
+    case "END_UPDATE_PROFILE":
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return state;
   }
@@ -105,6 +127,45 @@ export const LoginContext = ({ children }) => {
     dispatch({ type: "LOGOUT_USER" });
   };
 
+  const updateUserProfileAction = async (newProfileData) => {
+    dispatch({ type: "BEGIN_UPDATE_PROFILE" });
+    const response = await fetch(`${serverURL()}/profile`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newProfileData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          document.cookie = `userName=${newProfileData.userName};`;
+          document.cookie = `email=${newProfileData.email};`;
+          dispatch({
+            type: "UPDATE_USER_PROFILE",
+            userName: data.userName,
+            email: data.email,
+          });
+          navigate("/profile");
+        } else {
+          dispatch({ type: "UPDATE_PROFILE_ERROR", error: data.message });
+        }
+      })
+      .catch ((err) => {
+        window.alert(err);
+        dispatch({ type: "UPDATE_PROFILE_ERROR", error: "Internal server error" });
+      })
+      .finally(() => {
+        dispatch({ type: "END_UPDATE_PROFILE" });
+      })
+    return response;     
+  };
+
+  const cancelUpdateProfileAction = () => {
+    dispatch({ type: "CANCEL_UPDATE_PROFILE" });
+    navigate("/profile");
+  };
+
   React.useEffect(() => {
     if (document?.cookie?.match(/token=/)) {
       const cookieData = {};
@@ -127,7 +188,7 @@ export const LoginContext = ({ children }) => {
     }
   }, []);
 
-  const actions = { loginUserAction, logOutUserAction };
+  const actions = { loginUserAction, logOutUserAction, updateUserProfileAction, cancelUpdateProfileAction };
 
   const userState = {
     actions,

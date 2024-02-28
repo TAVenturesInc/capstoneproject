@@ -9,28 +9,29 @@ userProfile.route("/profile").put(authCheck, async (req, res) => {
   try {
     const dbConnection = dbo.getDb();
 
-    // Retrieve user information from the authenticated user token
     const userId = req.user._id;
 
-    // Extract new username and email from the request body
     const { newUsername, newEmail } = req.body;
 
-    // Update user information in the database
     const updateResult = await dbConnection.collection("users").updateOne(
       { _id: userId },
       { $set: { username: newUsername, email: newEmail }}
     );
 
-    if (updateResult.modifiedCount === 0) {
-      return res.status(404).json({ success: false, message: "User not found or no changes made"})
+    if (updateResult.matchedCount === 0) {
+      return res.status(404).json({ success: false, message: "User not found" });
     }
 
-    // Send the updated user information in the response
+    if (updateResult.modifiedCount === 0) {
+      return res.status(200).json({ success: true, message: "No changes made" });
+    }
+
     res.status(200).json({
       userId,
       userName: newUsername,
       email: newEmail,
       success: true,
+      message: "Profile updated successfully",
     });
   } catch (error) {
     console.error("Error in updating profile:", error);

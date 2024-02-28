@@ -1,13 +1,10 @@
 import React from "react";
 import { useLoginContext } from "../../context";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const { userName, userId, email, actions } = useLoginContext();
-
-  // const handleEditProfile = () => {
-  //   actions.changeProfileAction();
-  // };
+  const { userName, userId, email, actions } = useLoginContext();  
 
   return (
     <div className="card">
@@ -19,13 +16,15 @@ const Profile = () => {
               <p>User ID: {userId}</p>
               <p>Username: {userName}</p>
               <p>Email: {email}</p>
-              <Button
-                variant="danger"
-                type="submit"
-                style={{ marginTop: "15px" }}
-              >
-                Edit
-              </Button>
+              <Link to="/editProfile">
+                <Button
+                  variant="danger"
+                  type="submit"
+                  style={{ marginTop: "15px" }}
+                >
+                  Edit
+                </Button>
+              </Link>
             </div>
           </div>
         </form>
