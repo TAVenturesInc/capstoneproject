@@ -1,0 +1,72 @@
+//background
+$body-bg: rgb(50, 50, 50);
+$card-bg: rgb(30, 30, 30);
+
+//navbar
+$light: rgb(70,70,70);
+#green.nav-link{
+    color:#1eff00;
+};
+#amber.nav-link{
+    color:#FFC200;
+};
+
+//game list
+#green.font_64 {
+    color: #1eff00;
+    font-family: "Sixtyfour", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "BLED" 0, "SCAN" 0;
+}
+#amber.font_64 {
+    color: #FFC200;
+    font-family: "Sixtyfour", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "BLED" 0, "SCAN" 0;
+}
+
+
+//buttons & links
+$body-color: #1eff00 ;
+$primary: #1eff00;
+
+//table
+$table-striped-bg:           rgb(60, 60, 60);
+$table-color: #FFC200;
+
+$table-striped-bg-factor:     .1 !default;
+$table-active-bg-factor: .5;
+$table-cell-padding-y:        1rem;
+$table-cell-padding-x:        1rem;
+$table-cell-padding-y-sm:     .50rem;
+$table-cell-padding-x-sm:     .50rem;
+
+#dropdown-basic.dropdown-toggle {
+  background-color: #1eff00;
+  color: rgb(30, 30, 30);
+}
+
+.actionGroup {
+  padding: 25px;
+}
+
+
+#dropdown-basic.dropdown-toggle {
+    background-color: #FFC200;
+    color: rgb(50, 50, 50);
+  }
+ 
+
+  
+input::file-selector-button {
+    background-color: rgb(70, 70, 70) !important;
+    padding: 5 rem;
+    border: thin solid grey;
+    border-radius: 10px;
+  }
+
+  @import '../../node_modules/bootstrap/scss/bootstrap';

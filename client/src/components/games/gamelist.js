@@ -5,9 +5,11 @@ import { Button, Form } from "react-bootstrap";
 import { Game } from "./game";
 import { useGameContext, useLoginContext } from "../../context";
 
-import "../../style/mainSass.css";
 
 export default function GameList() {
+
+  let theme = "green" // Apply with context
+
   const [search, setSearch] = React.useState("");
   const regex = new RegExp(search, "i");
 
@@ -71,7 +73,7 @@ export default function GameList() {
       <div className="card-body">
         <div className="row">
           <div className="col-6">
-            <h3 className="font_64">Game List</h3>
+            <h3 id={theme} className="font_64">Game List</h3>
           </div>
         </div>
         <div className="row">

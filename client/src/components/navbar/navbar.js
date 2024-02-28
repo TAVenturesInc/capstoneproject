@@ -5,6 +5,9 @@ import { NavLink } from "react-router-dom";
 import { useGameContext, useLoginContext } from "../../context";
 
 export default function NavbarComponent() {
+  
+  let theme = "green" // Apply with context
+  
   const { actions: loginActions, loggedIn } = useLoginContext();
   const { actions: gamesActions } = useGameContext();
   const logout = () => {
@@ -13,22 +16,22 @@ export default function NavbarComponent() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav  className="navbar navbar-expand-lg navbar-light bg-light">
       <Navbar.Brand style={{ paddingLeft: "20px" }}>
-        <NavLink className="nav-link" to="/">
+        <NavLink id={theme} className="nav-link" to="/">
           TA Ventures Inc
         </NavLink>
       </Navbar.Brand>
-      <Nav className="me-auto">
+      <Nav  className="me-auto">
         {loggedIn ? (
           <>
-            <NavLink className="nav-link" to="/games">
+            <NavLink id={theme} className="nav-link" to="/games">
               Games
             </NavLink>
-            <NavLink className="nav-link" to="/profile">
+            <NavLink id={theme} className="nav-link" to="/profile">
               My Profile
             </NavLink>
-            <NavLink className="nav-link" to="/" onClick={logout}>
+            <NavLink id={theme} className="nav-link" to="/" onClick={logout}>
               Logout
             </NavLink>
           </>
