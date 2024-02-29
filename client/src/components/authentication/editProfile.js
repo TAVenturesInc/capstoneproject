@@ -3,17 +3,24 @@ import { useLoginContext } from "../../context";
 import { Button } from "react-bootstrap";
 
 const EditProfile = () => {
-  const { userName: initialUserName, email: initialEmail, actions } = useLoginContext();
+  const { userId, userName: initialUserName, email: initialEmail, actions } = useLoginContext();
   const [userName, setUserName] = useState(initialUserName);
   const [email, setEmail] = useState(initialEmail);
 
   const handleSave = () => {
-    actions.updateUserProfileAction({ userName, email });
+    actions.updateUserProfileAction({ userId, userName, email });
   };
 
   const handleCancel = () => {
     actions.cancelUpdateProfileAction();
   };
+
+  React.useEffect(() => {
+    if (Boolean(initialUserName && initialEmail)) {
+      setUserName(initialUserName);
+      setEmail(initialEmail);
+    }
+  }, [Boolean(initialUserName && initialEmail)]);
 
   return (
     <div className="card">
@@ -22,13 +29,13 @@ const EditProfile = () => {
           <div className="row">
             <div className="col col-lg-4">
               <h1>Edit Profile</h1>
+              <p>User ID: {userId}</p>
               <div className="form-group">
                 <label htmlFor="formUsername">Username</label>
                 <input
                   type="text"
                   className="form-control"
                   id="formUsername"
-                  placeholder={initialUserName}
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
                 />
@@ -39,7 +46,6 @@ const EditProfile = () => {
                   type="email"
                   className="form-control"
                   id="formEmail"
-                  placeholder={initialEmail}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />

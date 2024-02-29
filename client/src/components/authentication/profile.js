@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const { userName, userId, email, actions } = useLoginContext();  
+  const { userName, userId, email } = useLoginContext();  
 
   return (
     <div className="card">

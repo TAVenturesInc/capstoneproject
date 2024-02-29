@@ -8,9 +8,9 @@ const initialState = {
   loading: false,
   loggedIn: false,
   token: null,
-  userName: null,
+  userName: "",
   userId: null,
-  email: null,
+  email: "",
 };
 
 const loginContext = React.createContext();
@@ -127,44 +127,36 @@ export const LoginContext = ({ children }) => {
     dispatch({ type: "LOGOUT_USER" });
   };
 
-  const updateUserProfileAction = async (newProfileData) => {
-    dispatch({ type: "BEGIN_UPDATE_PROFILE" });
+  const updateUserProfileAction = async (formData) => {
+    const { userId, userName, email } = formData
+
     const response = await fetch(`${serverURL()}/profile`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newProfileData),
+      body: JSON.stringify({ userId, newUsername: userName, newEmail: email }),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          document.cookie = `userName=${newProfileData.userName};`;
-          document.cookie = `email=${newProfileData.email};`;
-          dispatch({
-            type: "UPDATE_USER_PROFILE",
-            userName: data.userName,
-            email: data.email,
-          });
+          document.cookie = `userId=${data.userId};`;
+          document.cookie = `userName=${data.userName};`;
+          document.cookie = `email=${data.email};`;
           navigate("/profile");
-        } else {
-          dispatch({ type: "UPDATE_PROFILE_ERROR", error: data.message });
         }
       })
       .catch ((err) => {
         window.alert(err);
-        dispatch({ type: "UPDATE_PROFILE_ERROR", error: "Internal server error" });
+        navigate("/profile")
       })
-      .finally(() => {
-        dispatch({ type: "END_UPDATE_PROFILE" });
-      })
-    return response;     
+    return response;
   };
 
+
   const cancelUpdateProfileAction = () => {
-    dispatch({ type: "CANCEL_UPDATE_PROFILE" });
     navigate("/profile");
-  };
+  }
 
   React.useEffect(() => {
     if (document?.cookie?.match(/token=/)) {
