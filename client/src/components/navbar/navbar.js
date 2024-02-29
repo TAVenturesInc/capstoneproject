@@ -6,7 +6,8 @@ import { useStyleContext } from "../../context/styleContext"
 
 export default function NavbarComponent() {
   const { theme, toggleTheme } = useStyleContext()
-  
+  console.log(`from navbar NavbarComponent ${theme}`)
+
   const handleClick = () => {
     console.log(`from navbar handleClick I: ${theme}`)
     toggleTheme();

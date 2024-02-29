@@ -77,7 +77,7 @@ export default function GameList() {
       <div className="card-body">
         <div className="row">
           <div className="col-6">
-            <h3 id={theme} className="font_64">Game List</h3>
+            <h3 id={theme.theme} className="font_64">Game List</h3>
           </div>
         </div>
         <div id={theme} className="row">
