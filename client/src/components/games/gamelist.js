@@ -89,12 +89,12 @@ export default function GameList() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <Form.Text id={theme} className="searchHelpBlock" muted>
+            <Form.Text id={theme.theme} className="searchHelpBlock" muted>
               Find a game by title, author, or genre.
             </Form.Text>
           </div>
           <div className="col-2">
-            <Button id={theme} className="create" variant="primary" disabled={gamesLoading} href="/games/new">
+            <Button id={theme.theme} className="create" variant="primary" disabled={gamesLoading} href="/games/new">
               Create New Game
             </Button>
           </div>
@@ -112,10 +112,10 @@ export default function GameList() {
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>
             <tr >
-              <th id={theme} className="tableHeader">Title</th>
-              <th id={theme} className="tableHeader">Author</th>
-              <th id={theme} className="tableHeader">Genre</th>
-              <th id={theme} className="tableHeader">Game Description</th>
+              <th id={theme.theme} className="tableHeader">Title</th>
+              <th id={theme.theme} className="tableHeader">Author</th>
+              <th id={theme.theme} className="tableHeader">Genre</th>
+              <th id={theme.theme} className="tableHeader">Game Description</th>
               <th></th>
             </tr>
           </thead>
