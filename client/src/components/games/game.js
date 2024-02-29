@@ -4,6 +4,8 @@ import { Dropdown } from "react-bootstrap";
 
 import { useLoginContext } from "../../context";
 
+import { useStyleContext } from "../../context/styleContext"
+
 const completeStyle = {
   background: "rgb(255 255 255 / 15%)",
   border: "solid 1px rgb(89 137 209)",
@@ -35,7 +37,7 @@ export const Game = ({
   userName,
 }) => {
 
-  let theme = "amber"
+  const theme = useStyleContext()
 
   const { userId: currentUserId } = useLoginContext();
   const { recentStart, recentEnd } = userData || {

@@ -1,12 +1,17 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-
 import { useGameContext, useLoginContext } from "../../context";
+import { useStyleContext } from "../../context/styleContext"
 
 export default function NavbarComponent() {
+  const { theme, toggleTheme } = useStyleContext()
   
-  let theme = "green" // Apply with context
+  const handleClick = () => {
+    console.log(`from navbar handleClick I: ${theme}`)
+    toggleTheme();
+    console.log(`from navbar handleClick II: ${theme}`)  //why are I and II the same?
+  };
   
   const { actions: loginActions, loggedIn } = useLoginContext();
   const { actions: gamesActions } = useGameContext();
@@ -46,6 +51,7 @@ export default function NavbarComponent() {
           </>
         )}
       </Nav>
+      <button onClick={handleClick} >Theme</button>
     </nav>
   );
 }

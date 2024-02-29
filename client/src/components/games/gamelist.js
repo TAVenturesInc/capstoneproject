@@ -5,10 +5,14 @@ import { Button, Form } from "react-bootstrap";
 import { Game } from "./game";
 import { useGameContext, useLoginContext } from "../../context";
 
+import { useStyleContext } from "../../context/styleContext"
+
 
 export default function GameList() {
 
-  let theme = "green" // Apply with context
+  //let theme = "green" // Apply with context
+  const theme = useStyleContext();
+  console.log(`from gamelist: ${theme.theme}`)
 
   const [search, setSearch] = React.useState("");
   const regex = new RegExp(search, "i");
