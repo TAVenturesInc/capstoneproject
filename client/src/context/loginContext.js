@@ -50,6 +50,12 @@ const rootReducer = (state, action) => {
         userName: action.userName,
         email: action.email,
       };
+    case "UPDATE_USER_PROFILE":
+      return {
+        ...state,
+        userName: action.userName,
+        email: action.email,
+      };
     default:
       return state;
   }
@@ -104,6 +110,42 @@ export const LoginContext = ({ children }) => {
     document.cookie = "email=;expires=" + new Date(0).toUTCString();
     dispatch({ type: "LOGOUT_USER" });
   };
+
+  const updateUserProfileAction = async (formData) => {
+    const { userId, userName, email } = formData
+
+    const response = await fetch(`${serverURL()}/profile`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId, newUsername: userName, newEmail: email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          document.cookie = `userId=${data.userId};`;
+          document.cookie = `userName=${data.userName};`;
+          document.cookie = `email=${data.email};`;
+          dispatch({
+            type: "UPDATE_USER_PROFILE",
+            userName,
+            email,
+          })
+          navigate("/profile");
+        }
+      })
+      .catch ((err) => {
+        window.alert(err);
+        navigate("/profile")
+      })
+    return response;
+  };
+
+
+  const cancelUpdateProfileAction = () => {
+    navigate("/profile");
+  }
 
   React.useEffect(() => {
     if (document?.cookie?.match(/token=/)) {
