@@ -28,9 +28,13 @@ export default function Login() {
         <form onSubmit={loginUser} className="container form-group">
           <div className="row">
             <div className="col col-lg-4">
-              <h3 id={theme} className="font_64" >User Login</h3>
-              <label id={theme} className="font2" htmlFor="username">Username</label>
-              <input 
+              <h3 id={theme} className="font_64">
+                User Login
+              </h3>
+              <label id={theme} className="font2" htmlFor="username">
+                Username
+              </label>
+              <input
                 className="form-control"
                 disabled={loading}
                 id="username"
@@ -38,7 +42,9 @@ export default function Login() {
                 type="text"
                 value={form.username}
               />
-              <label id={theme} className="font2" htmlFor="password">Password</label>
+              <label id={theme} className="font2" htmlFor="password">
+                Password
+              </label>
               <input
                 className="form-control"
                 disabled={loading}

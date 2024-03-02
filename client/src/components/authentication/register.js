@@ -84,8 +84,12 @@ export default function Register() {
         <form onSubmit={onSubmit} className="container form-group">
           <div className="row">
             <div className="col col-lg-4">
-              <h3 id={theme} className="font_64" >Register</h3>
-              <label id={theme} className="font2" htmlFor="username">Username</label>
+              <h3 id={theme} className="font_64">
+                Register
+              </h3>
+              <label id={theme} className="font2" htmlFor="username">
+                Username
+              </label>
               <input
                 className="form-control"
                 id="username"
@@ -93,7 +97,9 @@ export default function Register() {
                 type="text"
                 value={form.username}
               />
-              <label id={theme} className="font2" htmlFor="password">Password</label>
+              <label id={theme} className="font2" htmlFor="password">
+                Password
+              </label>
               <div className="input-group">
                 <input
                   className="form-control"
@@ -103,7 +109,7 @@ export default function Register() {
                   value={form.password}
                 />
                 <div className="input-group-append">
-                  <button 
+                  <button
                     id={theme}
                     className="font2 btn btn-outline-secondary"
                     type="button"
@@ -113,7 +119,9 @@ export default function Register() {
                   </button>
                 </div>
               </div>
-              <label id={theme} className="font2" htmlFor="confirmPassword">Confirm Password</label>
+              <label id={theme} className="font2" htmlFor="confirmPassword">
+                Confirm Password
+              </label>
               <div className="input-group">
                 <input
                   className={`form-control ${
@@ -127,7 +135,8 @@ export default function Register() {
                   value={form.confirmPassword}
                 />
                 <div className="input-group-append">
-                  <button                    id={theme}
+                  <button
+                    id={theme}
                     className="font2 btn btn-outline-secondary"
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -139,7 +148,9 @@ export default function Register() {
               {!passwordsMatch && (
                 <div className="invalid-feedback">Passwords do not match</div>
               )}
-              <label id ={ theme } className="font2" htmlFor="email">Email</label>
+              <label id={theme} className="font2" htmlFor="email">
+                Email
+              </label>
               <input
                 className="form-control"
                 id="email"

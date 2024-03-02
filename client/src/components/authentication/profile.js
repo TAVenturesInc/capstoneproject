@@ -14,10 +14,18 @@ const Profile = () => {
         <form className="container form-group">
           <div className="row">
             <div className="col col-lg-4">
-              <h1 id={theme.theme} className="font_64">User Profile</h1>
-              <p id={theme.theme} className="font2">User ID: {userId}</p>
-              <p id={theme.theme} className="font2">Username: {userName}</p>
-              <p id={theme.theme} className="font2">Email: {email}</p>
+              <h1 id={theme.theme} className="font_64">
+                User Profile
+              </h1>
+              <p id={theme.theme} className="font2">
+                User ID: {userId}
+              </p>
+              <p id={theme.theme} className="font2">
+                Username: {userName}
+              </p>
+              <p id={theme.theme} className="font2">
+                Email: {email}
+              </p>
               <Link to="/editProfile">
                 <Button
                   variant="danger"

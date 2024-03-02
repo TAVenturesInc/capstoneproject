@@ -3,7 +3,12 @@ import { useLoginContext } from "../../context";
 import { Button } from "react-bootstrap";
 
 const EditProfile = () => {
-  const { userId, userName: initialUserName, email: initialEmail, actions } = useLoginContext();
+  const {
+    userId,
+    userName: initialUserName,
+    email: initialEmail,
+    actions,
+  } = useLoginContext();
   const [userName, setUserName] = useState(initialUserName || "");
   const [email, setEmail] = useState(initialEmail || "");
 
@@ -75,7 +80,6 @@ const EditProfile = () => {
       </div>
     </div>
   );
-  
 };
 
 export default EditProfile;

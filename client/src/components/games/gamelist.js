@@ -6,11 +6,10 @@ import { Game } from "./game";
 import { useGameContext, useLoginContext } from "../../context";
 import { useStyleContext } from "../../context/styleContext";
 
-
 export default function GameList() {
   const [search, setSearch] = React.useState("");
   const regex = new RegExp(search, "i");
-  
+
   const {
     gameData,
     games = [],
@@ -45,7 +44,7 @@ export default function GameList() {
       actions?.refreshGameList();
     };
   };
-  console.log(games);
+
   const gameList = games
     ?.filter(
       ({ description, genre, title, userName }) =>
@@ -72,7 +71,9 @@ export default function GameList() {
       <div className="card-body">
         <div className="row">
           <div className="col-6">
-            <h3 id={theme.theme} className="font_64">Game List</h3>
+            <h3 id={theme.theme} className="font_64">
+              Game List
+            </h3>
           </div>
         </div>
         <div className="row">
@@ -89,7 +90,13 @@ export default function GameList() {
             </Form.Text>
           </div>
           <div className="col-2">
-            <Button id={theme.theme} className="font2 create" variant="primary" disabled={gamesLoading} href="/games/new">
+            <Button
+              id={theme.theme}
+              className="font2 create"
+              variant="primary"
+              disabled={gamesLoading}
+              href="/games/new"
+            >
               Create New Game
             </Button>
           </div>
@@ -106,11 +113,35 @@ export default function GameList() {
         </div>
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>
-            <tr >
-              <th id={theme.theme} className="font_64 tableHeader" style={{textAlign: "left"}}>Title</th>
-              <th id={theme.theme} className="font_64 tableHeader" style={{textAlign: "left"}}>Author</th>
-              <th id={theme.theme} className="font_64 tableHeader" style={{textAlign: "left"}}>Genre</th>
-              <th id={theme.theme} className="font_64 tableHeader" style={{textAlign: "left"}}>Game Description</th>
+            <tr>
+              <th
+                id={theme.theme}
+                className="font_64 tableHeader"
+                style={{ textAlign: "left" }}
+              >
+                Title
+              </th>
+              <th
+                id={theme.theme}
+                className="font_64 tableHeader"
+                style={{ textAlign: "left" }}
+              >
+                Author
+              </th>
+              <th
+                id={theme.theme}
+                className="font_64 tableHeader"
+                style={{ textAlign: "left" }}
+              >
+                Genre
+              </th>
+              <th
+                id={theme.theme}
+                className="font_64 tableHeader"
+                style={{ textAlign: "left" }}
+              >
+                Game Description
+              </th>
               <th></th>
             </tr>
           </thead>
