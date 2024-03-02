@@ -17,7 +17,7 @@ import { Login, Register, Profile, EditProfile } from "./components/authenticati
 const App = () => (
   <div>
     <StyleContext>
-      <LoginContext>error: Merging is not possible because you have unmerged files.
+      <LoginContext>
         <GameContext>
           <Navbar />
           <Routes>
