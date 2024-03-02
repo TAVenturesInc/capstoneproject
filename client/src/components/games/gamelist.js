@@ -45,14 +45,14 @@ export default function GameList() {
       actions?.refreshGameList();
     };
   };
-
+  console.log(games);
   const gameList = games
     ?.filter(
-      ({ description = "", genre = "", title = "", userName = "" }) =>
-        description.match(regex) ||
-        genre.match(regex) ||
-        title.match(regex) ||
-        userName.match(regex)
+      ({ description, genre, title, userName }) =>
+        (description || "").match(regex) ||
+        (genre || "").match(regex) ||
+        (title || "").match(regex) ||
+        (userName || "").match(regex)
     )
     .map((game) => ({
       ...game,
