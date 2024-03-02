@@ -3,7 +3,7 @@ import React from "react";
 // We use Route in order to define the different routes of our application
 import { Route, Routes } from "react-router-dom";
 
-import { GameContext, LoginContext} from "./context";
+import { GameContext, LoginContext } from "./context";
 import { StyleContext } from "./context/styleContext";
 // We import all the components we need in our app
 import Creator from "./components/creator";
@@ -12,7 +12,12 @@ import GamePlayer from "./components/gamePlayor";
 import LandingPage from "./components/landingpage";
 import Navbar from "./components/navbar";
 import QRcode from "./components/qrcode";
-import { Login, Register, Profile, EditProfile } from "./components/authentication";
+import {
+  Login,
+  Register,
+  Profile,
+  EditProfile,
+} from "./components/authentication";
 
 const App = () => (
   <div>
@@ -30,6 +35,7 @@ const App = () => (
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/editProfile" element={<EditProfile />} />
             <Route path="/qr/:id" element={<QRcode />} />
           </Routes>
         </GameContext>
