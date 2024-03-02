@@ -7,6 +7,22 @@
   color: #FFC200;
 }
 
+#green.font2 {
+  color: #1eff00;
+  font-family: "Kode Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+#amber.font2 {
+  color: #FFC200;
+  font-family: "Kode Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
 #green.font_64 {
   color: #1eff00;
   font-family: "Sixtyfour", sans-serif;
@@ -14,6 +30,7 @@
   font-weight: 400;
   font-style: normal;
   font-variation-settings: "BLED" 0, "SCAN" 0;
+  text-align: center;
 }
 
 #amber.font_64 {
@@ -23,6 +40,7 @@
   font-weight: 400;
   font-style: normal;
   font-variation-settings: "BLED" 0, "SCAN" 0;
+  text-align: center;
 }
 
 #green.searchHelpBlock {

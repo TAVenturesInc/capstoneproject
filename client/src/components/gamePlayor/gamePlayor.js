@@ -14,7 +14,7 @@ const GamePlayor = () => {
   const { userId } = useLoginContext();
   const { actions: gameActions, currentGame } = useGameContext();
   const { theme } = useStyleContext();
-  console.log(`from game playor: ${theme}`)
+ 
 
   const currentPage = currentGame?.content.find(
     (page) => page.id === currentPageId
@@ -76,9 +76,9 @@ const GamePlayor = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-12">
-              <p>{description}</p>
-              <ReactMarkdown>{value}</ReactMarkdown>
+            <div id={theme} className="font2 col-md-12">
+              <p >{description}</p>
+              <ReactMarkdown >{value}</ReactMarkdown>
             </div>
           </div>
           <div className="row">

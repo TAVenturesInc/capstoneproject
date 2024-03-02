@@ -4,19 +4,13 @@ import { Button, Form } from "react-bootstrap";
 
 import { Game } from "./game";
 import { useGameContext, useLoginContext } from "../../context";
-
-import { useStyleContext } from "../../context/styleContext"
+import { useStyleContext } from "../../context/styleContext";
 
 
 export default function GameList() {
-
-  //let theme = "green" // Apply with context
-  const theme = useStyleContext();
-  console.log(`from gamelist: ${theme.theme}`)
-
   const [search, setSearch] = React.useState("");
   const regex = new RegExp(search, "i");
-
+  
   const {
     gameData,
     games = [],
@@ -25,6 +19,7 @@ export default function GameList() {
     actions,
   } = useGameContext();
   const { userId } = useLoginContext();
+  const theme = useStyleContext();
 
   const deleteGame = (id) => actions?.deleteGame(id);
   const downloadGame = async (id) => {
@@ -80,7 +75,7 @@ export default function GameList() {
             <h3 id={theme.theme} className="font_64">Game List</h3>
           </div>
         </div>
-        <div id={theme} className="row">
+        <div className="row">
           <div className="col-6">
             <Form.Control
               aria-describedby="searchHelpBlock"
@@ -89,12 +84,12 @@ export default function GameList() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <Form.Text id={theme.theme} className="searchHelpBlock" muted>
+            <Form.Text id={theme.theme} className="font2 searchHelpBlock" muted>
               Find a game by title, author, or genre.
             </Form.Text>
           </div>
           <div className="col-2">
-            <Button id={theme.theme} className="create" variant="primary" disabled={gamesLoading} href="/games/new">
+            <Button id={theme.theme} className="font2 create" variant="primary" disabled={gamesLoading} href="/games/new">
               Create New Game
             </Button>
           </div>
@@ -112,10 +107,10 @@ export default function GameList() {
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>
             <tr >
-              <th id={theme.theme} className="tableHeader">Title</th>
-              <th id={theme.theme} className="tableHeader">Author</th>
-              <th id={theme.theme} className="tableHeader">Genre</th>
-              <th id={theme.theme} className="tableHeader">Game Description</th>
+              <th id={theme.theme} className="font_64 tableHeader" style={{textAlign: "left"}}>Title</th>
+              <th id={theme.theme} className="font_64 tableHeader" style={{textAlign: "left"}}>Author</th>
+              <th id={theme.theme} className="font_64 tableHeader" style={{textAlign: "left"}}>Genre</th>
+              <th id={theme.theme} className="font_64 tableHeader" style={{textAlign: "left"}}>Game Description</th>
               <th></th>
             </tr>
           </thead>

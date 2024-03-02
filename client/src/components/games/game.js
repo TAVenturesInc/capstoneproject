@@ -53,15 +53,15 @@ export const Game = ({
 
   return (
     <tr >
-      <td id={theme.theme} className="tableRow">
+      <td id={theme.theme} className="font2 tableRow">
         {title}
         {recentEnd && <span style={completeStyle}>Completed</span>}
         {recentStart && !recentEnd && <span style={startedStyle}>Started</span>}
       </td>
-      <td id={theme.theme} className="tableRow">{userName}</td>
-      <td id={theme.theme} className="tableRow">{genre}</td>
-      <td id={theme.theme} className="tableRow">{description}</td>
-      <td id={theme.theme} className="tableRow" style={{ textAlign: "right" }}>
+      <td id={theme.theme} className="font2 tableRow">{userName}</td>
+      <td id={theme.theme} className="font2 tableRow">{genre}</td>
+      <td id={theme.theme} className="font2 tableRow">{description}</td>
+      <td id={theme.theme} className="font2 tableRow" style={{ textAlign: "right" }}>
         {userId === currentUserId ? (
           <Dropdown>
             <Dropdown.Toggle variant="success" id={theme}>

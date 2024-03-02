@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import serverURL from "../../serverURL";
 
 import { Button } from "react-bootstrap";
+import { useStyleContext } from "../../context/styleContext";
 
 export default function Register() {
   const [loading, setLoading] = React.useState(false);
@@ -16,6 +17,7 @@ export default function Register() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const navigate = useNavigate();
+  const { theme } = useStyleContext();
 
   // These methods will update the state properties.
   function updateForm(value) {
@@ -82,8 +84,8 @@ export default function Register() {
         <form onSubmit={onSubmit} className="container form-group">
           <div className="row">
             <div className="col col-lg-4">
-              <h3>Register</h3>
-              <label htmlFor="username">Username</label>
+              <h3 id={theme} className="font_64" >Register</h3>
+              <label id={theme} className="font2" htmlFor="username">Username</label>
               <input
                 className="form-control"
                 id="username"
@@ -91,7 +93,7 @@ export default function Register() {
                 type="text"
                 value={form.username}
               />
-              <label htmlFor="password">Password</label>
+              <label id={theme} className="font2" htmlFor="password">Password</label>
               <div className="input-group">
                 <input
                   className="form-control"
@@ -101,8 +103,9 @@ export default function Register() {
                   value={form.password}
                 />
                 <div className="input-group-append">
-                  <button
-                    className="btn btn-outline-secondary"
+                  <button 
+                    id={theme}
+                    className="font2 btn btn-outline-secondary"
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                   >
@@ -110,7 +113,7 @@ export default function Register() {
                   </button>
                 </div>
               </div>
-              <label htmlFor="confirmPassword">Confirm Password</label>
+              <label id={theme} className="font2" htmlFor="confirmPassword">Confirm Password</label>
               <div className="input-group">
                 <input
                   className={`form-control ${
@@ -124,8 +127,8 @@ export default function Register() {
                   value={form.confirmPassword}
                 />
                 <div className="input-group-append">
-                  <button
-                    className="btn btn-outline-secondary"
+                  <button                    id={theme}
+                    className="font2 btn btn-outline-secondary"
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
@@ -136,7 +139,7 @@ export default function Register() {
               {!passwordsMatch && (
                 <div className="invalid-feedback">Passwords do not match</div>
               )}
-              <label htmlFor="email">Email</label>
+              <label id ={ theme } className="font2" htmlFor="email">Email</label>
               <input
                 className="form-control"
                 id="email"

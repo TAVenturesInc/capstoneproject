@@ -1,12 +1,16 @@
 import Card from "react-bootstrap/Card";
+import { useStyleContext } from "../../context/styleContext"
 
 export default function LandingPage() {
+  const theme = useStyleContext();
   return (
     <Card style={{ margin: "2rem 4rem" }}>
       <Card.Img />
-      <Card.Body>
-        <Card.Title className="font_64" >TAVenture: A Text Adventure for Students and Teachers</Card.Title>
-        <Card.Text>
+      <Card.Body id={theme.theme} className="font2">
+	  	<h1 id={theme.theme} className="font_64">TAVenture</h1>
+        <Card.Title id={theme.theme} className="font_64" >A Text Adventure for Students and Teachers</Card.Title>
+        
+		<Card.Text >
 			<br></br><br></br>
       		Welcome Adventurers, to TAVenture for educators and students! Enrich the learning experience 
 			with customized games for any topic or learning environment. All you need is an internet connection.

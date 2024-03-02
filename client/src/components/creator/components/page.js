@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 
 import { rowStyle } from "../styles";
+import { useStyleContext } from "../../../context/styleContext";
 
 export const Page = ({
   currentIndex,
@@ -17,6 +18,7 @@ export const Page = ({
   setCurrentIndex,
   setGameContent,
 }) => {
+  const theme = useStyleContext();
   const addPage = () => {
     setGameContent((prev) => [
       ...prev,
@@ -68,15 +70,15 @@ export const Page = ({
     <>
       <div className="row">
         <div className="col col-lg-6">
-          <h3>Page Content</h3>
+          <h3 id={theme.theme} className="font2">Page Content</h3>
         </div>
         <div className="col col-lg-6">
-          <h3>Page Preview</h3>
+          <h3 id={theme.theme} className="font2">Page Preview</h3>
         </div>
       </div>
       <div className="row" style={rowStyle}>
         <div className="col col-lg-6">
-          <Form.Label htmlFor="contentTitle">Title</Form.Label>
+          <Form.Label  id={theme.theme} className="font2" htmlFor="contentTitle">Title</Form.Label>
           <Form.Control
             aria-describedby="contentTitle"
             id="contentTitle"
@@ -90,13 +92,13 @@ export const Page = ({
           </Form.Text>
         </div>
         <div className="col col-lg-6">
-          <h2>{title}</h2>
+          <h2 id={theme.theme} className="font2">{title}</h2>
         </div>
       </div>
 
       <div className="row" style={rowStyle}>
         <div className="col col-lg-6">
-          <Form.Label htmlFor="pageContentValue">Page Content</Form.Label>
+          <Form.Label  id={theme.theme} className="font2" htmlFor="pageContentValue">Page Content</Form.Label>
           <Form.Control
             aria-describedby="pageContentValue"
             as="textarea"
@@ -113,8 +115,8 @@ export const Page = ({
 
           <br />
         </div>
-        <div className="col col-lg-6">
-          <ReactMarkdown>{value}</ReactMarkdown>
+        <div  id={theme.theme} className="font2 col col-lg-6">
+          <ReactMarkdown >{value}</ReactMarkdown>
         </div>
       </div>
       <div className="row" style={rowStyle}>

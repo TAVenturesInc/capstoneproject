@@ -13,6 +13,7 @@ import {
 } from "./components";
 
 import { useGameContext, useLoginContext } from "../../context";
+import { useStyleContext } from "../../context/styleContext";
 
 const Creator = () => {
   const [pointsOfInterest, setPointsOfInterest] = React.useState([]);
@@ -34,6 +35,7 @@ const Creator = () => {
   ]);
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const { userName, userId } = useLoginContext();
+  const theme = useStyleContext();
 
   const { actions, currentGame, gamesLoading } = useGameContext();
   const { id } = useParams();
