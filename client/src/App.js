@@ -12,12 +12,12 @@ import GamePlayer from "./components/gamePlayor";
 import LandingPage from "./components/landingpage";
 import Navbar from "./components/navbar";
 import QRcode from "./components/qrcode";
-import { Login, Register, Profile } from "./components/authentication";
+import { Login, Register, Profile, EditProfile } from "./components/authentication";
 
 const App = () => (
   <div>
     <StyleContext>
-      <LoginContext>
+      <LoginContext>error: Merging is not possible because you have unmerged files.
         <GameContext>
           <Navbar />
           <Routes>
