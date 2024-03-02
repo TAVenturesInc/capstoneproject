@@ -8,9 +8,9 @@ const initialState = {
   loading: false,
   loggedIn: false,
   token: null,
-  userName: null,
+  userName: "",
   userId: null,
-  email: null,
+  email: "",
 };
 
 const loginContext = React.createContext();
@@ -121,7 +121,16 @@ export const LoginContext = ({ children }) => {
       },
       body: JSON.stringify({ userId, newUsername: userName, newEmail: email }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 409) {
+          return res.json().then((data) => {
+            window.alert(data.message);
+            navigate("/editProfile");
+            throw new Error("Profile update failed");
+          });
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data.success) {
           document.cookie = `userId=${data.userId};`;
@@ -137,7 +146,7 @@ export const LoginContext = ({ children }) => {
       })
       .catch ((err) => {
         window.alert(err);
-        navigate("/profile")
+        navigate("/editProfile")
       })
     return response;
   };
@@ -169,7 +178,7 @@ export const LoginContext = ({ children }) => {
     }
   }, []);
 
-  const actions = { loginUserAction, logOutUserAction };
+  const actions = { loginUserAction, logOutUserAction, updateUserProfileAction, cancelUpdateProfileAction };
 
   const userState = {
     actions,
