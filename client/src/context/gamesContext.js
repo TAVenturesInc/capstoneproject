@@ -87,7 +87,6 @@ function GameContext({ children }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log({ data });
         if (data.success) {
           dispatch({
             type: "SET_USER_GAME_RECORDS",
