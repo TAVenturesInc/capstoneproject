@@ -6,12 +6,9 @@ import { useStyleContext } from "../../context/styleContext"
 
 export default function NavbarComponent() {
   const { theme, toggleTheme } = useStyleContext()
-  console.log(`from navbar NavbarComponent ${theme}`)
 
   const handleClick = () => {
-    console.log(`from navbar handleClick I: ${theme}`)
     toggleTheme();
-    console.log(`from navbar handleClick II: ${theme}`)  //why are I and II the same?
   };
   
   const { actions: loginActions, loggedIn } = useLoginContext();
@@ -52,7 +49,7 @@ export default function NavbarComponent() {
           </>
         )}
       </Nav>
-      <button onClick={handleClick} >Theme</button>
+      <button id={theme} className="theme" onClick={handleClick} >Theme</button>
     </nav>
   );
 }

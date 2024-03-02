@@ -3,7 +3,7 @@ $body-bg: rgb(50, 50, 50);
 $card-bg: rgb(30, 30, 30);
 
 //navbar
-$light: rgb(70,70,70);
+$light: rgb(30,30,30);
 #green.nav-link{
     color:#1eff00;
 };
@@ -49,8 +49,17 @@ $light: rgb(70,70,70);
     color: black !important;   
 }
 
+#amber.theme {   //not working
+    background-color: #FFC200;
+    color: black !important; 
+}
+#green.theme {   //not working
+    background-color: #1eff00; 
+    color: black !important;   
+}
+
 #file.form-control{
-    color: red;
+    color: grey;
 }
 
 #amber.tableHeader{
@@ -97,7 +106,7 @@ $light: rgb(70,70,70);
 
   
 input::file-selector-button {
-    color: red !important;
+    //color: red !important;
     background-color: rgb(70, 70, 70) !important;
     padding: 5 rem;
     border: thin solid grey;

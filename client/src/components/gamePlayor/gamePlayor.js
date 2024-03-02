@@ -5,6 +5,7 @@ import { Button, ButtonGroup } from "react-bootstrap";
 import { useParams } from "react-router";
 
 import { useGameContext, useLoginContext } from "../../context";
+import { useStyleContext } from "../../context/styleContext"
 
 const GamePlayor = () => {
   const [currentPageId, setCurrentPageId] = React.useState(null);
@@ -12,6 +13,8 @@ const GamePlayor = () => {
   const { id, pageId } = useParams();
   const { userId } = useLoginContext();
   const { actions: gameActions, currentGame } = useGameContext();
+  const { theme } = useStyleContext();
+  console.log(`from game playor: ${theme}`)
 
   const currentPage = currentGame?.content.find(
     (page) => page.id === currentPageId
@@ -69,7 +72,7 @@ const GamePlayor = () => {
         <div className="container form-group">
           <div className="row">
             <div className="col-md-12">
-              <h1>{title}</h1>
+              <h1 id={theme} className="font_64">{title}</h1>
             </div>
           </div>
           <div className="row">
