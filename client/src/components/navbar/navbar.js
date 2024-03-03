@@ -1,16 +1,16 @@
 import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Button, Navbar, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useGameContext, useLoginContext } from "../../context";
-import { useStyleContext } from "../../context/styleContext"
+import { useStyleContext } from "../../context/styleContext";
 
 export default function NavbarComponent() {
-  const { theme, toggleTheme } = useStyleContext()
+  const { theme, toggleTheme } = useStyleContext();
 
   const handleClick = () => {
     toggleTheme();
   };
-  
+
   const { actions: loginActions, loggedIn } = useLoginContext();
   const { actions: gamesActions } = useGameContext();
   const logout = () => {
@@ -19,13 +19,13 @@ export default function NavbarComponent() {
   };
 
   return (
-    <nav  className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Navbar.Brand style={{ paddingLeft: "20px" }}>
         <NavLink id={theme} className="nav-link" to="/">
           TA Ventures Inc
         </NavLink>
       </Navbar.Brand>
-      <Nav  className="me-auto">
+      <Nav className="me-auto">
         {loggedIn ? (
           <>
             <NavLink id={theme} className="nav-link" to="/games">
@@ -49,7 +49,14 @@ export default function NavbarComponent() {
           </>
         )}
       </Nav>
-      <button id={theme} className="theme" onClick={handleClick} >Theme</button>
+      <Button
+        id={theme}
+        className="theme"
+        onClick={handleClick}
+        style={{ marginRight: "8px" }}
+      >
+        Theme
+      </Button>
     </nav>
   );
 }
