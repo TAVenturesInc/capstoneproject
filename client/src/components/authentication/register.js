@@ -82,9 +82,7 @@ export default function Register() {
           <div className="row">
             <div className="col col-lg-4">
               <h3 className="font_64">Register</h3>
-              <label className="font2" htmlFor="username">
-                Username
-              </label>
+              <label htmlFor="username">Username</label>
               <input
                 className="form-control"
                 id="username"
@@ -92,9 +90,7 @@ export default function Register() {
                 type="text"
                 value={form.username}
               />
-              <label className="font2" htmlFor="password">
-                Password
-              </label>
+              <label htmlFor="password">Password</label>
               <div className="input-group">
                 <input
                   className="form-control"
@@ -105,7 +101,7 @@ export default function Register() {
                 />
                 <div className="input-group-append">
                   <button
-                    className="font2 btn btn-outline-secondary"
+                    className="btn btn-outline-secondary"
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                   >
@@ -113,9 +109,7 @@ export default function Register() {
                   </button>
                 </div>
               </div>
-              <label className="font2" htmlFor="confirmPassword">
-                Confirm Password
-              </label>
+              <label htmlFor="confirmPassword">Confirm Password</label>
               <div className="input-group">
                 <input
                   className={`form-control ${
@@ -130,7 +124,7 @@ export default function Register() {
                 />
                 <div className="input-group-append">
                   <button
-                    className="font2 btn btn-outline-secondary"
+                    className="btn btn-outline-secondary"
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
@@ -141,9 +135,7 @@ export default function Register() {
               {!passwordsMatch && (
                 <div className="invalid-feedback">Passwords do not match</div>
               )}
-              <label className="font2" htmlFor="email">
-                Email
-              </label>
+              <label htmlFor="email">Email</label>
               <input
                 className="form-control"
                 id="email"

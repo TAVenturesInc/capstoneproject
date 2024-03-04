@@ -15,9 +15,7 @@ export const GameDetails = ({ gameData, onChange: setGameData }) => (
     </div>
     <div className="row" style={rowStyle}>
       <div className="col col-lg-6">
-        <Form.Label className="font2" htmlFor="title">
-          Title
-        </Form.Label>
+        <Form.Label htmlFor="title">Title</Form.Label>
         <Form.Control
           aria-describedby="title"
           id="title"
@@ -32,9 +30,7 @@ export const GameDetails = ({ gameData, onChange: setGameData }) => (
     </div>
     <div className="row" style={rowStyle}>
       <div className="col col-lg-6">
-        <Form.Label className="font2" htmlFor="description">
-          Description
-        </Form.Label>
+        <Form.Label htmlFor="description">Description</Form.Label>
         <Form.Control
           aria-describedby="description"
           as="textarea"
@@ -52,9 +48,7 @@ export const GameDetails = ({ gameData, onChange: setGameData }) => (
     </div>
     <div className="row">
       <div className="col col-lg-6">
-        <label className="font2" htmlFor="genre">
-          Genre
-        </label>
+        <label htmlFor="genre">Genre</label>
       </div>
     </div>
     <div className="row" style={rowStyle}>

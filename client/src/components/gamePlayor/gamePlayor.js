@@ -72,7 +72,7 @@ const GamePlayor = () => {
             </div>
           </div>
           <div className="row">
-            <div className="font2 col-md-12">
+            <div className="col-md-12">
               <p>{description}</p>
               <ReactMarkdown>{value}</ReactMarkdown>
             </div>

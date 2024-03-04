@@ -29,7 +29,7 @@ const EditProfile = () => {
   }, [Boolean(initialUserName && initialEmail)]);
 
   return (
-    <div className="card font2">
+    <div className="card">
       <div className="card-body">
         <form className="container form-group">
           <div className="row">

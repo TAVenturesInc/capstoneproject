@@ -26,16 +26,16 @@ export const Actions = ({
       <br />
       <div className="row">
         <div className="col col-lg-6">
-          <h3 className="font2">Action Page Actions</h3>
+          <h3>Action Page Actions</h3>
         </div>
       </div>
       <div className="row">
         <div className="col col-lg-1"></div>
         <div className="col col-lg-3">
-          <label className="font2">Action Text</label>
+          <label>Action Text</label>
         </div>
         <div className="col col-lg-2">
-          <label className="font2">Destination</label>
+          <label>Destination</label>
         </div>
       </div>
 

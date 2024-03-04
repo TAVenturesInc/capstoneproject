@@ -27,9 +27,7 @@ export default function Login() {
           <div className="row">
             <div className="col col-lg-4">
               <h3 className="font_64">User Login</h3>
-              <label className="font2" htmlFor="username">
-                Username
-              </label>
+              <label htmlFor="username">Username</label>
               <input
                 className="form-control"
                 disabled={loading}
@@ -38,9 +36,7 @@ export default function Login() {
                 type="text"
                 value={form.username}
               />
-              <label className="font2" htmlFor="password">
-                Password
-              </label>
+              <label htmlFor="password">Password</label>
               <input
                 className="form-control"
                 disabled={loading}

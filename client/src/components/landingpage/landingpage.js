@@ -4,7 +4,7 @@ export default function LandingPage() {
   return (
     <Card style={{ margin: "2rem 4rem" }}>
       <Card.Img />
-      <Card.Body className="font2">
+      <Card.Body>
         <h1 className="font_64">TAVenture</h1>
         <Card.Title className="font_64">
           A Text Adventure for Students and Teachers

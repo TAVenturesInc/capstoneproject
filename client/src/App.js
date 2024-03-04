@@ -30,7 +30,7 @@ const RoutesComponent = () => {
   const { theme = "" } = useStyleContext();
 
   return (
-    <div id={theme}>
+    <div id={theme} class="font2">
       <Navbar />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />

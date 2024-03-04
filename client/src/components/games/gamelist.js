@@ -81,13 +81,13 @@ export default function GameList() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <Form.Text className="font2 searchHelpBlock" muted>
+            <Form.Text className="searchHelpBlock" muted>
               Find a game by title, author, or genre.
             </Form.Text>
           </div>
           <div className="col-2">
             <Button
-              className="font2 create"
+              className="create"
               variant="primary"
               disabled={gamesLoading}
               href="/games/new"

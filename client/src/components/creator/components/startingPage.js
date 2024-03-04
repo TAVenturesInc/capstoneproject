@@ -9,9 +9,7 @@ export const StartingPage = ({
 }) => (
   <div className="row" style={rowStyle}>
     <div className="col col-lg-6">
-      <Form.Label className="font2" htmlFor="startingPage">
-        Starting Point
-      </Form.Label>
+      <Form.Label htmlFor="startingPage">Starting Point</Form.Label>
       <br />
       <select
         id="startingPage"

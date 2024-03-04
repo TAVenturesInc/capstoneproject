@@ -48,15 +48,15 @@ export const Game = ({
 
   return (
     <tr>
-      <td className="font2 tableRow">
+      <td className="tableRow">
         {title}
         {recentEnd && <span style={completeStyle}>Completed</span>}
         {recentStart && !recentEnd && <span style={startedStyle}>Started</span>}
       </td>
-      <td className="font2 tableRow">{userName}</td>
-      <td className="font2 tableRow">{genre}</td>
-      <td className="font2 tableRow">{description}</td>
-      <td className="font2 tableRow" style={{ textAlign: "right" }}>
+      <td className="tableRow">{userName}</td>
+      <td className="tableRow">{genre}</td>
+      <td className="tableRow">{description}</td>
+      <td className="tableRow" style={{ textAlign: "right" }}>
         {userId === currentUserId ? (
           <Dropdown>
             <Dropdown.Toggle variant="success">Actions</Dropdown.Toggle>

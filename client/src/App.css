@@ -13,11 +13,6 @@
   color: #c8c8c8;
 }
 
-#green small,
-#amber small {
-  color: rgb(200, 200, 200) !important;
-}
-
 #green .nav-link {
   color: #1eff00;
 }
@@ -26,20 +21,24 @@
   color: #ffc200;
 }
 
-#green .font2 {
-  color: #1eff00;
+#green.font2,
+#amber.font2 {
   font-family: "Kode Mono", monospace;
   font-optical-sizing: auto;
   font-weight: 100;
   font-style: normal;
 }
 
-#amber .font2 {
-  color: #ffc200;
-  font-family: "Kode Mono", monospace;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-weight: 100;
+#green.font2,
+#green.font2 .card,
+#green.font2 small {
+  color: #1eff00 !important;
+}
+
+#amber.font2,
+#amber.font2 .card,
+#amber.font2 small {
+  color: #ffc200 !important;
 }
 
 #green .font_64 {
