@@ -13,10 +13,9 @@ import {
 } from "./components";
 
 import { useGameContext, useLoginContext } from "../../context";
-import { useStyleContext } from "../../context/styleContext";
 
 const Creator = () => {
-  const [pointsOfInterest, setPointsOfInterest] = React.useState([]);
+  const [pointsOfInterest /*, setPointsOfInterest*/] = React.useState([]);
   const [startingPage, setStartingPage] = React.useState("");
   const [gameData, setGameData] = React.useState({
     description: "",
@@ -35,8 +34,6 @@ const Creator = () => {
   ]);
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const { userName, userId } = useLoginContext();
-  const theme = useStyleContext();
-
   const { actions, currentGame, gamesLoading } = useGameContext();
   const { id } = useParams();
 
@@ -138,8 +135,6 @@ const Creator = () => {
               >
                 {gamesLoading ? "Loading..." : id ? "Update Game" : "Save Game"}
               </Button>
-              &nbsp;
-              <Button variant="outline-primary">Preview Game</Button>
               &nbsp;
               <Button variant="outline-primary" href="/games">
                 Cancel
