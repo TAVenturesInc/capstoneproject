@@ -143,3 +143,7 @@ body {
 #root table td {
   background: rgb(50, 50, 50);
 }
+
+.card {
+  margin: 2rem 4rem;
+}

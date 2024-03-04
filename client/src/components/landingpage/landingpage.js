@@ -2,7 +2,7 @@ import Card from "react-bootstrap/Card";
 
 export default function LandingPage() {
   return (
-    <Card style={{ margin: "2rem 4rem" }}>
+    <Card>
       <Card.Img />
       <Card.Body>
         <h1 className="font_64">TAVenture</h1>

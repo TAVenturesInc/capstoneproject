@@ -65,7 +65,7 @@ export default function GameList() {
   }, [userId]);
 
   return (
-    <div className="card" style={{ margin: "2rem 4rem" }}>
+    <div className="card">
       <div className="card-body">
         <div className="row">
           <div className="col-6">
