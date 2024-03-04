@@ -147,3 +147,7 @@ body {
 .card {
   margin: 2rem 4rem;
 }
+
+.tableRow .show .dropdown-menu {
+  background: lightgray;
+}
