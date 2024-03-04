@@ -43,7 +43,7 @@ const Creator = () => {
     setGameContent(newContent);
   };
 
-  const currentPage = gameContent[currentIndex];
+  const currentPage = gameContent[currenqrcode.reacttIndex];
 
   const updateGameData = () => {
     if (currentGame?._id) {
@@ -134,6 +134,10 @@ const Creator = () => {
                 disabled={gamesLoading}
               >
                 {gamesLoading ? "Loading..." : id ? "Update Game" : "Save Game"}
+              </Button>
+              &nbsp;
+              <Button variant="outline-primary" href="/games">
+                Test
               </Button>
               &nbsp;
               <Button variant="outline-primary" href="/games">
