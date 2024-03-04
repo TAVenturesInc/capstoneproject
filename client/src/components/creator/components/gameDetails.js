@@ -3,20 +3,21 @@ import { Form } from "react-bootstrap";
 import { genreList } from "../../../genres";
 
 import { rowStyle } from "../styles";
-import { useStyleContext } from "../../../context/styleContext";
 
-export const GameDetails = ({ gameData, onChange: setGameData }) => {
-  const theme = useStyleContext();
-  return(
+export const GameDetails = ({ gameData, onChange: setGameData }) => (
   <>
     <div className="row">
       <div className="col col-lg-12">
-        <h3 id={theme.theme} className="font_64" style={{ textAlign: "center" }}>Design Your Game</h3>
+        <h3 className="font_64" style={{ textAlign: "center" }}>
+          Design Your Game
+        </h3>
       </div>
     </div>
     <div className="row" style={rowStyle}>
       <div className="col col-lg-6">
-        <Form.Label id={theme.theme} className="font2" htmlFor="title">Title</Form.Label>
+        <Form.Label className="font2" htmlFor="title">
+          Title
+        </Form.Label>
         <Form.Control
           aria-describedby="title"
           id="title"
@@ -31,7 +32,9 @@ export const GameDetails = ({ gameData, onChange: setGameData }) => {
     </div>
     <div className="row" style={rowStyle}>
       <div className="col col-lg-6">
-        <Form.Label id={theme.theme} className="font2" htmlFor="description">Description</Form.Label>
+        <Form.Label className="font2" htmlFor="description">
+          Description
+        </Form.Label>
         <Form.Control
           aria-describedby="description"
           as="textarea"
@@ -49,7 +52,9 @@ export const GameDetails = ({ gameData, onChange: setGameData }) => {
     </div>
     <div className="row">
       <div className="col col-lg-6">
-        <label id={theme.theme} className="font2" htmlFor="genre">Genre</label>
+        <label className="font2" htmlFor="genre">
+          Genre
+        </label>
       </div>
     </div>
     <div className="row" style={rowStyle}>
@@ -68,4 +73,4 @@ export const GameDetails = ({ gameData, onChange: setGameData }) => {
       </div>
     </div>
   </>
-)};
+);

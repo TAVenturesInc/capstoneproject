@@ -1,18 +1,17 @@
 import { Form } from "react-bootstrap";
 
 import { rowStyle } from "../styles";
-import { useStyleContext } from "../../../context/styleContext";
 
 export const StartingPage = ({
   setStartingPage,
   gameContent,
   startingPage,
-}) => {
-  const theme = useStyleContext();
-  return(
+}) => (
   <div className="row" style={rowStyle}>
     <div className="col col-lg-6">
-      <Form.Label id={theme.theme} className="font2" htmlFor="startingPage">Starting Point</Form.Label>
+      <Form.Label className="font2" htmlFor="startingPage">
+        Starting Point
+      </Form.Label>
       <br />
       <select
         id="startingPage"
@@ -32,4 +31,4 @@ export const StartingPage = ({
       </Form.Text>
     </div>
   </div>
-)};
+);

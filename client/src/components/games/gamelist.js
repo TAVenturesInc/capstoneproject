@@ -4,7 +4,6 @@ import { Button, Form } from "react-bootstrap";
 
 import { Game } from "./game";
 import { useGameContext, useLoginContext } from "../../context";
-import { useStyleContext } from "../../context/styleContext";
 
 export default function GameList() {
   const [search, setSearch] = React.useState("");
@@ -18,7 +17,6 @@ export default function GameList() {
     actions,
   } = useGameContext();
   const { userId } = useLoginContext();
-  const theme = useStyleContext();
 
   const deleteGame = (id) => actions?.deleteGame(id);
   const downloadGame = async (id) => {
@@ -67,13 +65,11 @@ export default function GameList() {
   }, [userId]);
 
   return (
-    <div id={theme} className="card" style={{ margin: "2rem 4rem" }}>
+    <div className="card" style={{ margin: "2rem 4rem" }}>
       <div className="card-body">
         <div className="row">
           <div className="col-6">
-            <h3 id={theme.theme} className="font_64">
-              Game List
-            </h3>
+            <h3 className="font_64">Game List</h3>
           </div>
         </div>
         <div className="row">
@@ -85,13 +81,12 @@ export default function GameList() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <Form.Text id={theme.theme} className="font2 searchHelpBlock" muted>
+            <Form.Text className="font2 searchHelpBlock" muted>
               Find a game by title, author, or genre.
             </Form.Text>
           </div>
           <div className="col-2">
             <Button
-              id={theme.theme}
               className="font2 create"
               variant="primary"
               disabled={gamesLoading}
@@ -114,32 +109,16 @@ export default function GameList() {
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>
             <tr>
-              <th
-                id={theme.theme}
-                className="font_64 tableHeader"
-                style={{ textAlign: "left" }}
-              >
+              <th className="font_64 tableHeader" style={{ textAlign: "left" }}>
                 Title
               </th>
-              <th
-                id={theme.theme}
-                className="font_64 tableHeader"
-                style={{ textAlign: "left" }}
-              >
+              <th className="font_64 tableHeader" style={{ textAlign: "left" }}>
                 Author
               </th>
-              <th
-                id={theme.theme}
-                className="font_64 tableHeader"
-                style={{ textAlign: "left" }}
-              >
+              <th className="font_64 tableHeader" style={{ textAlign: "left" }}>
                 Genre
               </th>
-              <th
-                id={theme.theme}
-                className="font_64 tableHeader"
-                style={{ textAlign: "left" }}
-              >
+              <th className="font_64 tableHeader" style={{ textAlign: "left" }}>
                 Game Description
               </th>
               <th></th>

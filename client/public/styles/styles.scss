@@ -2,140 +2,136 @@
 $body-bg: rgb(50, 50, 50);
 $card-bg: rgb(30, 30, 30);
 
+#green input.form-control {
+  color: red;
+}
+
+#green,
+#amber {
+  textarea,
+  input.form-control,
+  input[type="text"],
+  input[type="password"],
+  input[type="textarea"] {
+    background-color: rgb(70, 70, 70);
+    color: rgb(200, 200, 200);
+  }
+}
+
 //navbar
-$light: rgb(30,30,30);
-#green.nav-link{
-    color:#1eff00;
-};
-#amber.nav-link{
-    color:#FFC200;
-};
+$light: rgb(30, 30, 30);
+#green .nav-link {
+  color: #1eff00;
+}
+
+#amber .nav-link {
+  color: #ffc200;
+}
 
 //landing page
 
-#green.font2{
-    color: #1eff00;
-    font-family: "Kode Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 100;
-    font-style: normal;
+#green .font2 {
+  color: #1eff00;
+  font-family: "Kode Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
 }
 
-#amber.font2{
-    color: #FFC200;
-    font-family: "Kode Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 100;
-    font-style: normal;
+#amber .font2 {
+  color: #ffc200;
+  font-family: "Kode Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
 }
-
 
 //game list
-#green.font_64 {
-    color: #1eff00;
-    font-family: "Sixtyfour", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings: "BLED" 0, "SCAN" 0;
-    text-align: center;
+#green .font_64 {
+  color: #1eff00;
+  font-family: "Sixtyfour", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "BLED" 0, "SCAN" 0;
+  text-align: center;
 }
-#amber.font_64 {
-    color: #FFC200;
-    font-family: "Sixtyfour", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings: "BLED" 0, "SCAN" 0;
-    text-align: center;
+#amber .font_64 {
+  color: #ffc200;
+  font-family: "Sixtyfour", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "BLED" 0, "SCAN" 0;
+  text-align: center;
 }
 //buttons & links
 //$body-color: #1eff00 ;
 // $primary: #1eff00;
 // $primary-text-emphasis: rgb(30, 30, 30);
 
-#green.searchHelpBlock{
-    color: #1eff00!important;
+#green .searchHelpBlock {
+  color: #1eff00 !important;
 }
-#amber.searchHelpBlock{
-    color: #FFC200 !important;
-}
-
-#amber.create { 
-    background-color: #FFC200;
-    color: black !important;   
-}
-#green.create {  
-    background-color: #1eff00;
-    color: black !important;   
+#amber .searchHelpBlock {
+  color: #ffc200 !important;
 }
 
-#amber.theme {   //not working
-    background-color: #FFC200;
-    color: black !important; 
+#amber .create {
+  background-color: #ffc200;
+  color: black !important;
 }
-#green.theme {   //not working
-    background-color: #1eff00; 
-    color: black !important;   
-}
-
-#file.form-control{
-    color: grey;
+#green .create {
+  background-color: #1eff00;
+  color: black !important;
 }
 
-#amber.tableHeader{
-    color: #FFC200;
+#amber .theme {
+  //not working
+  background-color: #ffc200;
+  color: black !important;
 }
-#green.tableHeader{
-    color: #1eff00;
-}
-#amber.tableRow{
-    color: #FFC200;
-}
-#green.tableRow{
-    color: #1eff00;
+#green .theme {
+  //not working
+  background-color: #1eff00;
+  color: black !important;
 }
 
-// //table
-// $table-striped-bg:           rgb(60, 60, 60);
-// $table-color: #FFC200;
+#file.form-control {
+  color: grey;
+}
 
-// $table-striped-bg-factor:     .1 !default;
-// $table-active-bg-factor: .5;
-// $table-cell-padding-y:        1rem;
-// $table-cell-padding-x:        1rem;
-// $table-cell-padding-y-sm:     .50rem;
-// $table-cell-padding-x-sm:     .50rem;
+#amber .tableHeader {
+  color: #ffc200;
+}
+#green .tableHeader {
+  color: #1eff00;
+}
+#amber .tableRow {
+  color: #ffc200;
+}
+#green .tableRow {
+  color: #1eff00;
+}
 
-// #dropdown-basic.dropdown-toggle {
-//       background-color: #FFC200;
-//       color: rgb(50, 50, 50);
-// }
- 
-#green.dropdown-toggle {
+#green .dropdown-toggle {
   background-color: #1eff00;
   color: rgb(30, 30, 30);
 }
-#amber.dropdown-toggle {
-    background-color: #FFC200;
-    color: rgb(50, 50, 50);
+#amber .dropdown-toggle {
+  background-color: #ffc200;
+  color: rgb(50, 50, 50);
 }
-
 
 .actionGroup {
   padding: 25px;
 }
 
-
 input::file-selector-button {
-    //color: red !important;
-    background-color: rgb(70, 70, 70) !important;
-    padding: 5 rem;
-    border: thin solid grey;
-    border-radius: 10px;
+  background-color: rgb(70, 70, 70) !important;
+  padding: 5 rem;
+  border: thin solid grey;
+  border-radius: 10px;
+}
 
-
-    
-  }
-
-  @import '../../node_modules/bootstrap/scss/bootstrap';
+@import "../../node_modules/bootstrap/scss/bootstrap";

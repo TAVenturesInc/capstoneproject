@@ -4,8 +4,6 @@ import { Dropdown } from "react-bootstrap";
 
 import { useLoginContext } from "../../context";
 
-import { useStyleContext } from "../../context/styleContext"
-
 const completeStyle = {
   background: "rgb(255 255 255 / 15%)",
   border: "solid 1px rgb(89 137 209)",
@@ -36,9 +34,6 @@ export const Game = ({
   userId,
   userName,
 }) => {
-
-  const theme = useStyleContext()
-
   const { userId: currentUserId } = useLoginContext();
   const { recentStart, recentEnd } = userData || {
     recentStart: "",
@@ -52,21 +47,19 @@ export const Game = ({
   };
 
   return (
-    <tr >
-      <td id={theme.theme} className="font2 tableRow">
+    <tr>
+      <td className="font2 tableRow">
         {title}
         {recentEnd && <span style={completeStyle}>Completed</span>}
         {recentStart && !recentEnd && <span style={startedStyle}>Started</span>}
       </td>
-      <td id={theme.theme} className="font2 tableRow">{userName}</td>
-      <td id={theme.theme} className="font2 tableRow">{genre}</td>
-      <td id={theme.theme} className="font2 tableRow">{description}</td>
-      <td id={theme.theme} className="font2 tableRow" style={{ textAlign: "right" }}>
+      <td className="font2 tableRow">{userName}</td>
+      <td className="font2 tableRow">{genre}</td>
+      <td className="font2 tableRow">{description}</td>
+      <td className="font2 tableRow" style={{ textAlign: "right" }}>
         {userId === currentUserId ? (
           <Dropdown>
-            <Dropdown.Toggle variant="success" id={theme}>
-              Actions
-            </Dropdown.Toggle>
+            <Dropdown.Toggle variant="success">Actions</Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item href={`/game/${_id}`} target="_blank">
                 Play

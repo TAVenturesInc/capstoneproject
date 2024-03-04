@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "react-bootstrap";
 
 import { useLoginContext } from "../../context";
-import { useStyleContext } from "../../context/styleContext";
 
 export default function Login() {
   const { actions, error, loading } = useLoginContext();
@@ -10,7 +9,6 @@ export default function Login() {
     username: "",
     password: "",
   });
-  const { theme } = useStyleContext();
 
   const loginUser = (e) => {
     e.preventDefault();
@@ -28,10 +26,8 @@ export default function Login() {
         <form onSubmit={loginUser} className="container form-group">
           <div className="row">
             <div className="col col-lg-4">
-              <h3 id={theme} className="font_64">
-                User Login
-              </h3>
-              <label id={theme} className="font2" htmlFor="username">
+              <h3 className="font_64">User Login</h3>
+              <label className="font2" htmlFor="username">
                 Username
               </label>
               <input
@@ -42,7 +38,7 @@ export default function Login() {
                 type="text"
                 value={form.username}
               />
-              <label id={theme} className="font2" htmlFor="password">
+              <label className="font2" htmlFor="password">
                 Password
               </label>
               <input
