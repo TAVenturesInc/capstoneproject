@@ -29,12 +29,12 @@ const EditProfile = () => {
   }, [Boolean(initialUserName && initialEmail)]);
 
   return (
-    <div className="card">
+    <div className="card font2">
       <div className="card-body">
         <form className="container form-group">
           <div className="row">
             <div className="col col-lg-4">
-              <h1>Edit Profile</h1>
+              <h1 className="font_64">Edit Profile</h1>
               <p>User ID: {userId}</p>
               <div className="form-group">
                 <label htmlFor="formUsername">Username</label>

@@ -24,6 +24,8 @@ import {
   EditProfile,
 } from "./components/authentication";
 
+import "./App.css";
+
 const RoutesComponent = () => {
   const { theme = "" } = useStyleContext();
 
