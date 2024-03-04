@@ -43,7 +43,7 @@ const Creator = () => {
     setGameContent(newContent);
   };
 
-  const currentPage = gameContent[currenqrcode.reacttIndex];
+  const currentPage = gameContent[currentIndex];
 
   const updateGameData = () => {
     if (currentGame?._id) {
