@@ -16,7 +16,7 @@ export default function GameList() {
     gamesLoaded,
     actions,
   } = useGameContext();
-  const { userId } = useLoginContext();
+  const { userId, userName } = useLoginContext();
 
   const deleteGame = (id) => actions?.deleteGame(id);
   const downloadGame = async (id) => {
@@ -37,8 +37,8 @@ export default function GameList() {
     const fileReader = new FileReader();
     fileReader.readAsText(e.target.files[0], "UTF-8");
     fileReader.onload = async (e) => {
-      const game = e.target.result;
-      await actions.createGameData(JSON.parse(game));
+      const game = JSON.parse(e.target.result);
+      await actions.createGameData({ ...game, userId, userName });
       actions?.refreshGameList();
     };
   };
