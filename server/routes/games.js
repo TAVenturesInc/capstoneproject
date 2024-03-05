@@ -41,7 +41,7 @@ gamesRoutes.route("/api/games/:id").get(async (req, res) => {
 });
 
 // This section will help you create a new record.
-gamesRoutes.route("/api/games/add").post(async (req, res) => {
+gamesRoutes.route("/api/game/add").post(async (req, res) => {
   const dbConnection = dbo.getDb();
   const myobj = {
     userName: req.body.userName,

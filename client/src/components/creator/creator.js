@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import generateUniqueId from "generate-unique-id";
-import { Button } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useParams } from "react-router";
 
 import {
@@ -13,6 +13,33 @@ import {
 } from "./components";
 
 import { useGameContext, useLoginContext } from "../../context";
+
+const previewButton = (disable, href) => {
+  if (disable) {
+    return (
+      <OverlayTrigger
+        placement="top"
+        overlay={
+          <Tooltip id="tooltip">
+            Preview not available until after initial save.
+          </Tooltip>
+        }
+      >
+        <span>
+          <Button disabled variant="outline-primary">
+            Preview
+          </Button>
+        </span>
+      </OverlayTrigger>
+    );
+  } else {
+    return (
+      <Button variant="outline-primary" href={href} target="_blank">
+        Preview
+      </Button>
+    );
+  }
+};
 
 const Creator = () => {
   const [pointsOfInterest /*, setPointsOfInterest*/] = React.useState([]);
@@ -68,6 +95,8 @@ const Creator = () => {
     alert("Game Saved");
   };
 
+  const disableTestButton = !currentGame?._id || !currentPage?.id;
+
   React.useEffect(() => {
     if (currentGame) {
       setGameData({
@@ -98,6 +127,12 @@ const Creator = () => {
       ]);
     }
   }, [id]);
+  console.log({
+    currentPage,
+    currentIndex,
+    disableTestButton,
+    id: currentGame?._id,
+  });
 
   return (
     <div className="card">
@@ -136,9 +171,10 @@ const Creator = () => {
                 {gamesLoading ? "Loading..." : id ? "Update Game" : "Save Game"}
               </Button>
               &nbsp;
-              <Button variant="outline-primary" href="/games">
-                Test
-              </Button>
+              {previewButton(
+                disableTestButton,
+                `/game/${currentGame?._id}/${currentPage?.id}`
+              )}
               &nbsp;
               <Button variant="outline-primary" href="/games">
                 Cancel

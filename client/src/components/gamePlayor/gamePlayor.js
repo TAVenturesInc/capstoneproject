@@ -9,7 +9,7 @@ import { useGameContext, useLoginContext } from "../../context";
 const GamePlayor = () => {
   const [currentPageId, setCurrentPageId] = React.useState(null);
 
-  const { id, pageId } = useParams();
+  const { id, pageId = false } = useParams();
   const { userId } = useLoginContext();
   const { actions: gameActions, currentGame } = useGameContext();
 
@@ -62,6 +62,8 @@ const GamePlayor = () => {
     return <div>Loading...</div>;
   }
 
+  const shouldButtonBeDisabled = !pageId;
+
   return (
     <div className="card">
       <div className="card-body">
@@ -83,6 +85,7 @@ const GamePlayor = () => {
                 <ButtonGroup>
                   {actions.map(({ name, id, destination }) => (
                     <Button
+                      disabled={shouldButtonBeDisabled}
                       key={id}
                       onClick={() => setCurrentPageId(destination)}
                     >
@@ -93,12 +96,20 @@ const GamePlayor = () => {
               </div>
               &nbsp;
               <div>
-                <Button variant="outline-primary" href="/games">
+                <Button
+                  disabled={shouldButtonBeDisabled}
+                  href="/games"
+                  variant="outline-primary"
+                >
                   Quit
                 </Button>
                 &nbsp;
                 {endNode && (
-                  <Button variant="outline-warning" onClick={goToStart}>
+                  <Button
+                    disabled={shouldButtonBeDisabled}
+                    onClick={goToStart}
+                    variant="outline-warning"
+                  >
                     Start Over
                   </Button>
                 )}
