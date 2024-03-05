@@ -127,12 +127,6 @@ const Creator = () => {
       ]);
     }
   }, [id]);
-  console.log({
-    currentPage,
-    currentIndex,
-    disableTestButton,
-    id: currentGame?._id,
-  });
 
   return (
     <div className="card">
